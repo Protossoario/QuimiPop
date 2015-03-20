@@ -7,7 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30E4CBD91ABBC70700C5D0CD /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30E4CBD81ABBC70700C5D0CD /* main.cpp */; };
+		30C378A71ABBC83200C883A4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C378A61ABBC83200C883A4 /* OpenGL.framework */; };
+		30C378A91ABBC87700C883A4 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C378A81ABBC87700C883A4 /* SDL2.framework */; };
+		30C378C11ABBC96B00C883A4 /* Errors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378AA1ABBC96B00C883A4 /* Errors.cpp */; };
+		30C378C21ABBC96B00C883A4 /* GLSLProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378AC1ABBC96B00C883A4 /* GLSLProgram.cpp */; };
+		30C378C31ABBC96B00C883A4 /* ImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378AF1ABBC96B00C883A4 /* ImageLoader.cpp */; };
+		30C378C41ABBC96B00C883A4 /* IOManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378B11ABBC96B00C883A4 /* IOManager.cpp */; };
+		30C378C51ABBC96B00C883A4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378B31ABBC96B00C883A4 /* main.cpp */; };
+		30C378C61ABBC96B00C883A4 /* MainGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378B41ABBC96B00C883A4 /* MainGame.cpp */; };
+		30C378C71ABBC96B00C883A4 /* picoPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378B61ABBC96B00C883A4 /* picoPNG.cpp */; };
+		30C378C81ABBC96B00C883A4 /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378B81ABBC96B00C883A4 /* ResourceManager.cpp */; };
+		30C378C91ABBC96B00C883A4 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378BB1ABBC96B00C883A4 /* Sprite.cpp */; };
+		30C378CA1ABBC96B00C883A4 /* TextureCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378BD1ABBC96B00C883A4 /* TextureCache.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +34,32 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		30C378A61ABBC83200C883A4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		30C378A81ABBC87700C883A4 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		30C378AA1ABBC96B00C883A4 /* Errors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Errors.cpp; sourceTree = "<group>"; };
+		30C378AB1ABBC96B00C883A4 /* Errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Errors.h; sourceTree = "<group>"; };
+		30C378AC1ABBC96B00C883A4 /* GLSLProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLSLProgram.cpp; sourceTree = "<group>"; };
+		30C378AD1ABBC96B00C883A4 /* GLSLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLSLProgram.h; sourceTree = "<group>"; };
+		30C378AE1ABBC96B00C883A4 /* GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTexture.h; sourceTree = "<group>"; };
+		30C378AF1ABBC96B00C883A4 /* ImageLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLoader.cpp; sourceTree = "<group>"; };
+		30C378B01ABBC96B00C883A4 /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
+		30C378B11ABBC96B00C883A4 /* IOManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IOManager.cpp; sourceTree = "<group>"; };
+		30C378B21ABBC96B00C883A4 /* IOManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOManager.h; sourceTree = "<group>"; };
+		30C378B31ABBC96B00C883A4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		30C378B41ABBC96B00C883A4 /* MainGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainGame.cpp; sourceTree = "<group>"; };
+		30C378B51ABBC96B00C883A4 /* MainGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGame.h; sourceTree = "<group>"; };
+		30C378B61ABBC96B00C883A4 /* picoPNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = picoPNG.cpp; sourceTree = "<group>"; };
+		30C378B71ABBC96B00C883A4 /* picoPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picoPNG.h; sourceTree = "<group>"; };
+		30C378B81ABBC96B00C883A4 /* ResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceManager.cpp; sourceTree = "<group>"; };
+		30C378B91ABBC96B00C883A4 /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
+		30C378BA1ABBC96B00C883A4 /* Shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shaders; sourceTree = "<group>"; };
+		30C378BB1ABBC96B00C883A4 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
+		30C378BC1ABBC96B00C883A4 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
+		30C378BD1ABBC96B00C883A4 /* TextureCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureCache.cpp; sourceTree = "<group>"; };
+		30C378BE1ABBC96B00C883A4 /* TextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureCache.h; sourceTree = "<group>"; };
+		30C378BF1ABBC96B00C883A4 /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
+		30C378C01ABBC96B00C883A4 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		30E4CBD51ABBC70700C5D0CD /* QuimiPop */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = QuimiPop; sourceTree = BUILT_PRODUCTS_DIR; };
-		30E4CBD81ABBC70700C5D0CD /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,15 +67,100 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30C378A91ABBC87700C883A4 /* SDL2.framework in Frameworks */,
+				30C378A71ABBC83200C883A4 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30C378CB1ABBC97400C883A4 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				30C378AA1ABBC96B00C883A4 /* Errors.cpp */,
+				30C378AB1ABBC96B00C883A4 /* Errors.h */,
+			);
+			name = Errors;
+			sourceTree = "<group>";
+		};
+		30C378CC1ABBC97A00C883A4 /* GLSLProgram */ = {
+			isa = PBXGroup;
+			children = (
+				30C378AC1ABBC96B00C883A4 /* GLSLProgram.cpp */,
+				30C378AD1ABBC96B00C883A4 /* GLSLProgram.h */,
+			);
+			name = GLSLProgram;
+			sourceTree = "<group>";
+		};
+		30C378CD1ABBC98200C883A4 /* ImageLoader */ = {
+			isa = PBXGroup;
+			children = (
+				30C378AF1ABBC96B00C883A4 /* ImageLoader.cpp */,
+				30C378B01ABBC96B00C883A4 /* ImageLoader.h */,
+			);
+			name = ImageLoader;
+			sourceTree = "<group>";
+		};
+		30C378CE1ABBC98900C883A4 /* IOManager */ = {
+			isa = PBXGroup;
+			children = (
+				30C378B11ABBC96B00C883A4 /* IOManager.cpp */,
+				30C378B21ABBC96B00C883A4 /* IOManager.h */,
+			);
+			name = IOManager;
+			sourceTree = "<group>";
+		};
+		30C378CF1ABBC99D00C883A4 /* MainGame */ = {
+			isa = PBXGroup;
+			children = (
+				30C378B41ABBC96B00C883A4 /* MainGame.cpp */,
+				30C378B51ABBC96B00C883A4 /* MainGame.h */,
+			);
+			name = MainGame;
+			sourceTree = "<group>";
+		};
+		30C378D01ABBC9A300C883A4 /* picoPNG */ = {
+			isa = PBXGroup;
+			children = (
+				30C378B61ABBC96B00C883A4 /* picoPNG.cpp */,
+				30C378B71ABBC96B00C883A4 /* picoPNG.h */,
+			);
+			name = picoPNG;
+			sourceTree = "<group>";
+		};
+		30C378D11ABBC9B500C883A4 /* ResourceManager */ = {
+			isa = PBXGroup;
+			children = (
+				30C378B81ABBC96B00C883A4 /* ResourceManager.cpp */,
+				30C378B91ABBC96B00C883A4 /* ResourceManager.h */,
+			);
+			name = ResourceManager;
+			sourceTree = "<group>";
+		};
+		30C378D21ABBCA4600C883A4 /* Sprite */ = {
+			isa = PBXGroup;
+			children = (
+				30C378BB1ABBC96B00C883A4 /* Sprite.cpp */,
+				30C378BC1ABBC96B00C883A4 /* Sprite.h */,
+			);
+			name = Sprite;
+			sourceTree = "<group>";
+		};
+		30C378D31ABBCA4C00C883A4 /* TextureCache */ = {
+			isa = PBXGroup;
+			children = (
+				30C378BD1ABBC96B00C883A4 /* TextureCache.cpp */,
+				30C378BE1ABBC96B00C883A4 /* TextureCache.h */,
+			);
+			name = TextureCache;
+			sourceTree = "<group>";
+		};
 		30E4CBCC1ABBC70600C5D0CD = {
 			isa = PBXGroup;
 			children = (
+				30C378A81ABBC87700C883A4 /* SDL2.framework */,
+				30C378A61ABBC83200C883A4 /* OpenGL.framework */,
 				30E4CBD71ABBC70700C5D0CD /* QuimiPop */,
 				30E4CBD61ABBC70700C5D0CD /* Products */,
 			);
@@ -57,7 +177,20 @@
 		30E4CBD71ABBC70700C5D0CD /* QuimiPop */ = {
 			isa = PBXGroup;
 			children = (
-				30E4CBD81ABBC70700C5D0CD /* main.cpp */,
+				30C378CB1ABBC97400C883A4 /* Errors */,
+				30C378CC1ABBC97A00C883A4 /* GLSLProgram */,
+				30C378AE1ABBC96B00C883A4 /* GLTexture.h */,
+				30C378CD1ABBC98200C883A4 /* ImageLoader */,
+				30C378CE1ABBC98900C883A4 /* IOManager */,
+				30C378B31ABBC96B00C883A4 /* main.cpp */,
+				30C378CF1ABBC99D00C883A4 /* MainGame */,
+				30C378D01ABBC9A300C883A4 /* picoPNG */,
+				30C378D11ABBC9B500C883A4 /* ResourceManager */,
+				30C378BA1ABBC96B00C883A4 /* Shaders */,
+				30C378D21ABBCA4600C883A4 /* Sprite */,
+				30C378D31ABBCA4C00C883A4 /* TextureCache */,
+				30C378BF1ABBC96B00C883A4 /* Textures */,
+				30C378C01ABBC96B00C883A4 /* Vertex.h */,
 			);
 			path = QuimiPop;
 			sourceTree = "<group>";
@@ -118,7 +251,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30E4CBD91ABBC70700C5D0CD /* main.cpp in Sources */,
+				30C378CA1ABBC96B00C883A4 /* TextureCache.cpp in Sources */,
+				30C378C61ABBC96B00C883A4 /* MainGame.cpp in Sources */,
+				30C378C21ABBC96B00C883A4 /* GLSLProgram.cpp in Sources */,
+				30C378C41ABBC96B00C883A4 /* IOManager.cpp in Sources */,
+				30C378C11ABBC96B00C883A4 /* Errors.cpp in Sources */,
+				30C378C71ABBC96B00C883A4 /* picoPNG.cpp in Sources */,
+				30C378C51ABBC96B00C883A4 /* main.cpp in Sources */,
+				30C378C31ABBC96B00C883A4 /* ImageLoader.cpp in Sources */,
+				30C378C81ABBC96B00C883A4 /* ResourceManager.cpp in Sources */,
+				30C378C91ABBC96B00C883A4 /* Sprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +344,10 @@
 		30E4CBDD1ABBC70700C5D0CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -209,6 +355,10 @@
 		30E4CBDE1ABBC70700C5D0CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -232,6 +382,7 @@
 				30E4CBDE1ABBC70700C5D0CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

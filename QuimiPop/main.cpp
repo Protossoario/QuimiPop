@@ -1,15 +1,17 @@
 //
 //  main.cpp
-//  QuimiPop
+//  GraphicsTutorial
 //
-//  Created by Eduardo Alberto Sanchez Alvarado on 3/19/15.
+//  Created by Eduardo Alberto Sanchez Alvarado on 3/1/15.
 //  Copyright (c) 2015 Eduardo Alberto Sanchez Alvarado. All rights reserved.
 //
 
+#include "MainGame.h"
 #include <iostream>
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    MainGame mainGame;
+    mainGame.run();
+    
     return 0;
 }
