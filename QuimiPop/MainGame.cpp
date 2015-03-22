@@ -8,7 +8,7 @@
 
 #include "MainGame.h"
 
-MainGame::MainGame() : _screenWidth(500), _screenHeight(500), _gameState(GameState::PLAY), _maxFPS(60.0f), _gameBoard(glm::vec2(-250.0f, -250.0f)) {
+MainGame::MainGame() : _screenWidth(720), _screenHeight(720), _gameState(GameState::PLAY), _maxFPS(60.0f), _gameBoard(glm::vec2(-300.0f, -300.0f)) {
     _camera.init(_screenWidth, _screenHeight);
     _gameBoard.init();
 }

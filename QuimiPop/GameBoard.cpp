@@ -8,7 +8,9 @@
 
 #include "GameBoard.h"
 
-GameBoard::GameBoard(glm::vec2 position) : _position(position), _clickingDown(false), _setMouseCoords(false), _highlighting(false) {}
+/* PUBLIC METHODS */
+
+GameBoard::GameBoard(glm::vec2 position) : _position(position), _clickingDown(false), _setMouseCoords(false), _highlighting(false), _highlightCol(-1), _highlightRow(-1) {}
 
 void GameBoard::init() {
     srand(time(NULL));
@@ -30,12 +32,12 @@ void GameBoard::draw(SpriteBatch &spriteBatch) {
     
     if (_clickingDown && !_setMouseCoords && !_highlighting) {
         glm::vec2 mouseOffset = _mouseCoords - _originMouseCoords;
-        if (abs(mouseOffset.x) > abs(mouseOffset.y) && abs(mouseOffset.x) > TILE_WIDTH / 2) {
+        if (abs(mouseOffset.x) > abs(mouseOffset.y) && abs(mouseOffset.x) > TILE_WIDTH / 4) {
             _highlightRow = getRowForY(_mouseCoords.y);
             _highlighting = true;
             printf("Highlighted row: %d\n", _highlightRow);
         }
-        else if (abs(mouseOffset.x) < abs(mouseOffset.y) && abs(mouseOffset.y) > TILE_HEIGHT / 2) {
+        else if (abs(mouseOffset.x) < abs(mouseOffset.y) && abs(mouseOffset.y) > TILE_HEIGHT / 4) {
             _highlightCol = getColForX(_mouseCoords.x);
             _highlighting = true;
             printf("Highlighted col: %d\n", _highlightCol);
@@ -59,7 +61,16 @@ void GameBoard::setClickingDown(bool clickingDown) {
         _setMouseCoords = false;
     }
     _clickingDown = clickingDown;
-    if (!_clickingDown) {
+    if (!_clickingDown && _highlighting) {
+        glm::vec2 offset = _originMouseCoords - _mouseCoords;
+        if (_highlightRow > -1) {
+            int rowOffset = offset.x / TILE_WIDTH;
+            scrollRow(_highlightRow, rowOffset);
+        }
+        else if (_highlightCol > -1) {
+            int colOffset = offset.y / TILE_HEIGHT;
+            scrollColumn(_highlightCol, colOffset);
+        }
         _highlighting = false;
         _highlightRow = -1;
         _highlightCol = -1;
@@ -72,6 +83,34 @@ void GameBoard::updateMouseCoords(glm::vec2 mouseCoords) {
     }
     else {
         _mouseCoords = mouseCoords;
+    }
+}
+
+/* PRIVATE METHODS */
+
+void GameBoard::scrollColumn(int column, int offset) {
+    if (offset == 0) {
+        return;
+    }
+    int temp[8];
+    for (int i = 0; i < 8; i++) {
+        temp[i] = _board[i][column];
+    }
+    for (int i = 0; i < 8; i++) {
+        _board[i][column] = temp[(i + offset + 8) % 8];
+    }
+}
+
+void GameBoard::scrollRow(int row, int offset) {
+    if (offset == 0) {
+        return;
+    }
+    int temp[8];
+    for (int i = 0; i < 8; i++) {
+        temp[i] = _board[row][i];
+    }
+    for (int i = 0; i < 8; i++) {
+        _board[row][i] = temp[(i + offset + 8) % 8];
     }
 }
 

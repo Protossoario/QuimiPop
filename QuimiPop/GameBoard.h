@@ -30,8 +30,11 @@ public:
     void updateMouseCoords(glm::vec2 mouseCoords);
     
 private:
-    constexpr const static float TILE_WIDTH = 50.0f;
-    constexpr const static float TILE_HEIGHT = 50.0f;
+    constexpr const static float TILE_WIDTH = 75.0f;
+    constexpr const static float TILE_HEIGHT = 75.0f;
+    
+    void scrollColumn(int column, int offset);
+    void scrollRow(int row, int offset);
     
     glm::vec4 getTileRectangle(int row, int col);
     GLTexture getTileTexture(int row, int col);
