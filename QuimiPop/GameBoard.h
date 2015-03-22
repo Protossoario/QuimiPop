@@ -26,13 +26,30 @@ public:
     
     void draw(SpriteBatch& spriteBatch);
     
+    void setClickingDown(bool clickingDown);
+    void updateMouseCoords(glm::vec2 mouseCoords);
+    
 private:
+    constexpr const static float TILE_WIDTH = 50.0f;
+    constexpr const static float TILE_HEIGHT = 50.0f;
+    
     glm::vec4 getTileRectangle(int row, int col);
     GLTexture getTileTexture(int row, int col);
+    int getRowForY(int y);
+    int getColForX(int x);
     
     int _board[8][8];
     
     glm::vec2 _position;
+    
+    bool _clickingDown;
+    bool _setMouseCoords;
+    glm::vec2 _originMouseCoords;
+    glm::vec2 _mouseCoords;
+    
+    bool _highlighting;
+    int _highlightRow;
+    int _highlightCol;
 };
 
 #endif /* defined(__QuimiPop__GameBoard__) */

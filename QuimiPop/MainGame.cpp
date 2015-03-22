@@ -131,7 +131,12 @@ void MainGame::processInput() {
     if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
         glm::vec2 mouseCoords = _inputManager.getMouseCoords();
         mouseCoords = _camera.convertScreenToWorld(mouseCoords);
-        printf("X: %.0f, Y: %.0f\n", mouseCoords.x, mouseCoords.y);
+        
+        _gameBoard.setClickingDown(true);
+        _gameBoard.updateMouseCoords(mouseCoords);
+    }
+    else {
+        _gameBoard.setClickingDown(false);
     }
 }
 
