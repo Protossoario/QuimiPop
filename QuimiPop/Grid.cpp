@@ -56,7 +56,7 @@ bool Grid::checkMolecule(int colOrRen, int x, int y, const int *arrMolecule, int
             
         case 1:
             for (int i = 0; i < size; i++) {
-                if ((x + i) >= grid_length || arrMolecule[i] != _gameGrid[x + i][y] || arrMolecule[size - 1 - i] != _gameGrid[x][y + i]) {
+                if ((x + i) >= grid_length || arrMolecule[i] != _gameGrid[x + i][y] || arrMolecule[size - 1 - i] != _gameGrid[x + 1][y]) {
                     return false;
                 }
             }

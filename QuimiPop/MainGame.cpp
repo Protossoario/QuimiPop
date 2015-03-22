@@ -8,7 +8,7 @@
 
 #include "MainGame.h"
 
-MainGame::MainGame() : _screenWidth(720), _screenHeight(720), _gameState(GameState::PLAY), _maxFPS(60.0f), _gameBoard(glm::vec2(-300.0f, -300.0f)) {
+MainGame::MainGame() : _screenWidth(1024), _screenHeight(720), _gameState(GameState::PLAY), _maxFPS(60.0f), _gameBoard(glm::vec2(-450.0f, -300.0f)) {
     _camera.init(_screenWidth, _screenHeight);
     _gameBoard.init();
 }
@@ -155,6 +155,16 @@ void MainGame::drawGame() {
     glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
     
     _spriteBatch.begin();
+    
+    glm::vec4 backgroundRect(-_screenWidth / 2, -_screenHeight / 2, _screenWidth, _screenHeight);
+    glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
+    static GLTexture backgroundTexture = ResourceManager::getTexture("/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/Background.png");
+    Color color;
+    color.r = 255;
+    color.g = 255;
+    color.b = 255;
+    color.a = 255;
+    _spriteBatch.draw(backgroundRect, uvRect, backgroundTexture.textureId, 0.0f, color);
     
     _gameBoard.draw(_spriteBatch);
     
