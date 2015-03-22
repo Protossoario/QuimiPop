@@ -14,9 +14,8 @@
 #include <string>
 
 #include "glm/glm.hpp"
-#include "ResourceManager.h"
 #include "SpriteBatch.h"
-#include "GLTexture.h"
+#include "Grid.h"
 
 class GameBoard {
 public:
@@ -33,15 +32,11 @@ private:
     constexpr const static float TILE_WIDTH = 75.0f;
     constexpr const static float TILE_HEIGHT = 75.0f;
     
-    void scrollColumn(int column, int offset);
-    void scrollRow(int row, int offset);
-    
     glm::vec4 getTileRectangle(int row, int col);
-    GLTexture getTileTexture(int row, int col);
     int getRowForY(int y);
     int getColForX(int x);
     
-    int _board[8][8];
+    Grid _boardGrid;
     
     glm::vec2 _position;
     
