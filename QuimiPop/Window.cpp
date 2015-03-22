@@ -38,7 +38,7 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
         fatalError("SDL GL Context could not be created!");
     }
     
-    glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
     
     // Turn on double buffering
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);

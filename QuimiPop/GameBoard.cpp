@@ -15,7 +15,7 @@ void GameBoard::init() {
     
     for (int row = 0; row < 8; row++) {
         for (int col = 0; col < 8; col++) {
-            _board[row][col] = (rand() % 8);
+            _board[row][col] = (rand() % 11);
         }
     }
 }
@@ -91,39 +91,51 @@ GLTexture GameBoard::getTileTexture(int row, int col) {
     std::string filePath = "/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/";
     switch (_board[row][col]) {
         case 0:
-            filePath += "blue_gem.png";
+            filePath += "Acido.png";
             break;
             
         case 1:
-            filePath += "gray_gem.png";
+            filePath += "Agua.png";
             break;
             
         case 2:
-            filePath += "light_blue_gem.png";
+            filePath += "Azucar.png";
             break;
             
         case 3:
-            filePath += "orange_gem.png";
+            filePath += "Azufre.png";
             break;
             
         case 4:
-            filePath += "purple_gem.png";
+            filePath += "Carbon dioxide.png";
             break;
             
         case 5:
-            filePath += "red_gem.png";
+            filePath += "Carbon.png";
             break;
             
         case 6:
-            filePath += "teal_gem.png";
+            filePath += "Hydrogen.png";
             break;
             
         case 7:
-            filePath += "yellow_gem.png";
+            filePath += "Kriptonita.png";
+            break;
+        
+        case 8:
+            filePath += "Methane.png";
+            break;
+            
+        case 9:
+            filePath += "Nitrogen.png";
+            break;
+            
+        case 10:
+            filePath += "Oxygen.png";
             break;
             
         default:
-            filePath += "blue_gem.png";
+            filePath += "Kriptonita.png";
             break;
     }
     return ResourceManager::getTexture(filePath);
