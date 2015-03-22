@@ -13,6 +13,7 @@
 		3065A0D11ABE969200E77DF9 /* SpriteBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0C81ABE969200E77DF9 /* SpriteBatch.cpp */; };
 		3065A0D21ABE969200E77DF9 /* Timing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0CA1ABE969200E77DF9 /* Timing.cpp */; };
 		3065A0D31ABE969200E77DF9 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0CC1ABE969200E77DF9 /* Window.cpp */; };
+		3065A0DD1ABE99F000E77DF9 /* GameBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0DB1ABE99F000E77DF9 /* GameBoard.cpp */; };
 		30C378A71ABBC83200C883A4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C378A61ABBC83200C883A4 /* OpenGL.framework */; };
 		30C378A91ABBC87700C883A4 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C378A81ABBC87700C883A4 /* SDL2.framework */; };
 		30C378C11ABBC96B00C883A4 /* Errors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378AA1ABBC96B00C883A4 /* Errors.cpp */; };
@@ -53,6 +54,8 @@
 		3065A0CC1ABE969200E77DF9 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		3065A0CD1ABE969200E77DF9 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		3065A0DA1ABE978700E77DF9 /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
+		3065A0DB1ABE99F000E77DF9 /* GameBoard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameBoard.cpp; sourceTree = "<group>"; };
+		3065A0DC1ABE99F000E77DF9 /* GameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoard.h; sourceTree = "<group>"; };
 		30C378A61ABBC83200C883A4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		30C378A81ABBC87700C883A4 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		30C378AA1ABBC96B00C883A4 /* Errors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Errors.cpp; sourceTree = "<group>"; };
@@ -146,6 +149,15 @@
 				3065A0CD1ABE969200E77DF9 /* Window.h */,
 			);
 			name = Window;
+			sourceTree = "<group>";
+		};
+		3065A0DE1ABE99F700E77DF9 /* GameBoard */ = {
+			isa = PBXGroup;
+			children = (
+				3065A0DB1ABE99F000E77DF9 /* GameBoard.cpp */,
+				3065A0DC1ABE99F000E77DF9 /* GameBoard.h */,
+			);
+			name = GameBoard;
 			sourceTree = "<group>";
 		};
 		30C378CB1ABBC97400C883A4 /* Errors */ = {
@@ -253,6 +265,7 @@
 				3065A0D41ABE969A00E77DF9 /* Bullet */,
 				3065A0D51ABE96AF00E77DF9 /* Camera2D */,
 				30C378CB1ABBC97400C883A4 /* Errors */,
+				3065A0DE1ABE99F700E77DF9 /* GameBoard */,
 				3065A0DA1ABE978700E77DF9 /* glm */,
 				30C378CC1ABBC97A00C883A4 /* GLSLProgram */,
 				30C378AE1ABBC96B00C883A4 /* GLTexture.h */,
@@ -345,6 +358,7 @@
 				30C378C31ABBC96B00C883A4 /* ImageLoader.cpp in Sources */,
 				30C378C81ABBC96B00C883A4 /* ResourceManager.cpp in Sources */,
 				3065A0D11ABE969200E77DF9 /* SpriteBatch.cpp in Sources */,
+				3065A0DD1ABE99F000E77DF9 /* GameBoard.cpp in Sources */,
 				30C378C91ABBC96B00C883A4 /* Sprite.cpp in Sources */,
 				3065A0D01ABE969200E77DF9 /* InputManager.cpp in Sources */,
 			);

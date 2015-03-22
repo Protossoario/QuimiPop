@@ -11,7 +11,6 @@
 
 #include <SDL2/SDL.h>
 #include <OpenGL/gl3.h>
-#include <vector>
 #include "glm/glm.hpp"
 #include "Errors.h"
 #include "GLSLProgram.h"
@@ -21,7 +20,7 @@
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "Timing.h"
-#include "Bullet.h"
+#include "GameBoard.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -53,7 +52,7 @@ private:
     InputManager _inputManager;
     FPSLimiter _fpsLimiter;
     
-    std::vector<Bullet> _bullets;
+    GameBoard _gameBoard;
     
     float _fps;
     float _maxFPS;

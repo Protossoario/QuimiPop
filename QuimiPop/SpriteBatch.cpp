@@ -54,7 +54,7 @@ void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuin
 
 void SpriteBatch::renderBatch() {
     glBindVertexArray(_vao);
-    
+        
     for (int i = 0; i < _renderBatches.size(); i++) {
         glBindTexture(GL_TEXTURE_2D, _renderBatches[i].texture);
         
@@ -85,7 +85,7 @@ void SpriteBatch::createRenderBatches() {
     
     for (int cg = 1; cg < _glyphs.size(); cg++) {
         if (_glyphs[cg]->texture != _glyphs[cg - 1]->texture) {
-            _renderBatches.emplace_back(offset, 6, _glyphs[0]->texture);
+            _renderBatches.emplace_back(offset, 6, _glyphs[cg]->texture);
         }
         else {
             _renderBatches.back().numVertices += 6;
