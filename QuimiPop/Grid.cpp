@@ -48,7 +48,7 @@ bool Grid::checkMolecule(int colOrRen, int x, int y, const int *arrMolecule, int
     switch (colOrRen) {
         case 0:
             for (int i = 0; i < size; i++) {
-                if ((y + i) >= grid_length || arrMolecule[i] != _gameGrid[x][y + i] || arrMolecule[size - 1 - i] != _gameGrid[x][y + i]) {
+                if ((y + i) >= grid_length || arrMolecule[i] != _gameGrid[x][y + i]) {
                     return false;
                 }
             }
@@ -56,7 +56,7 @@ bool Grid::checkMolecule(int colOrRen, int x, int y, const int *arrMolecule, int
             
         case 1:
             for (int i = 0; i < size; i++) {
-                if ((x + i) >= grid_length || arrMolecule[i] != _gameGrid[x + i][y] || arrMolecule[size - 1 - i] != _gameGrid[x + 1][y]) {
+                if ((x + i) >= grid_length || arrMolecule[i] != _gameGrid[x + i][y]) {
                     return false;
                 }
             }
@@ -123,16 +123,28 @@ void Grid::checkGrid(int colOrRen, int pos) {
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid3, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, 15);
                 }
-                if (checkMolecule(colOrRen, i, j, arrSugar, 4)) {
+                if (checkMolecule(colOrRen, i, j, arrSulfuricAcid4, 5)) {
+                    deleteMolecule(colOrRen, i, j, 5, 15);
+                }
+                if (checkMolecule(colOrRen, i, j, arrSugar1, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, 10);
                 }
-                if (checkMolecule(colOrRen, i, j, arrMethane, 4)) {
+                if (checkMolecule(colOrRen, i, j, arrSugar2, 4)) {
+                    deleteMolecule(colOrRen, i, j, 4, 10);
+                }
+                if (checkMolecule(colOrRen, i, j, arrMethane1, 4)) {
+                    deleteMolecule(colOrRen, i, j, 4, 13);
+                }
+                if (checkMolecule(colOrRen, i, j, arrMethane2, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, 13);
                 }
                 if (checkMolecule(colOrRen, i, j, arrCarbonDioxide, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, 12);
                 }
-                if (checkMolecule(colOrRen, i, j, arrNitrousOxide, 3)) {
+                if (checkMolecule(colOrRen, i, j, arrNitrousOxide1, 3)) {
+                    deleteMolecule(colOrRen, i, j, 3, 14);
+                }
+                if (checkMolecule(colOrRen, i, j, arrNitrousOxide2, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, 14);
                 }
                 if (checkMolecule(colOrRen, i, j, arrWater, 3)) {
@@ -157,16 +169,28 @@ void Grid::checkGrid(int colOrRen, int pos) {
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid3, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, 15);
                 }
-                if (checkMolecule(colOrRen, i, j, arrSugar, 4)) {
+                if (checkMolecule(colOrRen, i, j, arrSulfuricAcid4, 5)) {
+                    deleteMolecule(colOrRen, i, j, 5, 15);
+                }
+                if (checkMolecule(colOrRen, i, j, arrSugar1, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, 10);
                 }
-                if (checkMolecule(colOrRen, i, j, arrMethane, 4)) {
+                if (checkMolecule(colOrRen, i, j, arrSugar2, 4)) {
+                    deleteMolecule(colOrRen, i, j, 4, 10);
+                }
+                if (checkMolecule(colOrRen, i, j, arrMethane1, 4)) {
+                    deleteMolecule(colOrRen, i, j, 4, 13);
+                }
+                if (checkMolecule(colOrRen, i, j, arrMethane2, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, 13);
                 }
                 if (checkMolecule(colOrRen, i, j, arrCarbonDioxide, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, 12);
                 }
-                if (checkMolecule(colOrRen, i, j, arrNitrousOxide, 3)) {
+                if (checkMolecule(colOrRen, i, j, arrNitrousOxide1, 3)) {
+                    deleteMolecule(colOrRen, i, j, 3, 14);
+                }
+                if (checkMolecule(colOrRen, i, j, arrNitrousOxide2, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, 14);
                 }
                 if (checkMolecule(colOrRen, i, j, arrWater, 3)) {

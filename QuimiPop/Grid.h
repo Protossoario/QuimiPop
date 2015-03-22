@@ -34,14 +34,18 @@ const int SULFURIC_ACID = 15;
 const int KRYPTONITE = 99;
 
 // Molecule Structures
-const int arrSugar[4] = {0,1,2,0};
+const int arrSugar1[4] = {0,1,2,0};
+const int arrSugar2[4] = {0,2,1,0};
 const int arrWater[3] = {0,1,0};
 const int arrCarbonDioxide[3] = {1,2,1};
-const int arrMethane[4] = {0,2,0,0};
-const int arrNitrousOxide[3] = {4,4,1};
+const int arrMethane1[4] = {0,2,0,0};
+const int arrMethane2[4] = {0,0,2,0};
+const int arrNitrousOxide1[3] = {4,4,1};
+const int arrNitrousOxide2[3] = {1,4,4};
 const int arrSulfuricAcid1[5] = {0,1,3,1,0};
 const int arrSulfuricAcid2[5] = {1,0,3,1,0};
 const int arrSulfuricAcid3[5] = {1,0,3,0,1};
+const int arrSulfuricAcid4[5] = {0,1,3,0,1};
 
 // Constants
 const int grid_length = 8;
