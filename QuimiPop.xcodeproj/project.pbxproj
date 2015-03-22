@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3065A0CE1ABE969200E77DF9 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0C21ABE969200E77DF9 /* Bullet.cpp */; };
+		3065A0CF1ABE969200E77DF9 /* Camera2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0C41ABE969200E77DF9 /* Camera2D.cpp */; };
+		3065A0D01ABE969200E77DF9 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0C61ABE969200E77DF9 /* InputManager.cpp */; };
+		3065A0D11ABE969200E77DF9 /* SpriteBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0C81ABE969200E77DF9 /* SpriteBatch.cpp */; };
+		3065A0D21ABE969200E77DF9 /* Timing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0CA1ABE969200E77DF9 /* Timing.cpp */; };
+		3065A0D31ABE969200E77DF9 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0CC1ABE969200E77DF9 /* Window.cpp */; };
 		30C378A71ABBC83200C883A4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C378A61ABBC83200C883A4 /* OpenGL.framework */; };
 		30C378A91ABBC87700C883A4 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C378A81ABBC87700C883A4 /* SDL2.framework */; };
 		30C378C11ABBC96B00C883A4 /* Errors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378AA1ABBC96B00C883A4 /* Errors.cpp */; };
@@ -34,6 +40,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3065A0C21ABE969200E77DF9 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
+		3065A0C31ABE969200E77DF9 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		3065A0C41ABE969200E77DF9 /* Camera2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera2D.cpp; sourceTree = "<group>"; };
+		3065A0C51ABE969200E77DF9 /* Camera2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera2D.h; sourceTree = "<group>"; };
+		3065A0C61ABE969200E77DF9 /* InputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputManager.cpp; sourceTree = "<group>"; };
+		3065A0C71ABE969200E77DF9 /* InputManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputManager.h; sourceTree = "<group>"; };
+		3065A0C81ABE969200E77DF9 /* SpriteBatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteBatch.cpp; sourceTree = "<group>"; };
+		3065A0C91ABE969200E77DF9 /* SpriteBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteBatch.h; sourceTree = "<group>"; };
+		3065A0CA1ABE969200E77DF9 /* Timing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timing.cpp; sourceTree = "<group>"; };
+		3065A0CB1ABE969200E77DF9 /* Timing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timing.h; sourceTree = "<group>"; };
+		3065A0CC1ABE969200E77DF9 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		3065A0CD1ABE969200E77DF9 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		3065A0DA1ABE978700E77DF9 /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
 		30C378A61ABBC83200C883A4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		30C378A81ABBC87700C883A4 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		30C378AA1ABBC96B00C883A4 /* Errors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Errors.cpp; sourceTree = "<group>"; };
@@ -75,6 +94,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3065A0D41ABE969A00E77DF9 /* Bullet */ = {
+			isa = PBXGroup;
+			children = (
+				3065A0C21ABE969200E77DF9 /* Bullet.cpp */,
+				3065A0C31ABE969200E77DF9 /* Bullet.h */,
+			);
+			name = Bullet;
+			sourceTree = "<group>";
+		};
+		3065A0D51ABE96AF00E77DF9 /* Camera2D */ = {
+			isa = PBXGroup;
+			children = (
+				3065A0C41ABE969200E77DF9 /* Camera2D.cpp */,
+				3065A0C51ABE969200E77DF9 /* Camera2D.h */,
+			);
+			name = Camera2D;
+			sourceTree = "<group>";
+		};
+		3065A0D61ABE96B600E77DF9 /* InputManager */ = {
+			isa = PBXGroup;
+			children = (
+				3065A0C61ABE969200E77DF9 /* InputManager.cpp */,
+				3065A0C71ABE969200E77DF9 /* InputManager.h */,
+			);
+			name = InputManager;
+			sourceTree = "<group>";
+		};
+		3065A0D71ABE96C200E77DF9 /* SpriteBatch */ = {
+			isa = PBXGroup;
+			children = (
+				3065A0C81ABE969200E77DF9 /* SpriteBatch.cpp */,
+				3065A0C91ABE969200E77DF9 /* SpriteBatch.h */,
+			);
+			name = SpriteBatch;
+			sourceTree = "<group>";
+		};
+		3065A0D81ABE96C700E77DF9 /* Timing */ = {
+			isa = PBXGroup;
+			children = (
+				3065A0CA1ABE969200E77DF9 /* Timing.cpp */,
+				3065A0CB1ABE969200E77DF9 /* Timing.h */,
+			);
+			name = Timing;
+			sourceTree = "<group>";
+		};
+		3065A0D91ABE96CD00E77DF9 /* Window */ = {
+			isa = PBXGroup;
+			children = (
+				3065A0CC1ABE969200E77DF9 /* Window.cpp */,
+				3065A0CD1ABE969200E77DF9 /* Window.h */,
+			);
+			name = Window;
+			sourceTree = "<group>";
+		};
 		30C378CB1ABBC97400C883A4 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,10 +250,14 @@
 		30E4CBD71ABBC70700C5D0CD /* QuimiPop */ = {
 			isa = PBXGroup;
 			children = (
+				3065A0D41ABE969A00E77DF9 /* Bullet */,
+				3065A0D51ABE96AF00E77DF9 /* Camera2D */,
 				30C378CB1ABBC97400C883A4 /* Errors */,
+				3065A0DA1ABE978700E77DF9 /* glm */,
 				30C378CC1ABBC97A00C883A4 /* GLSLProgram */,
 				30C378AE1ABBC96B00C883A4 /* GLTexture.h */,
 				30C378CD1ABBC98200C883A4 /* ImageLoader */,
+				3065A0D61ABE96B600E77DF9 /* InputManager */,
 				30C378CE1ABBC98900C883A4 /* IOManager */,
 				30C378B31ABBC96B00C883A4 /* main.cpp */,
 				30C378CF1ABBC99D00C883A4 /* MainGame */,
@@ -188,9 +265,12 @@
 				30C378D11ABBC9B500C883A4 /* ResourceManager */,
 				30C378BA1ABBC96B00C883A4 /* Shaders */,
 				30C378D21ABBCA4600C883A4 /* Sprite */,
+				3065A0D71ABE96C200E77DF9 /* SpriteBatch */,
 				30C378D31ABBCA4C00C883A4 /* TextureCache */,
 				30C378BF1ABBC96B00C883A4 /* Textures */,
+				3065A0D81ABE96C700E77DF9 /* Timing */,
 				30C378C01ABBC96B00C883A4 /* Vertex.h */,
+				3065A0D91ABE96CD00E77DF9 /* Window */,
 			);
 			path = QuimiPop;
 			sourceTree = "<group>";
@@ -251,16 +331,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3065A0CF1ABE969200E77DF9 /* Camera2D.cpp in Sources */,
 				30C378CA1ABBC96B00C883A4 /* TextureCache.cpp in Sources */,
+				3065A0D21ABE969200E77DF9 /* Timing.cpp in Sources */,
+				3065A0D31ABE969200E77DF9 /* Window.cpp in Sources */,
 				30C378C61ABBC96B00C883A4 /* MainGame.cpp in Sources */,
 				30C378C21ABBC96B00C883A4 /* GLSLProgram.cpp in Sources */,
 				30C378C41ABBC96B00C883A4 /* IOManager.cpp in Sources */,
 				30C378C11ABBC96B00C883A4 /* Errors.cpp in Sources */,
 				30C378C71ABBC96B00C883A4 /* picoPNG.cpp in Sources */,
 				30C378C51ABBC96B00C883A4 /* main.cpp in Sources */,
+				3065A0CE1ABE969200E77DF9 /* Bullet.cpp in Sources */,
 				30C378C31ABBC96B00C883A4 /* ImageLoader.cpp in Sources */,
 				30C378C81ABBC96B00C883A4 /* ResourceManager.cpp in Sources */,
+				3065A0D11ABE969200E77DF9 /* SpriteBatch.cpp in Sources */,
 				30C378C91ABBC96B00C883A4 /* Sprite.cpp in Sources */,
+				3065A0D01ABE969200E77DF9 /* InputManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

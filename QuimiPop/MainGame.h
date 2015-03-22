@@ -10,12 +10,18 @@
 #define __GraphicsTutorial__MainGame__
 
 #include <SDL2/SDL.h>
-#include <OpenGL/glu.h>
 #include <OpenGL/gl3.h>
 #include <vector>
+#include "glm/glm.hpp"
 #include "Errors.h"
-#include "Sprite.h"
 #include "GLSLProgram.h"
+#include "Window.h"
+#include "Camera2D.h"
+#include "SpriteBatch.h"
+#include "ResourceManager.h"
+#include "InputManager.h"
+#include "Timing.h"
+#include "Bullet.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -34,21 +40,23 @@ private:
     void drawGame();
     void calculateFPS();
     
-    SDL_Window* _window;
+    Window _window;
     int _screenWidth;
     int _screenHeight;
     GameState _gameState;
-    
-    std::vector<Sprite*> _sprites;
-    Sprite _sprite;
-    
+        
     GLSLProgram _colorProgram;
+    Camera2D _camera;
+    
+    SpriteBatch _spriteBatch;
+    
+    InputManager _inputManager;
+    FPSLimiter _fpsLimiter;
+    
+    std::vector<Bullet> _bullets;
     
     float _fps;
     float _maxFPS;
-    float _frameTime;
-    
-    float _time;
 };
 
 #endif /* defined(__GraphicsTutorial__MainGame__) */
