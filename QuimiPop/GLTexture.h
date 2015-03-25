@@ -2,8 +2,8 @@
 //  GLTexture.h
 //  GraphicsTutorial
 //
-//  Created by Eduardo Alberto Sanchez Alvarado on 3/16/15.
-//  Copyright (c) 2015 Eduardo Alberto Sanchez Alvarado. All rights reserved.
+//  Created by Eduardo Alberto Sanchez Alvarado & Graciela Garcia Diaz on 3/16/15.
+//  Copyright (c) 2015 Eduardo Alberto Sanchez Alvarado & Graciela Garcia Diaz. All rights reserved.
 //
 
 #ifndef GraphicsTutorial_GLTexture_h
