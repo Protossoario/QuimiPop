@@ -29,12 +29,10 @@ void GameBoard::draw(SpriteBatch &spriteBatch) {
         if (abs(mouseOffset.x) > abs(mouseOffset.y) && abs(mouseOffset.x) > TILE_WIDTH / 4) {
             _highlightRow = getRowForY(_mouseCoords.y);
             _highlighting = true;
-            printf("Highlighted row: %d\n", _highlightRow);
         }
         else if (abs(mouseOffset.x) < abs(mouseOffset.y) && abs(mouseOffset.y) > TILE_HEIGHT / 4) {
             _highlightCol = getColForX(_mouseCoords.x);
             _highlighting = true;
-            printf("Highlighted col: %d\n", _highlightCol);
         }
     }
     
@@ -58,12 +56,12 @@ void GameBoard::setClickingDown(bool clickingDown) {
     if (!_clickingDown && _highlighting) {
         glm::vec2 offset = _mouseCoords - _originMouseCoords;
         if (_highlightRow > -1) {
-            int rowOffset = offset.x / TILE_WIDTH;
+            int rowOffset = (offset.x > 0 ? offset.x + TILE_WIDTH / 2 : offset.x - TILE_WIDTH / 2) / TILE_WIDTH;
             _boardGrid.moveGrid(1, _highlightRow, rowOffset);
             _boardGrid.checkGrid(1, _highlightRow);
         }
         else if (_highlightCol > -1) {
-            int colOffset = offset.y / TILE_HEIGHT;
+            int colOffset = (offset.y > 0 ? offset.y + TILE_HEIGHT / 2 : offset.y - TILE_HEIGHT / 2) / TILE_HEIGHT;
             _boardGrid.moveGrid(0, _highlightCol, colOffset);
             _boardGrid.checkGrid(0, _highlightCol);
         }
@@ -84,12 +82,14 @@ void GameBoard::updateMouseCoords(glm::vec2 mouseCoords) {
 
 glm::vec4 GameBoard::getTileRectangle(int row, int col) {
     if (row == _highlightRow) {
-        glm::vec2 offset = _mouseCoords - _originMouseCoords;
-        return glm::vec4((int)(offset.x + TILE_WIDTH * col + 8 * TILE_WIDTH) % (int)(8 * TILE_WIDTH) + _position.x, TILE_HEIGHT * row + _position.y, TILE_WIDTH * 1.25, TILE_HEIGHT * 1.25);
+        glm::vec2 mouseOffset = _mouseCoords - _originMouseCoords;
+        int squareWidth = TILE_WIDTH * 8;
+        return glm::vec4((int)(mouseOffset.x + TILE_WIDTH * col + squareWidth) % squareWidth + _position.x, TILE_HEIGHT * row + _position.y, TILE_WIDTH * 1.25, TILE_HEIGHT * 1.25);
     }
     else if (col == _highlightCol) {
-        glm::vec2 offset = _mouseCoords - _originMouseCoords;
-        return glm::vec4(TILE_WIDTH * col + _position.x, (int)(offset.y + TILE_HEIGHT * row + 8 * TILE_HEIGHT) % (int)(8 * TILE_HEIGHT) + _position.y, TILE_WIDTH * 1.25, TILE_HEIGHT * 1.25);
+        glm::vec2 mouseOffset = _mouseCoords - _originMouseCoords;
+        int squareHeight = TILE_HEIGHT * 8;
+        return glm::vec4(TILE_WIDTH * col + _position.x, (int)(mouseOffset.y + TILE_HEIGHT * row + squareHeight) % squareHeight + _position.y, TILE_WIDTH * 1.25, TILE_HEIGHT * 1.25);
     }
     return glm::vec4(TILE_WIDTH * col + _position.x, TILE_HEIGHT * row + _position.y, TILE_WIDTH, TILE_HEIGHT);
 }
