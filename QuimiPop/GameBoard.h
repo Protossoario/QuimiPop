@@ -23,6 +23,7 @@ public:
     
     void init();
     
+    void update();
     void draw(SpriteBatch& spriteBatch);
     
     void setClickingDown(bool clickingDown);

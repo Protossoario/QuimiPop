@@ -16,14 +16,7 @@ void GameBoard::init() {
     _boardGrid.init();
 }
 
-void GameBoard::draw(SpriteBatch &spriteBatch) {
-    glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
-    Color color;
-    color.r = 255;
-    color.g = 255;
-    color.b = 255;
-    color.a = 255;
-    
+void GameBoard::update() {
     if (_clickingDown && !_setMouseCoords && !_highlighting) {
         glm::vec2 mouseOffset = _mouseCoords - _originMouseCoords;
         if (abs(mouseOffset.x) > abs(mouseOffset.y) && abs(mouseOffset.x) > TILE_WIDTH / 4) {
@@ -35,6 +28,15 @@ void GameBoard::draw(SpriteBatch &spriteBatch) {
             _highlighting = true;
         }
     }
+}
+
+void GameBoard::draw(SpriteBatch &spriteBatch) {
+    glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
+    Color color;
+    color.r = 255;
+    color.g = 255;
+    color.b = 255;
+    color.a = 255;
     
     for (int row = 0; row < 8; row++) {
         for (int col = 0; col < 8; col++) {

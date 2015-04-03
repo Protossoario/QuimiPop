@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3065A0CE1ABE969200E77DF9 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0C21ABE969200E77DF9 /* Bullet.cpp */; };
 		3065A0CF1ABE969200E77DF9 /* Camera2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0C41ABE969200E77DF9 /* Camera2D.cpp */; };
 		3065A0D01ABE969200E77DF9 /* InputManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0C61ABE969200E77DF9 /* InputManager.cpp */; };
 		3065A0D11ABE969200E77DF9 /* SpriteBatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0C81ABE969200E77DF9 /* SpriteBatch.cpp */; };
@@ -25,7 +24,6 @@
 		30C378C61ABBC96B00C883A4 /* MainGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378B41ABBC96B00C883A4 /* MainGame.cpp */; };
 		30C378C71ABBC96B00C883A4 /* picoPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378B61ABBC96B00C883A4 /* picoPNG.cpp */; };
 		30C378C81ABBC96B00C883A4 /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378B81ABBC96B00C883A4 /* ResourceManager.cpp */; };
-		30C378C91ABBC96B00C883A4 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378BB1ABBC96B00C883A4 /* Sprite.cpp */; };
 		30C378CA1ABBC96B00C883A4 /* TextureCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378BD1ABBC96B00C883A4 /* TextureCache.cpp */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +40,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3065A0C21ABE969200E77DF9 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
-		3065A0C31ABE969200E77DF9 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 		3065A0C41ABE969200E77DF9 /* Camera2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera2D.cpp; sourceTree = "<group>"; };
 		3065A0C51ABE969200E77DF9 /* Camera2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera2D.h; sourceTree = "<group>"; };
 		3065A0C61ABE969200E77DF9 /* InputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputManager.cpp; sourceTree = "<group>"; };
@@ -78,8 +74,6 @@
 		30C378B81ABBC96B00C883A4 /* ResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceManager.cpp; sourceTree = "<group>"; };
 		30C378B91ABBC96B00C883A4 /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
 		30C378BA1ABBC96B00C883A4 /* Shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shaders; sourceTree = "<group>"; };
-		30C378BB1ABBC96B00C883A4 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
-		30C378BC1ABBC96B00C883A4 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
 		30C378BD1ABBC96B00C883A4 /* TextureCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureCache.cpp; sourceTree = "<group>"; };
 		30C378BE1ABBC96B00C883A4 /* TextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureCache.h; sourceTree = "<group>"; };
 		30C378BF1ABBC96B00C883A4 /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
@@ -100,15 +94,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3065A0D41ABE969A00E77DF9 /* Bullet */ = {
-			isa = PBXGroup;
-			children = (
-				3065A0C21ABE969200E77DF9 /* Bullet.cpp */,
-				3065A0C31ABE969200E77DF9 /* Bullet.h */,
-			);
-			name = Bullet;
-			sourceTree = "<group>";
-		};
 		3065A0D51ABE96AF00E77DF9 /* Camera2D */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,15 +220,6 @@
 			name = ResourceManager;
 			sourceTree = "<group>";
 		};
-		30C378D21ABBCA4600C883A4 /* Sprite */ = {
-			isa = PBXGroup;
-			children = (
-				30C378BB1ABBC96B00C883A4 /* Sprite.cpp */,
-				30C378BC1ABBC96B00C883A4 /* Sprite.h */,
-			);
-			name = Sprite;
-			sourceTree = "<group>";
-		};
 		30C378D31ABBCA4C00C883A4 /* TextureCache */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,7 +250,6 @@
 		30E4CBD71ABBC70700C5D0CD /* QuimiPop */ = {
 			isa = PBXGroup;
 			children = (
-				3065A0D41ABE969A00E77DF9 /* Bullet */,
 				3065A0D51ABE96AF00E77DF9 /* Camera2D */,
 				30C378CB1ABBC97400C883A4 /* Errors */,
 				3065A0DE1ABE99F700E77DF9 /* GameBoard */,
@@ -290,7 +265,6 @@
 				30C378D01ABBC9A300C883A4 /* picoPNG */,
 				30C378D11ABBC9B500C883A4 /* ResourceManager */,
 				30C378BA1ABBC96B00C883A4 /* Shaders */,
-				30C378D21ABBCA4600C883A4 /* Sprite */,
 				3065A0D71ABE96C200E77DF9 /* SpriteBatch */,
 				30C378D31ABBCA4C00C883A4 /* TextureCache */,
 				30C378BF1ABBC96B00C883A4 /* Textures */,
@@ -368,12 +342,10 @@
 				30C378C71ABBC96B00C883A4 /* picoPNG.cpp in Sources */,
 				3065A0E41ABEE5C600E77DF9 /* Grid.cpp in Sources */,
 				30C378C51ABBC96B00C883A4 /* main.cpp in Sources */,
-				3065A0CE1ABE969200E77DF9 /* Bullet.cpp in Sources */,
 				30C378C31ABBC96B00C883A4 /* ImageLoader.cpp in Sources */,
 				30C378C81ABBC96B00C883A4 /* ResourceManager.cpp in Sources */,
 				3065A0D11ABE969200E77DF9 /* SpriteBatch.cpp in Sources */,
 				3065A0DD1ABE99F000E77DF9 /* GameBoard.cpp in Sources */,
-				30C378C91ABBC96B00C883A4 /* Sprite.cpp in Sources */,
 				3065A0D01ABE969200E77DF9 /* InputManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

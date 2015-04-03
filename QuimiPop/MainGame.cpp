@@ -63,6 +63,7 @@ void MainGame::gameLoop() {
         processInput();
         
         _camera.update();
+        _gameBoard.update();
         
         drawGame();
         
