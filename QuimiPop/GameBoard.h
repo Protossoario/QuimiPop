@@ -37,18 +37,18 @@ private:
     int getRowForY(int y);
     int getColForX(int x);
     
-    Grid _boardGrid;
+    Grid m_boardGrid;
     
-    glm::vec2 _position;
+    glm::vec2 m_position;
     
-    bool _clickingDown;
-    bool _setMouseCoords;
-    glm::vec2 _originMouseCoords;
-    glm::vec2 _mouseCoords;
+    bool m_clickingDown;
+    bool m_setMouseCoords;
+    glm::vec2 m_originMouseCoords;
+    glm::vec2 m_mouseCoords;
     
-    bool _highlighting;
-    int _highlightRow;
-    int _highlightCol;
+    bool m_highlighting;
+    int m_highlightRow;
+    int m_highlightCol;
 };
 
 #endif /* defined(__QuimiPop__GameBoard__) */

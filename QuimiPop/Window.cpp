@@ -8,7 +8,7 @@
 
 #include "Window.h"
 
-Window::Window() : _sdlWindow(nullptr) {}
+Window::Window() : m_sdlWindow(nullptr) {}
 
 int Window::create(std::string windowName, int screenWidth, int screenHeight, unsigned int currentFlags) {
     Uint32 flags = SDL_WINDOW_OPENGL;
@@ -25,15 +25,15 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
         flags |= SDL_WINDOW_BORDERLESS;
     }
     
-    _sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, flags);
+    m_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, flags);
     
-    if (_sdlWindow == nullptr) {
+    if (m_sdlWindow == nullptr) {
         const char *error = SDL_GetError();
         printf("Error: %s\n", error);
         fatalError("SDL Window could not be created!");
     }
     
-    SDL_GLContext glContext = SDL_GL_CreateContext(_sdlWindow);
+    SDL_GLContext glContext = SDL_GL_CreateContext(m_sdlWindow);
     if (glContext == nullptr) {
         fatalError("SDL GL Context could not be created!");
     }
@@ -52,5 +52,5 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
 }
 
 void Window::swapBuffer() {
-    SDL_GL_SwapWindow(_sdlWindow);
+    SDL_GL_SwapWindow(m_sdlWindow);
 }

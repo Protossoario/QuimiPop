@@ -25,31 +25,31 @@ enum class GlyphSortType {
 class Glyph {
 public:
     Glyph();
-    Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color) : _texture(texture), _depth(depth) {
-        _topLeft.color = color;
-        _topLeft.setPosition(destRect.x, destRect.y + destRect.w);
-        _topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
+    Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint Texture, float Depth, const Color& color) : texture(Texture), depth(Depth) {
+        topLeft.color = color;
+        topLeft.setPosition(destRect.x, destRect.y + destRect.w);
+        topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
         
-        _bottomLeft.color = color;
-        _bottomLeft.setPosition(destRect.x, destRect.y);
-        _bottomLeft.setUV(uvRect.x, uvRect.y);
+        bottomLeft.color = color;
+        bottomLeft.setPosition(destRect.x, destRect.y);
+        bottomLeft.setUV(uvRect.x, uvRect.y);
         
-        _bottomRight.color = color;
-        _bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
-        _bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
+        bottomRight.color = color;
+        bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
+        bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
         
-        _topRight.color = color;
-        _topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
-        _topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
+        topRight.color = color;
+        topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
+        topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
     }
     
-    GLuint _texture;
-    float _depth;
+    GLuint texture;
+    float depth;
     
-    Vertex _topLeft;
-    Vertex _bottomLeft;
-    Vertex _topRight;
-    Vertex _bottomRight;
+    Vertex topLeft;
+    Vertex bottomLeft;
+    Vertex topRight;
+    Vertex bottomRight;
 };
 
 class RenderBatch {
@@ -83,14 +83,14 @@ private:
     static bool compareBackToFront(Glyph* a, Glyph* b);
     static bool compareTexture(Glyph* a, Glyph* b);
     
-    GLuint _vbo;
-    GLuint _vao;
+    GLuint m_vbo;
+    GLuint m_vao;
     
-    GlyphSortType _sortType;
+    GlyphSortType m_sortType;
     
-    std::vector<Glyph*> _glyphPointers; // This is for sorting
-    std::vector<Glyph> _glyphs; // These are the actual glyphs
-    std::vector<RenderBatch> _renderBatches;
+    std::vector<Glyph*> m_glyphPointers; // This is for sorting
+    std::vector<Glyph> m_glyphs; // These are the actual glyphs
+    std::vector<RenderBatch> m_renderBatches;
 };
 
 #endif /* defined(__GraphicsTutorial__SpriteBatch__) */

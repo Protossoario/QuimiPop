@@ -44,25 +44,25 @@ private:
     void calculateFPS();
     void addGlow(const glm::vec2& position, int numParticles);
     
-    Window _window;
-    int _screenWidth;
-    int _screenHeight;
-    GameState _gameState;
+    Window m_window;
+    int m_screenWidth;
+    int m_screenHeight;
+    GameState m_gameState;
         
-    GLSLProgram _colorProgram;
-    Camera2D _camera;
+    GLSLProgram m_colorProgram;
+    Camera2D m_camera;
     
-    SpriteBatch _spriteBatch;
-    ParticleEngine2D _particleEngine;
-    ParticleBatch2D* _particleBatch;
+    SpriteBatch m_spriteBatch;
+    ParticleEngine2D m_particleEngine;
+    ParticleBatch2D* m_particleBatch;
     
-    InputManager _inputManager;
-    FPSLimiter _fpsLimiter;
+    InputManager m_inputManager;
+    FPSLimiter m_fpsLimiter;
     
-    GameBoard _gameBoard;
+    GameBoard m_gameBoard;
     
-    float _fps;
-    float _maxFPS;
+    float m_fps;
+    float m_maxFPS;
 };
 
 #endif /* defined(__GraphicsTutorial__MainGame__) */

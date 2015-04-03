@@ -8,9 +8,9 @@
 
 #include "MainGame.h"
 
-MainGame::MainGame() : _screenWidth(1024), _screenHeight(720), _gameState(GameState::PLAY), _maxFPS(60.0f), _gameBoard(glm::vec2(-450.0f, -300.0f)) {
-    _camera.init(_screenWidth, _screenHeight);
-    _gameBoard.init();
+MainGame::MainGame() : m_screenWidth(1024), m_screenHeight(720), m_gameState(GameState::PLAY), m_maxFPS(60.0f), m_gameBoard(glm::vec2(-450.0f, -300.0f)) {
+    m_camera.init(m_screenWidth, m_screenHeight);
+    m_gameBoard.init();
 }
 
 MainGame::~MainGame() {}
@@ -28,7 +28,7 @@ void MainGame::initSystems() {
     // Required for Mac OS X to support GLSL version 130 or higher
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     
-    _window.create("ChemiPop", _screenWidth, _screenHeight, 0);
+    m_window.create("ChemiPop", m_screenWidth, m_screenHeight, 0);
     
     // Required for Mac OS X
     GLuint vertexArrayID;
@@ -43,41 +43,41 @@ void MainGame::initSystems() {
     
     initShaders();
     
-    _spriteBatch.init();
+    m_spriteBatch.init();
     
-    _fpsLimiter.init(_maxFPS);
+    m_fpsLimiter.init(m_maxFPS);
     
-    _particleBatch = new ParticleBatch2D;
-    _particleBatch->init(1000, 0.05f, ResourceManager::getTexture("/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/glow_particle.png"));
-    _particleEngine.addParticleBatch(_particleBatch);
+    m_particleBatch = new ParticleBatch2D;
+    m_particleBatch->init(1000, 0.05f, ResourceManager::getTexture("/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/glow_particle.png"));
+    m_particleEngine.addParticleBatch(m_particleBatch);
 }
 
 void MainGame::initShaders() {
-    _colorProgram.compileShaders("/Users/EduardoS/Documents/Programacion/XCode Projects/GraphicsTutorial/GraphicsTutorial/Shaders/colorShading.vert", "/Users/EduardoS/Documents/Programacion/XCode Projects/GraphicsTutorial/GraphicsTutorial/Shaders/colorShading.frag");
-    _colorProgram.addAttribute("vertexPosition");
-    _colorProgram.addAttribute("vertexColor");
-    _colorProgram.addAttribute("vertexUV");
-    _colorProgram.linkShaders();
+    m_colorProgram.compileShaders("/Users/EduardoS/Documents/Programacion/XCode Projects/GraphicsTutorial/GraphicsTutorial/Shaders/colorShading.vert", "/Users/EduardoS/Documents/Programacion/XCode Projects/GraphicsTutorial/GraphicsTutorial/Shaders/colorShading.frag");
+    m_colorProgram.addAttribute("vertexPosition");
+    m_colorProgram.addAttribute("vertexColor");
+    m_colorProgram.addAttribute("vertexUV");
+    m_colorProgram.linkShaders();
 }
 
 void MainGame::gameLoop() {
-    while (_gameState != GameState::EXIT) {
-        _fpsLimiter.begin();
+    while (m_gameState != GameState::EXIT) {
+        m_fpsLimiter.begin();
         
         processInput();
         
-        _camera.update();
-        _gameBoard.update();
-        _particleEngine.update();
+        m_camera.update();
+        m_gameBoard.update();
+        m_particleEngine.update();
         
         drawGame();
         
-        _fps = _fpsLimiter.end();
+        m_fps = m_fpsLimiter.end();
         
         static int frameCounter = 0;
         frameCounter++;
         if (frameCounter == 1000) {
-            printf("FPS: %.1f\n", _fps);
+            printf("FPS: %.1f\n", m_fps);
             frameCounter = 0;
         }
     }
@@ -91,60 +91,60 @@ void MainGame::processInput() {
     while (SDL_PollEvent(&ev)) {
         switch (ev.type) {
             case SDL_QUIT:
-                _gameState = GameState::EXIT;
+                m_gameState = GameState::EXIT;
                 break;
                 
             case SDL_MOUSEMOTION:
-                _inputManager.setMouseCoords(ev.motion.x, ev.motion.y);
+                m_inputManager.setMouseCoords(ev.motion.x, ev.motion.y);
                 break;
                 
             case SDL_KEYDOWN:
-                _inputManager.pressKey(ev.key.keysym.sym);
+                m_inputManager.pressKey(ev.key.keysym.sym);
                 break;
             
             case SDL_KEYUP:
-                _inputManager.releaseKey(ev.key.keysym.sym);
+                m_inputManager.releaseKey(ev.key.keysym.sym);
                 break;
                 
             case SDL_MOUSEBUTTONDOWN:
-                _inputManager.pressKey(ev.button.button);
+                m_inputManager.pressKey(ev.button.button);
                 break;
                 
             case SDL_MOUSEBUTTONUP:
-                _inputManager.releaseKey(ev.button.button);
+                m_inputManager.releaseKey(ev.button.button);
                 break;
         }
     }
     
-    if (_inputManager.isKeyPressed(SDLK_w)) {
-        _camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, CAMERA_SPEED));
+    if (m_inputManager.isKeyPressed(SDLK_w)) {
+        m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, CAMERA_SPEED));
     }
-    if (_inputManager.isKeyPressed(SDLK_s)) {
-        _camera.setPosition(_camera.getPosition() + glm::vec2(0.0f, -CAMERA_SPEED));
+    if (m_inputManager.isKeyPressed(SDLK_s)) {
+        m_camera.setPosition(m_camera.getPosition() + glm::vec2(0.0f, -CAMERA_SPEED));
     }
-    if (_inputManager.isKeyPressed(SDLK_a)) {
-        _camera.setPosition(_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
+    if (m_inputManager.isKeyPressed(SDLK_a)) {
+        m_camera.setPosition(m_camera.getPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
     }
-    if (_inputManager.isKeyPressed(SDLK_d)) {
-        _camera.setPosition(_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
+    if (m_inputManager.isKeyPressed(SDLK_d)) {
+        m_camera.setPosition(m_camera.getPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
     }
-    if (_inputManager.isKeyPressed(SDLK_q)) {
-        _camera.setScale(_camera.getScale() + SCALE_SPEED);
+    if (m_inputManager.isKeyPressed(SDLK_q)) {
+        m_camera.setScale(m_camera.getScale() + SCALE_SPEED);
     }
-    if (_inputManager.isKeyPressed(SDLK_e)) {
-        _camera.setScale(_camera.getScale() - SCALE_SPEED);
+    if (m_inputManager.isKeyPressed(SDLK_e)) {
+        m_camera.setScale(m_camera.getScale() - SCALE_SPEED);
     }
-    if (_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
-        glm::vec2 mouseCoords = _inputManager.getMouseCoords();
-        mouseCoords = _camera.convertScreenToWorld(mouseCoords);
+    if (m_inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
+        glm::vec2 mouseCoords = m_inputManager.getMouseCoords();
+        mouseCoords = m_camera.convertScreenToWorld(mouseCoords);
         
-        _gameBoard.setClickingDown(true);
-        _gameBoard.updateMouseCoords(mouseCoords);
+        m_gameBoard.setClickingDown(true);
+        m_gameBoard.updateMouseCoords(mouseCoords);
         
         addGlow(mouseCoords, 10);
     }
     else {
-        _gameBoard.setClickingDown(false);
+        m_gameBoard.setClickingDown(false);
     }
 }
 
@@ -152,19 +152,19 @@ void MainGame::drawGame() {
     glClearDepth(1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    _colorProgram.use();
+    m_colorProgram.use();
     
     glActiveTexture(GL_TEXTURE0);
-    GLint textureLocation = _colorProgram.getUniformLocation("mySampler");
+    GLint textureLocation = m_colorProgram.getUniformLocation("mySampler");
     glUniform1i(textureLocation, 0);
     
-    GLint pLocation = _colorProgram.getUniformLocation("P");
-    glm::mat4 cameraMatrix = _camera.getCameraMatrix();
+    GLint pLocation = m_colorProgram.getUniformLocation("P");
+    glm::mat4 cameraMatrix = m_camera.getCameraMatrix();
     glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
     
-    _spriteBatch.begin();
+    m_spriteBatch.begin();
     
-    glm::vec4 backgroundRect(-_screenWidth / 2, -_screenHeight / 2, _screenWidth, _screenHeight);
+    glm::vec4 backgroundRect(-m_screenWidth / 2, -m_screenHeight / 2, m_screenWidth, m_screenHeight);
     glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
     static GLTexture backgroundTexture = ResourceManager::getTexture("/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/Background.png");
     Color color;
@@ -172,21 +172,21 @@ void MainGame::drawGame() {
     color.g = 255;
     color.b = 255;
     color.a = 255;
-    _spriteBatch.draw(backgroundRect, uvRect, backgroundTexture.textureId, 0.0f, color);
+    m_spriteBatch.draw(backgroundRect, uvRect, backgroundTexture.textureId, 0.0f, color);
     
-    _gameBoard.draw(_spriteBatch);
+    m_gameBoard.draw(m_spriteBatch);
     
-    _spriteBatch.end();
+    m_spriteBatch.end();
     
-    _spriteBatch.renderBatch();
+    m_spriteBatch.renderBatch();
     
-    _particleEngine.draw(&_spriteBatch);
+    m_particleEngine.draw(&m_spriteBatch);
     
     glBindTexture(GL_TEXTURE_2D, 0);
     
-    _colorProgram.unuse();
+    m_colorProgram.unuse();
     
-    _window.swapBuffer();
+    m_window.swapBuffer();
 }
 
 void MainGame::addGlow(const glm::vec2 &position, int numParticles) {
@@ -201,6 +201,6 @@ void MainGame::addGlow(const glm::vec2 &position, int numParticles) {
     col.a = 255;
     
     for (int i = 0; i < numParticles; i++) {
-        _particleBatch->addParticle(position, glm::rotate(vel, randAngle(randEngine)), col, 10.0f);
+        m_particleBatch->addParticle(position, glm::rotate(vel, randAngle(randEngine)), col, 10.0f);
     }
 }

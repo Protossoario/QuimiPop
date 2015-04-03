@@ -11,7 +11,7 @@
 void Grid::init() {
     for (int row = 0; row < grid_length; row++) {
         for (int col = 0; col < grid_length; col++) {
-            _gameGrid[row][col] = grid1[row][col];
+            m_gameGrid[row][col] = grid1[row][col];
         }
     }
 }
@@ -26,19 +26,19 @@ void Grid::moveGrid(int colOrRen, int index, int offset) {
         //caso del cambio de renglon
         case 1:
             for (int a = 0; a < grid_length; a++) {
-                arrOriginal[a] = _gameGrid[index][a];
+                arrOriginal[a] = m_gameGrid[index][a];
             }
             for (int i = 0; i < grid_length; i++) {
-                _gameGrid[index][(i + offset + grid_length) % grid_length] = arrOriginal[i];
+                m_gameGrid[index][(i + offset + grid_length) % grid_length] = arrOriginal[i];
             }
             break;
         //caso para el cambio de columna
         case 0:
             for (int a = 0; a < grid_length; a++) {
-                arrOriginal[a] = _gameGrid[a][index];
+                arrOriginal[a] = m_gameGrid[a][index];
             }
             for (int i = 0; i < grid_length; i++) {
-                _gameGrid[(i + offset + grid_length) % grid_length][index] = arrOriginal[i];
+                m_gameGrid[(i + offset + grid_length) % grid_length][index] = arrOriginal[i];
             }
             break;
     }
@@ -48,7 +48,7 @@ bool Grid::checkMolecule(int colOrRen, int x, int y, const int *arrMolecule, int
     switch (colOrRen) {
         case 0:
             for (int i = 0; i < size; i++) {
-                if ((y + i) >= grid_length || arrMolecule[i] != _gameGrid[x][y + i]) {
+                if ((y + i) >= grid_length || arrMolecule[i] != m_gameGrid[x][y + i]) {
                     return false;
                 }
             }
@@ -56,7 +56,7 @@ bool Grid::checkMolecule(int colOrRen, int x, int y, const int *arrMolecule, int
             
         case 1:
             for (int i = 0; i < size; i++) {
-                if ((x + i) >= grid_length || arrMolecule[i] != _gameGrid[x + i][y]) {
+                if ((x + i) >= grid_length || arrMolecule[i] != m_gameGrid[x + i][y]) {
                     return false;
                 }
             }
@@ -70,18 +70,18 @@ void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, int type) {
         case 0:
             for (int j = y + 1; j < y + size; j++) {
                 for (int i = x; i > 1; i--) {
-                    _gameGrid[i][j] = _gameGrid[i - 1][j];
+                    m_gameGrid[i][j] = m_gameGrid[i - 1][j];
                 }
-                _gameGrid[0][j] = rand() % 5;
+                m_gameGrid[0][j] = rand() % 5;
             }
             break;
             
         case 1:
             for (int i = 0; i < x; i++) {
-                _gameGrid[x + size - 2 - i][y] = _gameGrid[x - 1 - i][y];
+                m_gameGrid[x + size - 2 - i][y] = m_gameGrid[x - 1 - i][y];
             }
             for (int i = 0; i < size - 1; i++) {
-                _gameGrid[i][y] = rand() % 5;
+                m_gameGrid[i][y] = rand() % 5;
             }
             break;
     }
@@ -90,15 +90,15 @@ void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, int type) {
 void Grid::deleteMolecule(int colOrRen, int x, int y, int size, int type) {
     switch(colOrRen) {
         case 0:
-            _gameGrid[x][y] = type;
+            m_gameGrid[x][y] = type;
             for (int i = 1; i < size; i++) {
-                _gameGrid[x][y+i] = -1;
+                m_gameGrid[x][y+i] = -1;
             }
             break;
         case 1:
-            _gameGrid[x+size-1][y] = type;
+            m_gameGrid[x+size-1][y] = type;
             for (int i = x + size - 2; i > x - 1; i--) {
-                _gameGrid[i][y] = -1;
+                m_gameGrid[i][y] = -1;
             }
             break;
     }
@@ -204,7 +204,7 @@ void Grid::checkGrid(int colOrRen, int pos) {
 
 GLTexture Grid::getTileTexture(int row, int col) {
     std::string filePath = "/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/";
-    switch (_gameGrid[row][col]) {
+    switch (m_gameGrid[row][col]) {
         case 0:
             filePath += "Hydrogen.png";
             break;

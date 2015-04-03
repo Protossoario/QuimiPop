@@ -67,7 +67,7 @@ public:
     GLTexture getTileTexture(int row, int col);
     
 private:
-    int _gameGrid[grid_length][grid_length];
+    int m_gameGrid[grid_length][grid_length];
 };
 
 #endif /* defined(__QuimiPop__Grid__) */
