@@ -25,23 +25,8 @@ enum class GlyphSortType {
 class Glyph {
 public:
     Glyph();
-    Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint Texture, float Depth, const Color& color) : texture(Texture), depth(Depth) {
-        topLeft.color = color;
-        topLeft.setPosition(destRect.x, destRect.y + destRect.w);
-        topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
-        
-        bottomLeft.color = color;
-        bottomLeft.setPosition(destRect.x, destRect.y);
-        bottomLeft.setUV(uvRect.x, uvRect.y);
-        
-        bottomRight.color = color;
-        bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
-        bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
-        
-        topRight.color = color;
-        topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
-        topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
-    }
+    Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint Texture, float Depth, const Color& color);
+    Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint Texture, float Depth, const Color& color, float angle);
     
     GLuint texture;
     float depth;
@@ -50,6 +35,9 @@ public:
     Vertex bottomLeft;
     Vertex topRight;
     Vertex bottomRight;
+    
+private:
+    glm::vec2 rotatePoint(glm::vec2 point, float angle);
 };
 
 class RenderBatch {
@@ -71,6 +59,7 @@ public:
     void end();
     
     void draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color);
+    void draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color, float angle);
     
     void renderBatch();
     
