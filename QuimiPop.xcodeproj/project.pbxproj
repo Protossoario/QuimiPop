@@ -14,6 +14,8 @@
 		3065A0D31ABE969200E77DF9 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0CC1ABE969200E77DF9 /* Window.cpp */; };
 		3065A0DD1ABE99F000E77DF9 /* GameBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0DB1ABE99F000E77DF9 /* GameBoard.cpp */; };
 		3065A0E41ABEE5C600E77DF9 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3065A0E21ABEE5C600E77DF9 /* Grid.cpp */; };
+		30AED5C71ACF149F00113387 /* ParticleEngine2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30AED5C51ACF149F00113387 /* ParticleEngine2D.cpp */; };
+		30AED5CB1ACF14C400113387 /* ParticleBatch2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30AED5C91ACF14C400113387 /* ParticleBatch2D.cpp */; };
 		30C378A71ABBC83200C883A4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C378A61ABBC83200C883A4 /* OpenGL.framework */; };
 		30C378A91ABBC87700C883A4 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C378A81ABBC87700C883A4 /* SDL2.framework */; };
 		30C378C11ABBC96B00C883A4 /* Errors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378AA1ABBC96B00C883A4 /* Errors.cpp */; };
@@ -55,6 +57,10 @@
 		3065A0DC1ABE99F000E77DF9 /* GameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoard.h; sourceTree = "<group>"; };
 		3065A0E21ABEE5C600E77DF9 /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
 		3065A0E31ABEE5C600E77DF9 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		30AED5C51ACF149F00113387 /* ParticleEngine2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleEngine2D.cpp; sourceTree = "<group>"; };
+		30AED5C61ACF149F00113387 /* ParticleEngine2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleEngine2D.h; sourceTree = "<group>"; };
+		30AED5C91ACF14C400113387 /* ParticleBatch2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleBatch2D.cpp; sourceTree = "<group>"; };
+		30AED5CA1ACF14C400113387 /* ParticleBatch2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleBatch2D.h; sourceTree = "<group>"; };
 		30C378A61ABBC83200C883A4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		30C378A81ABBC87700C883A4 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		30C378AA1ABBC96B00C883A4 /* Errors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Errors.cpp; sourceTree = "<group>"; };
@@ -155,6 +161,24 @@
 				3065A0E31ABEE5C600E77DF9 /* Grid.h */,
 			);
 			name = Grid;
+			sourceTree = "<group>";
+		};
+		30AED5C81ACF14A200113387 /* ParticleEngine2D */ = {
+			isa = PBXGroup;
+			children = (
+				30AED5C51ACF149F00113387 /* ParticleEngine2D.cpp */,
+				30AED5C61ACF149F00113387 /* ParticleEngine2D.h */,
+			);
+			name = ParticleEngine2D;
+			sourceTree = "<group>";
+		};
+		30AED5CC1ACF14C800113387 /* ParticleBatch2D */ = {
+			isa = PBXGroup;
+			children = (
+				30AED5C91ACF14C400113387 /* ParticleBatch2D.cpp */,
+				30AED5CA1ACF14C400113387 /* ParticleBatch2D.h */,
+			);
+			name = ParticleBatch2D;
 			sourceTree = "<group>";
 		};
 		30C378CB1ABBC97400C883A4 /* Errors */ = {
@@ -262,6 +286,8 @@
 				30C378CE1ABBC98900C883A4 /* IOManager */,
 				30C378B31ABBC96B00C883A4 /* main.cpp */,
 				30C378CF1ABBC99D00C883A4 /* MainGame */,
+				30AED5CC1ACF14C800113387 /* ParticleBatch2D */,
+				30AED5C81ACF14A200113387 /* ParticleEngine2D */,
 				30C378D01ABBC9A300C883A4 /* picoPNG */,
 				30C378D11ABBC9B500C883A4 /* ResourceManager */,
 				30C378BA1ABBC96B00C883A4 /* Shaders */,
@@ -339,6 +365,7 @@
 				30C378C21ABBC96B00C883A4 /* GLSLProgram.cpp in Sources */,
 				30C378C41ABBC96B00C883A4 /* IOManager.cpp in Sources */,
 				30C378C11ABBC96B00C883A4 /* Errors.cpp in Sources */,
+				30AED5C71ACF149F00113387 /* ParticleEngine2D.cpp in Sources */,
 				30C378C71ABBC96B00C883A4 /* picoPNG.cpp in Sources */,
 				3065A0E41ABEE5C600E77DF9 /* Grid.cpp in Sources */,
 				30C378C51ABBC96B00C883A4 /* main.cpp in Sources */,
@@ -346,6 +373,7 @@
 				30C378C81ABBC96B00C883A4 /* ResourceManager.cpp in Sources */,
 				3065A0D11ABE969200E77DF9 /* SpriteBatch.cpp in Sources */,
 				3065A0DD1ABE99F000E77DF9 /* GameBoard.cpp in Sources */,
+				30AED5CB1ACF14C400113387 /* ParticleBatch2D.cpp in Sources */,
 				3065A0D01ABE969200E77DF9 /* InputManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

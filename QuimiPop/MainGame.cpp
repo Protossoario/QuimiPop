@@ -46,6 +46,10 @@ void MainGame::initSystems() {
     _spriteBatch.init();
     
     _fpsLimiter.init(_maxFPS);
+    
+    _particleBatch = new ParticleBatch2D;
+    _particleBatch->init(1000, 0.05f, ResourceManager::getTexture("/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/glow_particle.png"));
+    _particleEngine.addParticleBatch(_particleBatch);
 }
 
 void MainGame::initShaders() {
@@ -64,6 +68,7 @@ void MainGame::gameLoop() {
         
         _camera.update();
         _gameBoard.update();
+        _particleEngine.update();
         
         drawGame();
         
@@ -135,6 +140,8 @@ void MainGame::processInput() {
         
         _gameBoard.setClickingDown(true);
         _gameBoard.updateMouseCoords(mouseCoords);
+        
+        addGlow(mouseCoords, 10);
     }
     else {
         _gameBoard.setClickingDown(false);
@@ -173,9 +180,27 @@ void MainGame::drawGame() {
     
     _spriteBatch.renderBatch();
     
+    _particleEngine.draw(&_spriteBatch);
+    
     glBindTexture(GL_TEXTURE_2D, 0);
     
     _colorProgram.unuse();
     
     _window.swapBuffer();
+}
+
+void MainGame::addGlow(const glm::vec2 &position, int numParticles) {
+    static std::mt19937 randEngine(time(nullptr));
+    static std::uniform_real_distribution<float> randAngle(0.0f, 360.0f);
+    
+    glm::vec2 vel(1.0f, 0.0f);
+    Color col;
+    col.r = 255;
+    col.g = 255;
+    col.b = 255;
+    col.a = 255;
+    
+    for (int i = 0; i < numParticles; i++) {
+        _particleBatch->addParticle(position, glm::rotate(vel, randAngle(randEngine)), col, 10.0f);
+    }
 }

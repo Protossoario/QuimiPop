@@ -11,7 +11,9 @@
 
 #include <SDL2/SDL.h>
 #include <OpenGL/gl3.h>
+#include <random>
 #include "glm/glm.hpp"
+#include "glm/gtx/rotate_vector.hpp"
 #include "Errors.h"
 #include "GLSLProgram.h"
 #include "Window.h"
@@ -21,6 +23,8 @@
 #include "InputManager.h"
 #include "Timing.h"
 #include "GameBoard.h"
+#include "ParticleEngine2D.h"
+#include "ParticleBatch2D.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -38,6 +42,7 @@ private:
     void processInput();
     void drawGame();
     void calculateFPS();
+    void addGlow(const glm::vec2& position, int numParticles);
     
     Window _window;
     int _screenWidth;
@@ -48,6 +53,8 @@ private:
     Camera2D _camera;
     
     SpriteBatch _spriteBatch;
+    ParticleEngine2D _particleEngine;
+    ParticleBatch2D* _particleBatch;
     
     InputManager _inputManager;
     FPSLimiter _fpsLimiter;
