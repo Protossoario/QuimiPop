@@ -22,14 +22,34 @@ enum class GlyphSortType {
     TEXTURE
 };
 
-struct Glyph {
-    GLuint texture;
-    float depth;
+class Glyph {
+public:
+    Glyph();
+    Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color) : _texture(texture), _depth(depth) {
+        _topLeft.color = color;
+        _topLeft.setPosition(destRect.x, destRect.y + destRect.w);
+        _topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
+        
+        _bottomLeft.color = color;
+        _bottomLeft.setPosition(destRect.x, destRect.y);
+        _bottomLeft.setUV(uvRect.x, uvRect.y);
+        
+        _bottomRight.color = color;
+        _bottomRight.setPosition(destRect.x + destRect.z, destRect.y);
+        _bottomRight.setUV(uvRect.x + uvRect.z, uvRect.y);
+        
+        _topRight.color = color;
+        _topRight.setPosition(destRect.x + destRect.z, destRect.y + destRect.w);
+        _topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
+    }
     
-    Vertex topLeft;
-    Vertex bottomLeft;
-    Vertex topRight;
-    Vertex bottomRight;
+    GLuint _texture;
+    float _depth;
+    
+    Vertex _topLeft;
+    Vertex _bottomLeft;
+    Vertex _topRight;
+    Vertex _bottomRight;
 };
 
 class RenderBatch {
@@ -68,7 +88,8 @@ private:
     
     GlyphSortType _sortType;
     
-    std::vector<Glyph*> _glyphs;
+    std::vector<Glyph*> _glyphPointers; // This is for sorting
+    std::vector<Glyph> _glyphs; // These are the actual glyphs
     std::vector<RenderBatch> _renderBatches;
 };
 
