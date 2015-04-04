@@ -205,51 +205,51 @@ void Grid::checkGrid(int colOrRen, int pos) {
 GLTexture Grid::getTileTexture(int row, int col) {
     std::string filePath = "/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/";
     switch (m_gameGrid[row][col]) {
-        case 0:
+        case HYDROGEN:
             filePath += "Hydrogen.png";
             break;
             
-        case 1:
+        case OXYGEN:
             filePath += "Oxygen.png";
             break;
             
-        case 2:
+        case CARBON:
             filePath += "Carbon.png";
             break;
             
-        case 3:
+        case SULFUR:
             filePath += "Azufre.png";
             break;
             
-        case 4:
+        case NITROGEN:
             filePath += "Nitrogen.png";
             break;
             
-        case 10:
+        case SUGAR:
             filePath += "Azucar.png";
             break;
             
-        case 11:
+        case WATER:
             filePath += "Agua.png";
             break;
             
-        case 12:
+        case CARBON_DIOXIDE:
             filePath += "Carbon dioxide.png";
             break;
             
-        case 13:
+        case METHANE:
             filePath += "Methane.png";
             break;
             
-        case 14:
+        case NITROUS_OXIDE:
             filePath += "Nitrous oxide.png";
             break;
             
-        case 15:
+        case SULFURIC_ACID:
             filePath += "Acido.png";
             break;
             
-        case 99:
+        case KRYPTONITE:
             filePath += "Kriptonita.png";
             break;
             
