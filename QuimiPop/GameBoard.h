@@ -34,12 +34,13 @@ private:
     constexpr const static float TILE_HEIGHT = 75.0f;
     
     glm::vec4 getTileRectangle(int row, int col);
+    glm::vec4 getHighlightedTileRectangle(int row, int col);
     int getRowForY(int y);
     int getColForX(int x);
     
     Grid m_boardGrid;
     
-    glm::vec2 m_position;
+    glm::vec2 m_boardPosition;
     
     bool m_clickingDown;
     bool m_setMouseCoords;
