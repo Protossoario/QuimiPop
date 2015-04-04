@@ -249,7 +249,7 @@ GLTexture Grid::getTileTexture(int row, int col) {
             filePath += "Acido.png";
             break;
             
-        case 9:
+        case 99:
             filePath += "Kriptonita.png";
             break;
             
