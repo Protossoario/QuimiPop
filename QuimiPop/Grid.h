@@ -15,23 +15,23 @@
 #include "GLTexture.h"
 #include "ResourceManager.h"
 
-// Elements
-const int HYDROGEN = 0;
-const int OXYGEN = 1;
-const int CARBON = 2;
-const int SULFUR = 3;
-const int NITROGEN = 4;
+enum Element {
+    HYDROGEN = 0,
+    OXYGEN = 1,
+    CARBON = 2,
+    SULFUR = 3,
+    NITROGEN = 4,
+    KRYPTONITE = 99
+};
 
-// Molecules
-const int SUGAR = 10;
-const int WATER = 11;
-const int CARBON_DIOXIDE = 12;
-const int METHANE = 13;
-const int NITROUS_OXIDE = 14;
-const int SULFURIC_ACID = 15;
-
-// Kryptonite
-const int KRYPTONITE = 99;
+enum Molecule {
+    SUGAR = 10,
+    WATER = 11,
+    CARBON_DIOXIDE = 12,
+    METHANE = 13,
+    NITROUS_OXIDE = 14,
+    SULFURIC_ACID = 15
+};
 
 // Molecule Structures
 const int arrSugar1[4] = {0,1,2,0};
@@ -48,11 +48,11 @@ const int arrSulfuricAcid3[5] = {1,0,3,0,1};
 const int arrSulfuricAcid4[5] = {0,1,3,0,1};
 
 // Constants
-const int grid_length = 8;
-const int max_struct_length = 5;
+const int GRID_SIZE = 8;
+const int MAX_MOLECULE_SIZE = 5;
 
 // Preset grids
-const int grid1[grid_length][grid_length] = {{2,0,4,2,0,4,4,0},{4,3,1,2,3,0,3,2},{3,0,2,1,4,2,1,3},{0,99,3,2,0,1,4,2},{0,4,2,2,0,2,0,2},{3,2,1,99,1,3,0,0},{1,0,0,2,1,99,0,3},{0,99,1,1,0,4,2,1}};
+const int grid1[GRID_SIZE][GRID_SIZE] = {{2,0,4,2,0,4,4,0},{4,3,1,2,3,0,3,2},{3,0,2,1,4,2,1,3},{0,99,3,2,0,1,4,2},{0,4,2,2,0,2,0,2},{3,2,1,99,1,3,0,0},{1,0,0,2,1,99,0,3},{0,99,1,1,0,4,2,1}};
 
 class Grid {
 public:
@@ -60,14 +60,14 @@ public:
     
     void moveGrid(int colOrRen, int index, int offset);
     bool checkMolecule(int colOrRen, int x, int y, const int* arrMolecule, int size);
-    void rearrangeMolecule(int colOrRen, int x, int y, int size, int type);
-    void deleteMolecule(int colOrRen, int x, int y, int size, int type);
+    void rearrangeMolecule(int colOrRen, int x, int y, int size, Molecule type);
+    void deleteMolecule(int colOrRen, int x, int y, int size, Molecule type);
     void checkGrid(int colOrRen, int pos);
     
     GLTexture getTileTexture(int row, int col);
     
 private:
-    int m_gameGrid[grid_length][grid_length];
+    int m_gameGrid[GRID_SIZE][GRID_SIZE];
 };
 
 #endif /* defined(__QuimiPop__Grid__) */

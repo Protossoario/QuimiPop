@@ -9,8 +9,8 @@
 #include "Grid.h"
 
 void Grid::init() {
-    for (int row = 0; row < grid_length; row++) {
-        for (int col = 0; col < grid_length; col++) {
+    for (int row = 0; row < GRID_SIZE; row++) {
+        for (int col = 0; col < GRID_SIZE; col++) {
             m_gameGrid[row][col] = grid1[row][col];
         }
     }
@@ -20,25 +20,25 @@ void Grid::moveGrid(int colOrRen, int index, int offset) {
     if (offset == 0) {
         return;
     }
-    int arrOriginal[grid_length];
+    int arrOriginal[GRID_SIZE];
     
     switch (colOrRen) {
         //caso del cambio de renglon
         case 1:
-            for (int a = 0; a < grid_length; a++) {
+            for (int a = 0; a < GRID_SIZE; a++) {
                 arrOriginal[a] = m_gameGrid[index][a];
             }
-            for (int i = 0; i < grid_length; i++) {
-                m_gameGrid[index][(i + offset + grid_length) % grid_length] = arrOriginal[i];
+            for (int i = 0; i < GRID_SIZE; i++) {
+                m_gameGrid[index][(i + offset + GRID_SIZE) % GRID_SIZE] = arrOriginal[i];
             }
             break;
         //caso para el cambio de columna
         case 0:
-            for (int a = 0; a < grid_length; a++) {
+            for (int a = 0; a < GRID_SIZE; a++) {
                 arrOriginal[a] = m_gameGrid[a][index];
             }
-            for (int i = 0; i < grid_length; i++) {
-                m_gameGrid[(i + offset + grid_length) % grid_length][index] = arrOriginal[i];
+            for (int i = 0; i < GRID_SIZE; i++) {
+                m_gameGrid[(i + offset + GRID_SIZE) % GRID_SIZE][index] = arrOriginal[i];
             }
             break;
     }
@@ -48,7 +48,7 @@ bool Grid::checkMolecule(int colOrRen, int x, int y, const int *arrMolecule, int
     switch (colOrRen) {
         case 0:
             for (int i = 0; i < size; i++) {
-                if ((y + i) >= grid_length || arrMolecule[i] != m_gameGrid[x][y + i]) {
+                if ((y + i) >= GRID_SIZE || arrMolecule[i] != m_gameGrid[x][y + i]) {
                     return false;
                 }
             }
@@ -56,7 +56,7 @@ bool Grid::checkMolecule(int colOrRen, int x, int y, const int *arrMolecule, int
             
         case 1:
             for (int i = 0; i < size; i++) {
-                if ((x + i) >= grid_length || arrMolecule[i] != m_gameGrid[x + i][y]) {
+                if ((x + i) >= GRID_SIZE || arrMolecule[i] != m_gameGrid[x + i][y]) {
                     return false;
                 }
             }
@@ -65,7 +65,7 @@ bool Grid::checkMolecule(int colOrRen, int x, int y, const int *arrMolecule, int
     return true;
 }
 
-void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, int type) {
+void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, Molecule type) {
     switch(colOrRen) {
         case 0:
             for (int j = y + 1; j < y + size; j++) {
@@ -87,7 +87,7 @@ void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, int type) {
     }
 }
 
-void Grid::deleteMolecule(int colOrRen, int x, int y, int size, int type) {
+void Grid::deleteMolecule(int colOrRen, int x, int y, int size, Molecule type) {
     switch(colOrRen) {
         case 0:
             m_gameGrid[x][y] = type;
@@ -110,45 +110,45 @@ void Grid::checkGrid(int colOrRen, int pos) {
     switch (colOrRen) {
     //caso si se movio la columna
     case 0:
-        for (int i = 0; i < grid_length; i++) {
-            int inf_limit = (pos - max_struct_length < 0)? 0 : pos - max_struct_length;
-            int top_limit = (pos + max_struct_length > grid_length)? grid_length : pos + max_struct_length;
+        for (int i = 0; i < GRID_SIZE; i++) {
+            int inf_limit = (pos - MAX_MOLECULE_SIZE < 0)? 0 : pos - MAX_MOLECULE_SIZE;
+            int top_limit = (pos + MAX_MOLECULE_SIZE > GRID_SIZE)? GRID_SIZE : pos + MAX_MOLECULE_SIZE;
             for (int j = inf_limit; j < top_limit; j++) {
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid1, 5)) {
-                    deleteMolecule(colOrRen, i, j, 5, 15);
+                    deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid2, 5)) {
-                    deleteMolecule(colOrRen, i, j, 5, 15);
+                    deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid3, 5)) {
-                    deleteMolecule(colOrRen, i, j, 5, 15);
+                    deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid4, 5)) {
-                    deleteMolecule(colOrRen, i, j, 5, 15);
+                    deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar1, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, 10);
+                    deleteMolecule(colOrRen, i, j, 4, SUGAR);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar2, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, 10);
+                    deleteMolecule(colOrRen, i, j, 4, SUGAR);
                 }
                 if (checkMolecule(colOrRen, i, j, arrMethane1, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, 13);
+                    deleteMolecule(colOrRen, i, j, 4, METHANE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrMethane2, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, 13);
+                    deleteMolecule(colOrRen, i, j, 4, METHANE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrCarbonDioxide, 3)) {
-                    deleteMolecule(colOrRen, i, j, 3, 12);
+                    deleteMolecule(colOrRen, i, j, 3, CARBON_DIOXIDE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrNitrousOxide1, 3)) {
-                    deleteMolecule(colOrRen, i, j, 3, 14);
+                    deleteMolecule(colOrRen, i, j, 3, NITROUS_OXIDE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrNitrousOxide2, 3)) {
-                    deleteMolecule(colOrRen, i, j, 3, 14);
+                    deleteMolecule(colOrRen, i, j, 3, NITROUS_OXIDE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrWater, 3)) {
-                    deleteMolecule(colOrRen, i, j, 3, 11);
+                    deleteMolecule(colOrRen, i, j, 3, WATER);
                 }
             
             }
@@ -156,45 +156,45 @@ void Grid::checkGrid(int colOrRen, int pos) {
         break;
     //caso si se movio el renglon
     case 1:
-        for (int i = 0; i < grid_length; i++) {
-            int inf_limit = (pos - max_struct_length <= 0)? 0 : pos - max_struct_length;
-            int top_limit = (pos + max_struct_length > max_struct_length)? max_struct_length : pos + max_struct_length;
+        for (int i = 0; i < GRID_SIZE; i++) {
+            int inf_limit = (pos - MAX_MOLECULE_SIZE <= 0)? 0 : pos - MAX_MOLECULE_SIZE;
+            int top_limit = (pos + MAX_MOLECULE_SIZE > MAX_MOLECULE_SIZE)? MAX_MOLECULE_SIZE : pos + MAX_MOLECULE_SIZE;
             for (int j = inf_limit; j < top_limit; j++) {
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid1, 5)) {
-                    deleteMolecule(colOrRen, i, j, 5, 15);
+                    deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid2, 5)) {
-                    deleteMolecule(colOrRen, i, j, 5, 15);
+                    deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid3, 5)) {
-                    deleteMolecule(colOrRen, i, j, 5, 15);
+                    deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid4, 5)) {
-                    deleteMolecule(colOrRen, i, j, 5, 15);
+                    deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar1, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, 10);
+                    deleteMolecule(colOrRen, i, j, 4, SUGAR);
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar2, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, 10);
+                    deleteMolecule(colOrRen, i, j, 4, SUGAR);
                 }
                 if (checkMolecule(colOrRen, i, j, arrMethane1, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, 13);
+                    deleteMolecule(colOrRen, i, j, 4, METHANE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrMethane2, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, 13);
+                    deleteMolecule(colOrRen, i, j, 4, METHANE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrCarbonDioxide, 3)) {
-                    deleteMolecule(colOrRen, i, j, 3, 12);
+                    deleteMolecule(colOrRen, i, j, 3, CARBON_DIOXIDE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrNitrousOxide1, 3)) {
-                    deleteMolecule(colOrRen, i, j, 3, 14);
+                    deleteMolecule(colOrRen, i, j, 3, NITROUS_OXIDE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrNitrousOxide2, 3)) {
-                    deleteMolecule(colOrRen, i, j, 3, 14);
+                    deleteMolecule(colOrRen, i, j, 3, NITROUS_OXIDE);
                 }
                 if (checkMolecule(colOrRen, i, j, arrWater, 3)) {
-                    deleteMolecule(colOrRen, i, j, 3, 11);
+                    deleteMolecule(colOrRen, i, j, 3, WATER);
                 }
             }
         }
