@@ -29,6 +29,8 @@ public:
     void setClickingDown(bool clickingDown);
     void updateMouseCoords(glm::vec2 mouseCoords);
     
+    bool isPointInsideBoard(glm::vec2 point);
+    
 private:
     constexpr const static float TILE_WIDTH = 75.0f;
     constexpr const static float TILE_HEIGHT = 75.0f;

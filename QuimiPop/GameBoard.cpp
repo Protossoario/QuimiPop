@@ -90,6 +90,10 @@ void GameBoard::updateMouseCoords(glm::vec2 mouseCoords) {
     }
 }
 
+bool GameBoard::isPointInsideBoard(glm::vec2 point) {
+    return point.x >= m_boardPosition.x && point.x <= m_boardPosition.x + TILE_WIDTH * 8 && point.y >= m_boardPosition.y && point.y <= m_boardPosition.y + TILE_HEIGHT * 8;
+}
+
 glm::vec4 GameBoard::getTileRectangle(int row, int col) {
     return glm::vec4(
         TILE_WIDTH * col + m_boardPosition.x,

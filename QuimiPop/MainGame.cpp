@@ -138,13 +138,20 @@ void MainGame::processInput() {
         glm::vec2 mouseCoords = m_inputManager.getMouseCoords();
         mouseCoords = m_camera.convertScreenToWorld(mouseCoords);
         
-        m_gameBoard.setClickingDown(true);
-        m_gameBoard.updateMouseCoords(mouseCoords);
+        if (m_gameBoard.isPointInsideBoard(mouseCoords)) {
+            m_gameBoard.setClickingDown(true);
+            m_gameBoard.updateMouseCoords(mouseCoords);
+        }
         
         addGlow(mouseCoords, 10);
     }
     else {
-        m_gameBoard.setClickingDown(false);
+        glm::vec2 mouseCoords = m_inputManager.getMouseCoords();
+        mouseCoords = m_camera.convertScreenToWorld(mouseCoords);
+        
+        if (m_gameBoard.isPointInsideBoard(mouseCoords)) {
+            m_gameBoard.setClickingDown(false);
+        }
     }
 }
 
