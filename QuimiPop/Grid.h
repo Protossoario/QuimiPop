@@ -21,7 +21,8 @@ enum Element {
     CARBON = 2,
     SULFUR = 3,
     NITROGEN = 4,
-    KRYPTONITE = 99
+    KRYPTONITE = 99,
+    EMPTY = -1
 };
 
 enum Molecule {

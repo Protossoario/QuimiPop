@@ -92,13 +92,13 @@ void Grid::deleteMolecule(int colOrRen, int x, int y, int size, Molecule type) {
         case 0:
             m_gameGrid[x][y] = type;
             for (int i = 1; i < size; i++) {
-                m_gameGrid[x][y+i] = -1;
+                m_gameGrid[x][y+i] = EMPTY;
             }
             break;
         case 1:
             m_gameGrid[x+size-1][y] = type;
             for (int i = x + size - 2; i > x - 1; i--) {
-                m_gameGrid[i][y] = -1;
+                m_gameGrid[i][y] = EMPTY;
             }
             break;
     }
