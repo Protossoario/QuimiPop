@@ -254,7 +254,7 @@ GLTexture Grid::getTileTexture(int row, int col) {
             break;
             
         default:
-            filePath += "Kriptonita.png";
+            filePath += "glow_particle.png";
             break;
     }
     return ResourceManager::getTexture(filePath);
