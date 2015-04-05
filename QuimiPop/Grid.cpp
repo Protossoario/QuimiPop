@@ -90,12 +90,14 @@ void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, Molecule type
 void Grid::deleteMolecule(int colOrRen, int x, int y, int size, Molecule type) {
     switch(colOrRen) {
         case 0:
+            m_gridObserver->formedMoleculeRow(x, y, size);
             m_gameGrid[x][y] = type;
             for (int i = 1; i < size; i++) {
                 m_gameGrid[x][y+i] = EMPTY;
             }
             break;
         case 1:
+            m_gridObserver->formedMoleculeCol(x, y, size);
             m_gameGrid[x+size-1][y] = type;
             for (int i = x + size - 2; i > x - 1; i--) {
                 m_gameGrid[i][y] = EMPTY;
@@ -258,4 +260,8 @@ GLTexture Grid::getTileTexture(int row, int col) {
             break;
     }
     return ResourceManager::getTexture(filePath);
+}
+
+void Grid::setGridObserver(GridObserver* observer) {
+    m_gridObserver = observer;
 }

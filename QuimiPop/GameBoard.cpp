@@ -8,12 +8,21 @@
 
 #include "GameBoard.h"
 
+void GameBoard::formedMoleculeRow(int row, int col, int size) {
+    printf("Formed molecule on a row! Row: %d, Col %d, Size %d\n", row, col, size);
+}
+
+void GameBoard::formedMoleculeCol(int row, int col, int size) {
+    printf("Formed molecule on a column! Row: %d, Col %d, Size %d\n", row, col, size);
+}
+
 GameBoard::GameBoard(glm::vec2 position) : m_boardPosition(position), m_clickingDown(false), m_setMouseCoords(false), m_highlighting(false), m_highlightCol(-1), m_highlightRow(-1) {}
 
 void GameBoard::init() {
     srand(time(NULL));
     
     m_boardGrid.init();
+    m_boardGrid.setGridObserver((GridObserver*)this);
 }
 
 void GameBoard::update() {

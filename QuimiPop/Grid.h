@@ -14,6 +14,7 @@
 
 #include "GLTexture.h"
 #include "ResourceManager.h"
+#include "GridObserver.h"
 
 enum Element {
     HYDROGEN = 0,
@@ -67,7 +68,10 @@ public:
     
     GLTexture getTileTexture(int row, int col);
     
+    void setGridObserver(GridObserver* observer);
+    
 private:
+    GridObserver* m_gridObserver;
     int m_gameGrid[GRID_SIZE][GRID_SIZE];
 };
 

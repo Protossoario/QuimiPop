@@ -16,8 +16,9 @@
 #include "glm/glm.hpp"
 #include "SpriteBatch.h"
 #include "Grid.h"
+#include "Sprite.h"
 
-class GameBoard {
+class GameBoard : GridObserver {
 public:
     GameBoard(glm::vec2 position);
     
@@ -30,6 +31,9 @@ public:
     void updateMouseCoords(glm::vec2 mouseCoords);
     
     bool isPointInsideBoard(glm::vec2 point);
+    
+    void formedMoleculeRow(int row, int col, int size);
+    void formedMoleculeCol(int row, int col, int size);
     
 private:
     constexpr const static float TILE_WIDTH = 75.0f;
