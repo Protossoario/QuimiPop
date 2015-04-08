@@ -28,9 +28,6 @@
 		30C378C81ABBC96B00C883A4 /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378B81ABBC96B00C883A4 /* ResourceManager.cpp */; };
 		30C378CA1ABBC96B00C883A4 /* TextureCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30C378BD1ABBC96B00C883A4 /* TextureCache.cpp */; };
 		30DCEA141AD076EA0002CAC4 /* GridObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30DCEA121AD076EA0002CAC4 /* GridObserver.cpp */; };
-		30DCEA171AD07D230002CAC4 /* GridAnimator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30DCEA151AD07D230002CAC4 /* GridAnimator.cpp */; };
-		30DCEA1B1AD085E80002CAC4 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30DCEA191AD085E80002CAC4 /* Animation.cpp */; };
-		30DCEA1F1AD089370002CAC4 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30DCEA1D1AD089370002CAC4 /* Sprite.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -90,12 +87,6 @@
 		30C378C01ABBC96B00C883A4 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		30DCEA121AD076EA0002CAC4 /* GridObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridObserver.cpp; sourceTree = "<group>"; };
 		30DCEA131AD076EA0002CAC4 /* GridObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridObserver.h; sourceTree = "<group>"; };
-		30DCEA151AD07D230002CAC4 /* GridAnimator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridAnimator.cpp; sourceTree = "<group>"; };
-		30DCEA161AD07D230002CAC4 /* GridAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridAnimator.h; sourceTree = "<group>"; };
-		30DCEA191AD085E80002CAC4 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
-		30DCEA1A1AD085E80002CAC4 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
-		30DCEA1D1AD089370002CAC4 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
-		30DCEA1E1AD089370002CAC4 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
 		30E4CBD51ABBC70700C5D0CD /* QuimiPop */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = QuimiPop; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -274,33 +265,6 @@
 			name = GridObserver;
 			sourceTree = "<group>";
 		};
-		30DCEA181AD07D280002CAC4 /* GridAnimator */ = {
-			isa = PBXGroup;
-			children = (
-				30DCEA151AD07D230002CAC4 /* GridAnimator.cpp */,
-				30DCEA161AD07D230002CAC4 /* GridAnimator.h */,
-			);
-			name = GridAnimator;
-			sourceTree = "<group>";
-		};
-		30DCEA1C1AD085F00002CAC4 /* Animation */ = {
-			isa = PBXGroup;
-			children = (
-				30DCEA191AD085E80002CAC4 /* Animation.cpp */,
-				30DCEA1A1AD085E80002CAC4 /* Animation.h */,
-			);
-			name = Animation;
-			sourceTree = "<group>";
-		};
-		30DCEA201AD0893C0002CAC4 /* Sprite */ = {
-			isa = PBXGroup;
-			children = (
-				30DCEA1D1AD089370002CAC4 /* Sprite.cpp */,
-				30DCEA1E1AD089370002CAC4 /* Sprite.h */,
-			);
-			name = Sprite;
-			sourceTree = "<group>";
-		};
 		30E4CBCC1ABBC70600C5D0CD = {
 			isa = PBXGroup;
 			children = (
@@ -329,9 +293,6 @@
 				30C378CC1ABBC97A00C883A4 /* GLSLProgram */,
 				30C378AE1ABBC96B00C883A4 /* GLTexture.h */,
 				3065A0E51ABEE5FB00E77DF9 /* Grid */,
-				30DCEA201AD0893C0002CAC4 /* Sprite */,
-				30DCEA1C1AD085F00002CAC4 /* Animation */,
-				30DCEA181AD07D280002CAC4 /* GridAnimator */,
 				30DCEA111AD076CD0002CAC4 /* GridObserver */,
 				30C378CD1ABBC98200C883A4 /* ImageLoader */,
 				3065A0D61ABE96B600E77DF9 /* InputManager */,
@@ -411,11 +372,9 @@
 			files = (
 				3065A0CF1ABE969200E77DF9 /* Camera2D.cpp in Sources */,
 				30C378CA1ABBC96B00C883A4 /* TextureCache.cpp in Sources */,
-				30DCEA171AD07D230002CAC4 /* GridAnimator.cpp in Sources */,
 				3065A0D21ABE969200E77DF9 /* Timing.cpp in Sources */,
 				30DCEA141AD076EA0002CAC4 /* GridObserver.cpp in Sources */,
 				3065A0D31ABE969200E77DF9 /* Window.cpp in Sources */,
-				30DCEA1F1AD089370002CAC4 /* Sprite.cpp in Sources */,
 				30C378C61ABBC96B00C883A4 /* MainGame.cpp in Sources */,
 				30C378C21ABBC96B00C883A4 /* GLSLProgram.cpp in Sources */,
 				30C378C41ABBC96B00C883A4 /* IOManager.cpp in Sources */,
@@ -427,7 +386,6 @@
 				30C378C31ABBC96B00C883A4 /* ImageLoader.cpp in Sources */,
 				30C378C81ABBC96B00C883A4 /* ResourceManager.cpp in Sources */,
 				3065A0D11ABE969200E77DF9 /* SpriteBatch.cpp in Sources */,
-				30DCEA1B1AD085E80002CAC4 /* Animation.cpp in Sources */,
 				3065A0DD1ABE99F000E77DF9 /* GameBoard.cpp in Sources */,
 				30AED5CB1ACF14C400113387 /* ParticleBatch2D.cpp in Sources */,
 				3065A0D01ABE969200E77DF9 /* InputManager.cpp in Sources */,
