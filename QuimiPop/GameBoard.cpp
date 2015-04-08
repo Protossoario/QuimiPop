@@ -23,6 +23,23 @@ void GameBoard::init() {
     
     m_boardGrid.init();
     m_boardGrid.setGridObserver((GridObserver*)this);
+    
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            m_spriteGrid[row][col] = Sprite(
+                m_boardGrid.getTileTextureName(row, col),
+                getTileRectangle(row, col)
+            );
+        }
+    }
+    
+    /*auto rotate = Animation::createRotateTo(359, 300, true);
+    AnimationNode node;
+    node.setRotation(rotate);
+    AnimationSequence rotationSequence;
+    rotationSequence.addNode(node);
+    rotationSequence.setSprite(&m_spriteGrid[0][0]);
+    animations.push_back(rotationSequence);*/
 }
 
 void GameBoard::update() {
@@ -39,27 +56,16 @@ void GameBoard::update() {
             printf("Highlighted col: %d\n", m_highlightCol);
         }
     }
+    
+    /*for (auto& anim : animations) {
+        anim.update();
+    }*/
 }
 
 void GameBoard::draw(SpriteBatch &spriteBatch) {
-    glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
-    Color color;
-    color.r = 255;
-    color.g = 255;
-    color.b = 255;
-    color.a = 255;
-    
     for (int row = 0; row < 8; row++) {
         for (int col = 0; col < 8; col++) {
-            glm::vec4 destRect;
-            if (row == m_highlightRow || col == m_highlightCol) {
-                destRect = getHighlightedTileRectangle(row, col);
-            }
-            else {
-                destRect = getTileRectangle(row, col);
-            }
-            GLTexture texture = m_boardGrid.getTileTexture(row, col);
-            spriteBatch.draw(destRect, uv, texture.textureId, 0.0f, color);
+            m_spriteGrid[row][col].render(spriteBatch);
         }
     }
 }

@@ -204,7 +204,7 @@ void Grid::checkGrid(int colOrRen, int pos) {
     }
 }
 
-GLTexture Grid::getTileTexture(int row, int col) {
+std::string Grid::getTileTextureName(int row, int col) {
     std::string filePath = "/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/";
     switch (m_gameGrid[row][col]) {
         case HYDROGEN:
@@ -259,7 +259,7 @@ GLTexture Grid::getTileTexture(int row, int col) {
             filePath += "glow_particle.png";
             break;
     }
-    return ResourceManager::getTexture(filePath);
+    return filePath;
 }
 
 void Grid::setGridObserver(GridObserver* observer) {

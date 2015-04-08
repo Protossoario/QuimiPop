@@ -66,7 +66,7 @@ public:
     void deleteMolecule(int colOrRen, int x, int y, int size, Molecule type);
     void checkGrid(int colOrRen, int pos);
     
-    GLTexture getTileTexture(int row, int col);
+    std::string getTileTextureName(int row, int col);
     
     void setGridObserver(GridObserver* observer);
     

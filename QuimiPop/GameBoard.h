@@ -12,11 +12,13 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string>
+#include <vector>
 
 #include "glm/glm.hpp"
 #include "SpriteBatch.h"
 #include "Grid.h"
 #include "Sprite.h"
+#include "Animation.h"
 
 class GameBoard : GridObserver {
 public:
@@ -45,6 +47,8 @@ private:
     int getColForX(int x);
     
     Grid m_boardGrid;
+    Sprite m_spriteGrid[8][8];
+    //std::vector<AnimationSequence> animations;
     
     glm::vec2 m_boardPosition;
     
