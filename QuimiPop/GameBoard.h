@@ -16,7 +16,6 @@
 #include "glm/glm.hpp"
 #include "SpriteBatch.h"
 #include "Grid.h"
-#include "Sprite.h"
 
 class GameBoard : GridObserver {
 public:
