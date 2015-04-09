@@ -18,7 +18,7 @@ void InputManager::releaseKey(unsigned int keyID) {
     m_keyMap[keyID] = false;
 }
 
-bool InputManager::isKeyPressed(unsigned int keyID) {
+bool InputManager::isKeyDown(unsigned int keyID) {
     auto it = m_keyMap.find(keyID);
     if (it != m_keyMap.end()) {
         return m_keyMap[keyID];

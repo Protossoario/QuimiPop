@@ -18,7 +18,7 @@ public:
     
     void pressKey(unsigned int keyID);
     void releaseKey(unsigned int keyID);
-    bool isKeyPressed(unsigned int keyID);
+    bool isKeyDown(unsigned int keyID);
     void setMouseCoords(float x, float y);
     
     glm::vec2 getMouseCoords() const { return m_mouseCoords; }
