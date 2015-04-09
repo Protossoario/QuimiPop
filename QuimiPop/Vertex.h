@@ -16,7 +16,9 @@ struct Position {
     float y;
 };
 
-struct Color {
+struct ColorRGBA8 {
+    ColorRGBA8() : r(0), g(0), b(0), a(0) {}
+    ColorRGBA8(GLubyte R, GLubyte G, GLubyte B, GLubyte A) : r(R), g(G), b(B), a(A) {}
     GLubyte r;
     GLubyte g;
     GLubyte b;
@@ -30,7 +32,7 @@ struct UV {
 
 struct Vertex {
     Position position;
-    Color color;
+    ColorRGBA8 color;
     UV uv;
     
     void setPosition(float x, float y) {
@@ -39,10 +41,7 @@ struct Vertex {
     }
     
     void setColor(GLubyte r, GLubyte g, GLubyte b, GLubyte a) {
-        color.r = r;
-        color.g = g;
-        color.b = b;
-        color.a = a;
+        color = ColorRGBA8(r, g, b, a);
     };
     
     void setUV(float u, float v) {

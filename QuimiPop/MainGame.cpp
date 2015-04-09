@@ -174,11 +174,7 @@ void MainGame::drawGame() {
     glm::vec4 backgroundRect(-m_screenWidth / 2, -m_screenHeight / 2, m_screenWidth, m_screenHeight);
     glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
     static GLTexture backgroundTexture = ResourceManager::getTexture("/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/Background.png");
-    Color color;
-    color.r = 255;
-    color.g = 255;
-    color.b = 255;
-    color.a = 255;
+    ColorRGBA8 color(255, 255, 255, 255);
     m_spriteBatch.draw(backgroundRect, uvRect, backgroundTexture.textureId, 0.0f, color);
     
     m_gameBoard.draw(m_spriteBatch);
@@ -201,11 +197,7 @@ void MainGame::addGlow(const glm::vec2 &position, int numParticles) {
     static std::uniform_real_distribution<float> randAngle(0.0f, 360.0f);
     
     glm::vec2 vel(1.0f, 0.0f);
-    Color col;
-    col.r = 255;
-    col.g = 255;
-    col.b = 255;
-    col.a = 255;
+    ColorRGBA8 col(255, 255, 255, 255);
     
     for (int i = 0; i < numParticles; i++) {
         m_particleBatch->addParticle(position, glm::rotate(vel, randAngle(randEngine)), col, 10.0f);

@@ -8,7 +8,7 @@
 
 #include "SpriteBatch.h"
 
-Glyph::Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint Texture, float Depth, const Color& color) : texture(Texture), depth(Depth) {
+Glyph::Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint Texture, float Depth, const ColorRGBA8& color) : texture(Texture), depth(Depth) {
     topLeft.color = color;
     topLeft.setPosition(destRect.x, destRect.y + destRect.w);
     topLeft.setUV(uvRect.x, uvRect.y + uvRect.w);
@@ -26,7 +26,7 @@ Glyph::Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint Texture,
     topRight.setUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
 }
 
-Glyph::Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint Texture, float Depth, const Color& color, float angle) : texture(Texture), depth(Depth) {
+Glyph::Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint Texture, float Depth, const ColorRGBA8& color, float angle) : texture(Texture), depth(Depth) {
     glm::vec2 halfDims(destRect.z / 2.0f, destRect.w / 2.0f);
     
     glm::vec2 tl(-halfDims.x, halfDims.y);
@@ -84,11 +84,11 @@ void SpriteBatch::end() {
     createRenderBatches();
 }
 
-void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const Color& color) {
+void SpriteBatch::draw(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint texture, float depth, const ColorRGBA8& color) {
     m_glyphs.emplace_back(destRect, uvRect, texture, depth, color);
 }
 
-void SpriteBatch::draw(const glm::vec4 &destRect, const glm::vec4 &uvRect, GLuint texture, float depth, const Color &color, float angle) {
+void SpriteBatch::draw(const glm::vec4 &destRect, const glm::vec4 &uvRect, GLuint texture, float depth, const ColorRGBA8 &color, float angle) {
     m_glyphs.emplace_back(destRect, uvRect, texture, depth, color, angle);
 }
 

@@ -45,7 +45,7 @@ void ParticleBatch2D::draw(SpriteBatch* spriteBatch) {
     }
 }
 
-void ParticleBatch2D::addParticle(const glm::vec2 &position, const glm::vec2 &velocity, const Color &color, float width) {
+void ParticleBatch2D::addParticle(const glm::vec2 &position, const glm::vec2 &velocity, const ColorRGBA8 &color, float width) {
     int particleIndex = findFreeParticle();
     
     auto& particle = m_particles[particleIndex];

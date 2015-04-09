@@ -22,7 +22,7 @@ public:
 private:
     glm::vec2 m_position = glm::vec2(0.0f);
     glm::vec2 m_velocity = glm::vec2(0.0f);
-    Color m_color;
+    ColorRGBA8 m_color;
     float m_life = 1.0f;
     bool m_isActive = false;
     float m_width = 0.0f;
@@ -36,7 +36,7 @@ public:
     void init(int maxParticles, float decayRate, GLTexture texture);
     void update();
     void draw(SpriteBatch* spriteBatch);
-    void addParticle(const glm::vec2& position, const glm::vec2& velocity, const Color& color, float width);
+    void addParticle(const glm::vec2& position, const glm::vec2& velocity, const ColorRGBA8& color, float width);
     
 private:
     int findFreeParticle();

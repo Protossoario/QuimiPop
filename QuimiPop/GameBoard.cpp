@@ -43,11 +43,7 @@ void GameBoard::update() {
 
 void GameBoard::draw(SpriteBatch &spriteBatch) {
     glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
-    Color color;
-    color.r = 255;
-    color.g = 255;
-    color.b = 255;
-    color.a = 255;
+    ColorRGBA8 color(255, 255, 255, 255);
     
     for (int row = 0; row < 8; row++) {
         for (int col = 0; col < 8; col++) {
