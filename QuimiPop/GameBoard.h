@@ -60,15 +60,18 @@ private:
     int getRowForY(int y);
     int getColForX(int x);
     
-    void rescaleTile(Sprite* sprite, float scale);
+    void rescaleTile(Tile tile, float scale);
     void updateColHighlight(bool highlight, int col);
     void updateRowHighlight(bool highlight, int row);
     void updateColOffset(int col, int offset);
     void updateRowOffset(int row, int offset);
     
+    void refreshSpritesFromGrid();
+    void refreshRowFromGrid(int row);
+    void refreshColFromGrid(int col);
+    
     Grid m_boardGrid;
-    std::vector<Sprite> m_sprites;
-    Sprite* m_spriteGrid[8][8];
+    std::map<int, Sprite> m_spriteMap;
     
     MoleculeAnimation m_molAnimation;
     
@@ -78,6 +81,7 @@ private:
     bool m_setMouseCoords;
     glm::vec2 m_originMouseCoords;
     glm::vec2 m_currMouseCoords;
+    glm::vec2 m_offset;
     
     bool m_highlighting;
     int m_highlightRow;
