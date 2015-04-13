@@ -43,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		302CC7BD1AD827B100C57F7F /* Sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
 		3065A0C41ABE969200E77DF9 /* Camera2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera2D.cpp; sourceTree = "<group>"; };
 		3065A0C51ABE969200E77DF9 /* Camera2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera2D.h; sourceTree = "<group>"; };
 		3065A0C61ABE969200E77DF9 /* InputManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputManager.cpp; sourceTree = "<group>"; };
@@ -304,6 +305,7 @@
 				30C378D01ABBC9A300C883A4 /* picoPNG */,
 				30C378D11ABBC9B500C883A4 /* ResourceManager */,
 				30C378BA1ABBC96B00C883A4 /* Shaders */,
+				302CC7BD1AD827B100C57F7F /* Sprite.h */,
 				3065A0D71ABE96C200E77DF9 /* SpriteBatch */,
 				30C378D31ABBCA4C00C883A4 /* TextureCache */,
 				30C378BF1ABBC96B00C883A4 /* Textures */,

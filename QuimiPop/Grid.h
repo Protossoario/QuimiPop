@@ -9,6 +9,8 @@
 #ifndef __QuimiPop__Grid__
 #define __QuimiPop__Grid__
 
+#include <string>
+
 #include <time.h>
 #include <stdlib.h>
 
@@ -66,7 +68,7 @@ public:
     void deleteMolecule(int colOrRen, int x, int y, int size, Molecule type);
     void checkGrid(int colOrRen, int pos);
     
-    GLTexture getTileTexture(int row, int col);
+    std::string getTileTexturePath(int row, int col);
     
     void setGridObserver(GridObserver* observer);
     

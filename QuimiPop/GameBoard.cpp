@@ -14,6 +14,12 @@ void GameBoard::formedMoleculeRow(int row, int col, int size) {
 
 void GameBoard::formedMoleculeCol(int row, int col, int size) {
     printf("Formed molecule on a column! Row: %d, Col %d, Size %d\n", row, col, size);
+    m_molAnimation.animating = true;
+    m_molAnimation.currFrames = 0;
+    m_molAnimation.totalFrames = 90;
+    for (int i = row; i < row + size; i++) {
+        m_molAnimation.tiles.emplace_back(i, col);
+    }
 }
 
 GameBoard::GameBoard(glm::vec2 position) : m_boardPosition(position), m_clickingDown(false), m_setMouseCoords(false), m_highlighting(false), m_highlightCol(-1), m_highlightRow(-1) {}
@@ -23,40 +29,67 @@ void GameBoard::init() {
     
     m_boardGrid.init();
     m_boardGrid.setGridObserver((GridObserver*)this);
+    
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            m_sprites.emplace_back(m_boardGrid.getTileTexturePath(row, col), getTileRectangle(row, col));
+            m_spriteGrid[row][col] = &m_sprites.back();
+        }
+    }
 }
 
 void GameBoard::update() {
-    if (m_clickingDown && !m_setMouseCoords && !m_highlighting) {
-        glm::vec2 mouseOffset = m_mouseCoords - m_originMouseCoords;
-        if (abs(mouseOffset.x) > abs(mouseOffset.y) && abs(mouseOffset.x) > TILE_WIDTH / 4) {
-            m_highlightRow = getRowForY(m_mouseCoords.y);
+    if (m_clickingDown && !m_setMouseCoords) {
+        glm::vec2 baseTile = getTileForCoords(m_originMouseCoords);
+        glm::vec2 offsetTile = getTileForCoords(m_currMouseCoords);
+        glm::vec2 offset = offsetTile - baseTile;
+        if (!m_highlighting && (std::abs((int)offset.x) > 0 || std::abs((int)offset.y) > 0)) {
+            if (std::abs(offset.x) > std::abs(offset.y)) {
+                m_highlightRow = (int)baseTile.y;
+                updateRowHighlight(true, m_highlightRow);
+                printf("Highlighted row: %d\n", m_highlightRow);
+            }
+            else {
+                m_highlightCol = (int)baseTile.x;
+                updateColHighlight(true, m_highlightCol);
+                printf("Highlighted col: %d\n", m_highlightCol);
+            }
             m_highlighting = true;
-            printf("Highlighted row: %d\n", m_highlightRow);
         }
-        else if (abs(mouseOffset.x) < abs(mouseOffset.y) && abs(mouseOffset.y) > TILE_HEIGHT / 4) {
-            m_highlightCol = getColForX(m_mouseCoords.x);
-            m_highlighting = true;
-            printf("Highlighted col: %d\n", m_highlightCol);
+        if (m_highlightRow != -1) {
+            updateRowOffset(m_highlightRow, (int)offset.x);
+        }
+        else if (m_highlightCol != -1) {
+            updateColOffset(m_highlightCol, (int)offset.y);
+        }
+    }
+    
+    if (m_molAnimation.animating) {
+        float angle = 6.2832f * (float)m_molAnimation.currFrames / (float)m_molAnimation.totalFrames;
+        printf("Angle: %.1f\n", angle);
+        for (auto& tile : m_molAnimation.tiles) {
+            m_spriteGrid[tile.row][tile.col]->rotation = angle;
+        }
+        m_molAnimation.currFrames++;
+        if (m_molAnimation.currFrames == m_molAnimation.totalFrames) {
+            m_sprites.clear();
+            for (int row = 0; row < 8; row++) {
+                for (int col = 0; col < 8; col++) {
+                    m_sprites.emplace_back(m_boardGrid.getTileTexturePath(row, col), getTileRectangle(row, col));
+                    m_spriteGrid[row][col] = &m_sprites.back();
+                }
+            }
+            m_molAnimation.animating = false;
+            m_molAnimation.tiles.clear();
         }
     }
 }
 
 void GameBoard::draw(SpriteBatch &spriteBatch) {
-    glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
-    ColorRGBA8 color(255, 255, 255, 255);
+    static glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
     
-    for (int row = 0; row < 8; row++) {
-        for (int col = 0; col < 8; col++) {
-            glm::vec4 destRect;
-            if (row == m_highlightRow || col == m_highlightCol) {
-                destRect = getHighlightedTileRectangle(row, col);
-            }
-            else {
-                destRect = getTileRectangle(row, col);
-            }
-            GLTexture texture = m_boardGrid.getTileTexture(row, col);
-            spriteBatch.draw(destRect, uv, texture.textureId, 0.0f, color);
-        }
+    for (auto& sprite : m_sprites) {
+        spriteBatch.draw(sprite.rectangle, uv, (ResourceManager::getTexture(sprite.texturePath)).textureId, 0.0f, sprite.color, sprite.rotation);
     }
 }
 
@@ -69,16 +102,18 @@ void GameBoard::setClickingDown(bool clickingDown) {
     }
     m_clickingDown = clickingDown;
     if (!m_clickingDown && m_highlighting) {
-        glm::vec2 offset = m_mouseCoords - m_originMouseCoords;
+        glm::vec2 offset = m_currMouseCoords - m_originMouseCoords;
         if (m_highlightRow > -1) {
             int rowOffset = (offset.x > 0 ? offset.x + TILE_WIDTH / 2 : offset.x - TILE_WIDTH / 2) / TILE_WIDTH;
             m_boardGrid.moveGrid(1, m_highlightRow, rowOffset);
             m_boardGrid.checkGrid(1, m_highlightRow);
+            updateRowHighlight(false, m_highlightRow);
         }
         else if (m_highlightCol > -1) {
             int colOffset = (offset.y > 0 ? offset.y + TILE_HEIGHT / 2 : offset.y - TILE_HEIGHT / 2) / TILE_HEIGHT;
             m_boardGrid.moveGrid(0, m_highlightCol, colOffset);
             m_boardGrid.checkGrid(0, m_highlightCol);
+            updateColHighlight(false, m_highlightCol);
         }
         m_highlighting = false;
         m_highlightRow = -1;
@@ -91,7 +126,7 @@ void GameBoard::updateMouseCoords(glm::vec2 mouseCoords) {
         m_originMouseCoords = mouseCoords;
     }
     else {
-        m_mouseCoords = mouseCoords;
+        m_currMouseCoords = mouseCoords;
     }
 }
 
@@ -108,35 +143,8 @@ glm::vec4 GameBoard::getTileRectangle(int row, int col) {
     );
 }
 
-glm::vec4 GameBoard::getHighlightedTileRectangle(int row, int col) {
-    glm::vec2 mouseOffset = m_mouseCoords - m_originMouseCoords;
-    int gridWidth = TILE_WIDTH * 8;
-    int gridHeight = TILE_HEIGHT * 8;
-    float x, y, width, height;
-    
-    const static float HIGHLIGHT_SCALE = 1.25;
-    
-    width = TILE_WIDTH * HIGHLIGHT_SCALE;
-    height = TILE_HEIGHT * HIGHLIGHT_SCALE;
-        
-    if (m_highlightRow > -1) {
-        int offset = (mouseOffset.x > 0 ? mouseOffset.x + TILE_WIDTH / 2 : mouseOffset.x - TILE_WIDTH / 2) / TILE_WIDTH;
-        col = (col + offset + 8) % 8;
-    }
-    else if (m_highlightCol > -1) {
-        int offset = (mouseOffset.y > 0 ? mouseOffset.y + TILE_HEIGHT / 2 : mouseOffset.y - TILE_HEIGHT / 2) / TILE_HEIGHT;
-        row = (row + offset + 8) % 8;
-    }
-    
-    x = TILE_WIDTH * col - TILE_WIDTH * (HIGHLIGHT_SCALE - 1) / 2 + m_boardPosition.x;
-    y = TILE_HEIGHT * row - TILE_HEIGHT * (HIGHLIGHT_SCALE - 1) / 2 + m_boardPosition.y;
-    
-    return glm::vec4(
-        x,
-        y,
-        width,
-        height
-    );
+glm::vec2 GameBoard::getTileForCoords(glm::vec2 coords) {
+    return glm::vec2((coords.x - m_boardPosition.x) / TILE_WIDTH, (coords.y - m_boardPosition.y) / TILE_HEIGHT);
 }
 
 int GameBoard::getRowForY(int y) {
@@ -145,4 +153,48 @@ int GameBoard::getRowForY(int y) {
 
 int GameBoard::getColForX(int x) {
     return (x - m_boardPosition.x) / TILE_WIDTH;
+}
+
+void GameBoard::rescaleTile(Sprite *sprite, float scale) {
+    float oldWidth = sprite->rectangle.z;
+    sprite->rectangle.z = scale * TILE_WIDTH;
+    sprite->rectangle.x = sprite->rectangle.x - (sprite->rectangle.z - oldWidth) / 2;
+    
+    float oldHeight = sprite->rectangle.w;
+    sprite->rectangle.w = scale * TILE_HEIGHT;
+    sprite->rectangle.y = sprite->rectangle.y - (sprite->rectangle.w - oldHeight) / 2;
+}
+
+void GameBoard::updateColHighlight(bool highlight, int col) {
+    for (int row = 0; row < 8; row++) {
+        if (highlight) {
+            rescaleTile(m_spriteGrid[row][col], 1.25);
+        }
+        else {
+            rescaleTile(m_spriteGrid[row][col], 1);
+        }
+    }
+}
+
+void GameBoard::updateRowHighlight(bool highlight, int row) {
+    for (int col = 0; col < 8; col++) {
+        if (highlight) {
+            rescaleTile(m_spriteGrid[row][col], 1.25);
+        }
+        else {
+            rescaleTile(m_spriteGrid[row][col], 1);
+        }
+    }
+}
+
+void GameBoard::updateColOffset(int col, int offset) {
+    for (int row = 0; row < 8; row++) {
+        m_spriteGrid[row][col]->rectangle.y = TILE_HEIGHT * ((row + offset + 8) % 8) + m_boardPosition.y - TILE_HEIGHT / 8;
+    }
+}
+
+void GameBoard::updateRowOffset(int row, int offset) {
+    for (int col = 0; col < 8; col++) {
+        m_spriteGrid[row][col]->rectangle.x = TILE_WIDTH * ((col + offset + 8) % 8) + m_boardPosition.x - TILE_WIDTH / 8;
+    }
 }

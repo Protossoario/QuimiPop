@@ -12,10 +12,26 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string>
+#include <vector>
 
 #include "glm/glm.hpp"
+#include "Sprite.h"
 #include "SpriteBatch.h"
 #include "Grid.h"
+
+struct Tile {
+    Tile(int Row, int Col) : row(Row), col(Col) {}
+    int row;
+    int col;
+};
+
+struct MoleculeAnimation {
+    MoleculeAnimation() : currFrames(0), totalFrames(0), animating(false) {}
+    std::vector<Tile> tiles;
+    int currFrames;
+    int totalFrames;
+    bool animating;
+};
 
 class GameBoard : GridObserver {
 public:
@@ -39,18 +55,29 @@ private:
     constexpr const static float TILE_HEIGHT = 75.0f;
     
     glm::vec4 getTileRectangle(int row, int col);
-    glm::vec4 getHighlightedTileRectangle(int row, int col);
+    glm::vec2 getTileForCoords(glm::vec2 coords);
+    
     int getRowForY(int y);
     int getColForX(int x);
     
+    void rescaleTile(Sprite* sprite, float scale);
+    void updateColHighlight(bool highlight, int col);
+    void updateRowHighlight(bool highlight, int row);
+    void updateColOffset(int col, int offset);
+    void updateRowOffset(int row, int offset);
+    
     Grid m_boardGrid;
+    std::vector<Sprite> m_sprites;
+    Sprite* m_spriteGrid[8][8];
+    
+    MoleculeAnimation m_molAnimation;
     
     glm::vec2 m_boardPosition;
     
     bool m_clickingDown;
     bool m_setMouseCoords;
     glm::vec2 m_originMouseCoords;
-    glm::vec2 m_mouseCoords;
+    glm::vec2 m_currMouseCoords;
     
     bool m_highlighting;
     int m_highlightRow;
