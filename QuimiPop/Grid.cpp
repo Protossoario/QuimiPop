@@ -208,27 +208,27 @@ std::string Grid::getTileTexturePath(int row, int col) {
     std::string filePath = "/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Textures/";
     switch (m_gameGrid[row][col]) {
         case HYDROGEN:
-            filePath += "Hydrogen.png";
+            filePath += "Hydrogen2.png";
             break;
             
         case OXYGEN:
-            filePath += "Oxygen.png";
+            filePath += "Oxygen3.png";
             break;
             
         case CARBON:
-            filePath += "Carbon.png";
+            filePath += "Carbon2.png";
             break;
             
         case SULFUR:
-            filePath += "Azufre.png";
+            filePath += "Azufre2.png";
             break;
             
         case NITROGEN:
-            filePath += "Nitrogen.png";
+            filePath += "Nitrogen2.png";
             break;
             
         case SUGAR:
-            filePath += "Azucar.png";
+            filePath += "Azucar2.png";
             break;
             
         case WATER:

@@ -42,6 +42,7 @@ void GameBoard::init() {
 }
 
 void GameBoard::update() {
+    // Calcular scrolling con el mouse
     if (m_clickingDown && !m_setMouseCoords) {
         glm::vec2 baseTile = getTileForCoords(m_originMouseCoords);
         glm::vec2 offsetTile = getTileForCoords(m_currMouseCoords);
@@ -67,6 +68,7 @@ void GameBoard::update() {
         }
     }
     
+    // Animacion transicion de moleculas
     if (m_molAnimation.animating) {
         float angle = 2 * PI * (float)m_molAnimation.currFrames / (float)m_molAnimation.totalFrames;
         for (auto& tile : m_molAnimation.tiles) {
