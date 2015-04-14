@@ -9,31 +9,62 @@
 #include "GameBoard.h"
 
 #define PI 3.14159265358979323846
+#define TILE_WIDTH 75.0f
+#define TILE_HEIGHT 75.0f
+#define MOLECULE_ANIM_FRAMES 90
+
+void MoleculeAnimation::start(int frames) {
+    m_currFrames = 0;
+    m_animating = true;
+    m_totalFrames = frames;
+}
+
+void MoleculeAnimation::addTile(int row, int col) {
+    m_tiles.emplace_back(row, col);
+}
+
+void MoleculeAnimation::update(std::map<int, Sprite>& spriteMap) {
+    float angle = 2 * PI * (float)m_currFrames / (float)m_totalFrames;
+    ColorRGBA8 color(255, 255, 255 * cos(angle / 10), 255);
+    for (auto& tile : m_tiles) {
+        Sprite& sprite = spriteMap.find(tile.row * 8 + tile.col)->second;
+        sprite.rotation = angle;
+        sprite.color = color;
+    }
+    m_currFrames++;
+    if (m_currFrames == m_totalFrames) {
+        m_observer->notifyAnimationFinished();
+        m_animating = false;
+        m_tiles.clear();
+    }
+}
 
 void GameBoard::formedMoleculeRow(int row, int col, int size) {
     printf("Formed molecule on a row! Row: %d, Col %d, Size %d\n", row, col, size);
-    m_molAnimation.animating = true;
-    m_molAnimation.currFrames = 0;
-    m_molAnimation.totalFrames = 90;
     for (int i = col; i < col + size; i++) {
-        m_molAnimation.tiles.emplace_back(row, i);
+        m_molAnimation.addTile(row, i);
     }
+    m_molAnimation.start(MOLECULE_ANIM_FRAMES);
 }
 
 void GameBoard::formedMoleculeCol(int row, int col, int size) {
     printf("Formed molecule on a column! Row: %d, Col %d, Size %d\n", row, col, size);
-    m_molAnimation.animating = true;
-    m_molAnimation.currFrames = 0;
-    m_molAnimation.totalFrames = 90;
     for (int i = row; i < row + size; i++) {
-        m_molAnimation.tiles.emplace_back(i, col);
+        m_molAnimation.addTile(i, col);
     }
+    m_molAnimation.start(MOLECULE_ANIM_FRAMES);
+}
+
+void GameBoard::notifyAnimationFinished() {
+    refreshSpritesFromGrid();
 }
 
 GameBoard::GameBoard(glm::vec2 position) : m_boardPosition(position), m_clickingDown(false), m_setMouseCoords(false), m_highlighting(false), m_highlightCol(-1), m_highlightRow(-1) {}
 
 void GameBoard::init() {
     srand(time(NULL));
+    
+    m_molAnimation.registerObserver(this);
     
     m_boardGrid.init();
     m_boardGrid.setGridObserver((GridObserver*)this);
@@ -69,18 +100,8 @@ void GameBoard::update() {
     }
     
     // Animacion transicion de moleculas
-    if (m_molAnimation.animating) {
-        float angle = 2 * PI * (float)m_molAnimation.currFrames / (float)m_molAnimation.totalFrames;
-        for (auto& tile : m_molAnimation.tiles) {
-            Sprite& sprite = m_spriteMap.find(tile.row * 8 + tile.col)->second;
-            sprite.rotation = angle;
-        }
-        m_molAnimation.currFrames++;
-        if (m_molAnimation.currFrames == m_molAnimation.totalFrames) {
-            refreshSpritesFromGrid();
-            m_molAnimation.animating = false;
-            m_molAnimation.tiles.clear();
-        }
+    if (m_molAnimation.isAnimating()) {
+        m_molAnimation.update(m_spriteMap);
     }
 }
 

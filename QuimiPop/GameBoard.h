@@ -12,7 +12,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string>
-#include <vector>
+#include <map>
 
 #include "glm/glm.hpp"
 #include "Sprite.h"
@@ -25,15 +25,31 @@ struct Tile {
     int col;
 };
 
-struct MoleculeAnimation {
-    MoleculeAnimation() : currFrames(0), totalFrames(0), animating(false) {}
-    std::vector<Tile> tiles;
-    int currFrames;
-    int totalFrames;
-    bool animating;
+class AnimationObserver {
+public:
+    virtual void notifyAnimationFinished() = 0;
 };
 
-class GameBoard : GridObserver {
+class MoleculeAnimation {
+public:
+    MoleculeAnimation() : m_currFrames(0), m_totalFrames(0), m_animating(false) {}
+    
+    void start(int frames);
+    void addTile(int row, int col);
+    void update(std::map<int, Sprite>& spriteMap);
+    
+    bool isAnimating() { return m_animating; }
+    void registerObserver(AnimationObserver* obs) { m_observer = obs; }
+    
+private:
+    std::vector<Tile> m_tiles;
+    AnimationObserver* m_observer;
+    int m_currFrames;
+    int m_totalFrames;
+    bool m_animating;
+};
+
+class GameBoard : GridObserver, AnimationObserver {
 public:
     GameBoard(glm::vec2 position);
     
@@ -50,10 +66,9 @@ public:
     void formedMoleculeRow(int row, int col, int size);
     void formedMoleculeCol(int row, int col, int size);
     
-private:
-    constexpr const static float TILE_WIDTH = 75.0f;
-    constexpr const static float TILE_HEIGHT = 75.0f;
+    void notifyAnimationFinished();
     
+private:
     glm::vec4 getTileRectangle(int row, int col);
     glm::vec2 getTileForCoords(glm::vec2 coords);
     
