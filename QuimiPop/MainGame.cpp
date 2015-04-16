@@ -53,7 +53,7 @@ void MainGame::initSystems() {
 }
 
 void MainGame::initShaders() {
-    m_colorProgram.compileShaders("/Users/EduardoS/Documents/Programacion/XCode Projects/GraphicsTutorial/GraphicsTutorial/Shaders/colorShading.vert", "/Users/EduardoS/Documents/Programacion/XCode Projects/GraphicsTutorial/GraphicsTutorial/Shaders/colorShading.frag");
+    m_colorProgram.compileShaders("/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Shaders/colorShading.vert", "/Users/EduardoS/Documents/Programacion/XCode Projects/QuimiPop/QuimiPop/Shaders/colorShading.frag");
     m_colorProgram.addAttribute("vertexPosition");
     m_colorProgram.addAttribute("vertexColor");
     m_colorProgram.addAttribute("vertexUV");
