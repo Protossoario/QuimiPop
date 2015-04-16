@@ -25,7 +25,7 @@ void MoleculeAnimation::addTile(int row, int col) {
 
 void MoleculeAnimation::update(std::map<int, Sprite>& spriteMap) {
     float angle = 2 * PI * (float)m_currFrames / (float)m_totalFrames;
-    ColorRGBA8 color(255, 255, 255 * cos(angle / 10), 255);
+    ColorRGBA8 color(255 * cos(angle / 5), 255, 255, 255);
     for (auto& tile : m_tiles) {
         Sprite& sprite = spriteMap.find(tile.row * 8 + tile.col)->second;
         sprite.rotation = angle;
