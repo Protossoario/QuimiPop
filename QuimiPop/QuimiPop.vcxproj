@@ -22,6 +22,7 @@
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ParticleBatch2D.cpp" />
     <ClCompile Include="ParticleEngine2D.cpp" />
     <ClCompile Include="picoPNG.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="ParticleBatch2D.h" />
     <ClInclude Include="ParticleEngine2D.h" />
     <ClInclude Include="picoPNG.h" />
@@ -83,7 +85,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)deps/include/;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)deps/include/assimp/Compiler/;$(SolutionDir)deps/include/;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)deps/lib/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -94,7 +96,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;glew32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
