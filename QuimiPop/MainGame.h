@@ -14,6 +14,7 @@
 #include <Windows.h>
 #include <GL/glew.h>
 #include <random>
+#include <map>
 #include "glm/glm.hpp"
 #include "glm/gtx/rotate_vector.hpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -61,7 +62,7 @@ private:
     ParticleEngine2D m_particleEngine;
     ParticleBatch2D* m_particleBatch;
 
-	Mesh m_moleculeMesh;
+	std::map<Molecule, Mesh> m_molecules;
     
     InputManager m_inputManager;
     FPSLimiter m_fpsLimiter;

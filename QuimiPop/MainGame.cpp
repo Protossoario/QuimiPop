@@ -51,7 +51,23 @@ void MainGame::initSystems() {
     m_particleBatch->init(1000, 0.05f, ResourceManager::getTexture("Textures/glow_particle.png"));
     m_particleEngine.addParticleBatch(m_particleBatch);
 
-	m_moleculeMesh.loadMesh("Models/molecula_agua.obj");
+	m_molecules.insert(std::make_pair(SUGAR, Mesh()));
+	m_molecules.find(SUGAR)->second.loadMesh("Models/molecula_azucar.obj");
+
+	m_molecules.insert(std::make_pair(WATER, Mesh()));
+	m_molecules.find(WATER)->second.loadMesh("Models/molecula_agua.obj");
+
+	m_molecules.insert(std::make_pair(CARBON_DIOXIDE, Mesh()));
+	m_molecules.find(CARBON_DIOXIDE)->second.loadMesh("Models/molecula_dioxidoC.obj");
+
+	m_molecules.insert(std::make_pair(METHANE, Mesh()));
+	m_molecules.find(METHANE)->second.loadMesh("Models/molecula_metano.obj");
+
+	m_molecules.insert(std::make_pair(NITROUS_OXIDE, Mesh()));
+	m_molecules.find(NITROUS_OXIDE)->second.loadMesh("Models/molecula_oxido.obj");
+
+	m_molecules.insert(std::make_pair(SULFURIC_ACID, Mesh()));
+	m_molecules.find(SULFURIC_ACID)->second.loadMesh("Models/molecula_acdoS.obj");
 }
 
 void MainGame::initShaders() {
@@ -164,6 +180,7 @@ void MainGame::processInput() {
         
         if (m_gameBoard.isPointInsideBoard(mouseCoords)) {
             m_gameBoard.setClickingDown(false);
+			m_gameBoard.updateMouseCoords(mouseCoords);
         }
     }
 }
@@ -224,7 +241,10 @@ void MainGame::drawGame() {
 	GLint transformLocation = m_meshShader.getUniformLocation("transform");
 	glUniformMatrix4fv(transformLocation, 1, GL_FALSE, &(transform[0][0]));
 
-	m_moleculeMesh.render();
+	std::map<Molecule, Mesh>::iterator iter = m_molecules.find(m_gameBoard.getHoverMolecule());
+	if (iter != m_molecules.end()) {
+		iter->second.render();
+	}
 
 	m_meshShader.unuse();
     

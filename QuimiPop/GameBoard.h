@@ -60,6 +60,7 @@ public:
     
     void setClickingDown(bool clickingDown);
     void updateMouseCoords(glm::vec2 mouseCoords);
+	Molecule getHoverMolecule();
     
     bool isPointInsideBoard(glm::vec2 point);
     
@@ -89,6 +90,8 @@ private:
     std::map<int, Sprite> m_spriteMap;
     
     MoleculeAnimation m_molAnimation;
+
+	Molecule m_hoverMolecule = NONE;
     
     glm::vec2 m_boardPosition;
     

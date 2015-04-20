@@ -34,7 +34,8 @@ enum Molecule {
     CARBON_DIOXIDE = 12,
     METHANE = 13,
     NITROUS_OXIDE = 14,
-    SULFURIC_ACID = 15
+    SULFURIC_ACID = 15,
+	NONE = -1
 };
 
 // Molecule Structures
@@ -69,6 +70,7 @@ public:
     void checkGrid(int colOrRen, int pos);
     
     std::string getTileTexturePath(int row, int col);
+	Molecule getTileMolecule(int row, int col);
     
     void setGridObserver(GridObserver* observer);
     

@@ -103,6 +103,15 @@ void GameBoard::update() {
     if (m_molAnimation.isAnimating()) {
         m_molAnimation.update(m_spriteMap);
     }
+
+	// Molecula seleccionada con el mouse
+	if (!m_clickingDown && isPointInsideBoard(m_currMouseCoords)) {
+		glm::vec2 hoverTile = getTileForCoords(m_currMouseCoords);
+		Molecule hovering = m_boardGrid.getTileMolecule((int)hoverTile.y, (int)hoverTile.x);
+		if (hovering != NONE) {
+			m_hoverMolecule = hovering;
+		}
+	}
 }
 
 void GameBoard::draw(SpriteBatch &spriteBatch) {
@@ -148,6 +157,10 @@ void GameBoard::updateMouseCoords(glm::vec2 mouseCoords) {
     else {
         m_currMouseCoords = mouseCoords;
     }
+}
+
+Molecule GameBoard::getHoverMolecule() {
+	return m_hoverMolecule;
 }
 
 bool GameBoard::isPointInsideBoard(glm::vec2 point) {

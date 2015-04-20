@@ -262,6 +262,14 @@ std::string Grid::getTileTexturePath(int row, int col) {
     return filePath;
 }
 
+Molecule Grid::getTileMolecule(int row, int col) {
+	int tile = m_gameGrid[row][col];
+	if (tile == SUGAR || tile == WATER || tile == CARBON_DIOXIDE || tile == METHANE || tile == NITROUS_OXIDE || tile == SULFURIC_ACID) {
+		return (Molecule)tile;
+	}
+	return NONE;
+}
+
 void Grid::setGridObserver(GridObserver* observer) {
     m_gridObserver = observer;
 }
