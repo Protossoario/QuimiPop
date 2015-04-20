@@ -16,6 +16,7 @@
 #include <random>
 #include "glm/glm.hpp"
 #include "glm/gtx/rotate_vector.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include "Errors.h"
 #include "GLSLProgram.h"
 #include "Window.h"
@@ -27,6 +28,7 @@
 #include "GameBoard.h"
 #include "ParticleEngine2D.h"
 #include "ParticleBatch2D.h"
+#include "Mesh.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -51,12 +53,15 @@ private:
     int m_screenHeight;
     GameState m_gameState;
         
-    GLSLProgram m_colorProgram;
+    GLSLProgram m_spriteShader;
+	GLSLProgram m_meshShader;
     Camera2D m_camera;
     
     SpriteBatch m_spriteBatch;
     ParticleEngine2D m_particleEngine;
     ParticleBatch2D* m_particleBatch;
+
+	Mesh m_moleculeMesh;
     
     InputManager m_inputManager;
     FPSLimiter m_fpsLimiter;
@@ -65,6 +70,8 @@ private:
     
     float m_fps;
     float m_maxFPS;
+
+	float m_angle;
 };
 
 #endif /* defined(__GraphicsTutorial__MainGame__) */

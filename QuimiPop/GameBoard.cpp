@@ -9,8 +9,8 @@
 #include "GameBoard.h"
 
 #define PI 3.14159265358979323846
-#define TILE_WIDTH 65.0f
-#define TILE_HEIGHT 65.0f
+#define TILE_WIDTH 70.0f
+#define TILE_HEIGHT 62.0f
 #define MOLECULE_ANIM_FRAMES 90
 
 void MoleculeAnimation::start(int frames) {

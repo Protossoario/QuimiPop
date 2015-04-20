@@ -8,7 +8,7 @@
 
 #include "MainGame.h"
 
-MainGame::MainGame() : m_screenWidth(960), m_screenHeight(540), m_gameState(GameState::PLAY), m_maxFPS(60.0f), m_gameBoard(glm::vec2(-425.0f, -260.0f)) {
+MainGame::MainGame() : m_screenWidth(960), m_screenHeight(540), m_gameState(GameState::PLAY), m_maxFPS(60.0f), m_gameBoard(glm::vec2(-425.0f, -250.0f)), m_angle(0.0f) {
     m_camera.init(m_screenWidth, m_screenHeight);
     m_gameBoard.init();
 }
@@ -50,14 +50,22 @@ void MainGame::initSystems() {
     m_particleBatch = new ParticleBatch2D;
     m_particleBatch->init(1000, 0.05f, ResourceManager::getTexture("Textures/glow_particle.png"));
     m_particleEngine.addParticleBatch(m_particleBatch);
+
+	m_moleculeMesh.loadMesh("Models/molecula_agua.obj");
 }
 
 void MainGame::initShaders() {
-    m_colorProgram.compileShaders("Shaders/colorShading.vert", "Shaders/colorShading.frag");
-    m_colorProgram.addAttribute("vertexPosition");
-    m_colorProgram.addAttribute("vertexColor");
-    m_colorProgram.addAttribute("vertexUV");
-    m_colorProgram.linkShaders();
+    m_spriteShader.compileShaders("Shaders/spriteShader.vert", "Shaders/spriteShader.frag");
+    m_spriteShader.addAttribute("vertexPosition");
+    m_spriteShader.addAttribute("vertexColor");
+    m_spriteShader.addAttribute("vertexUV");
+    m_spriteShader.linkShaders();
+
+	m_meshShader.compileShaders("Shaders/meshShader.vert", "Shaders/meshShader.frag");
+	m_meshShader.addAttribute("vertexPosition");
+	m_meshShader.addAttribute("vertexUV");
+	m_meshShader.addAttribute("vertexNormal");
+	m_meshShader.linkShaders();
 }
 
 void MainGame::gameLoop() {
@@ -69,6 +77,11 @@ void MainGame::gameLoop() {
         m_camera.update();
         m_gameBoard.update();
         m_particleEngine.update();
+
+		m_angle += 0.1f;
+		if (m_angle >= 360.0f) {
+			m_angle = 0.0f;
+		}
         
         drawGame();
         
@@ -159,13 +172,14 @@ void MainGame::drawGame() {
     glClearDepth(1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    m_colorProgram.use();
+	// Drawing 2D sprites
+    m_spriteShader.use();
     
     glActiveTexture(GL_TEXTURE0);
-    GLint textureLocation = m_colorProgram.getUniformLocation("mySampler");
+    GLint textureLocation = m_spriteShader.getUniformLocation("mySampler");
     glUniform1i(textureLocation, 0);
     
-    GLint pLocation = m_colorProgram.getUniformLocation("P");
+    GLint pLocation = m_spriteShader.getUniformLocation("P");
     glm::mat4 cameraMatrix = m_camera.getCameraMatrix();
     glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
@@ -187,7 +201,32 @@ void MainGame::drawGame() {
     
     glBindTexture(GL_TEXTURE_2D, 0);
     
-    m_colorProgram.unuse();
+    m_spriteShader.unuse();
+
+	// Drawing 3D molecule mesh
+	m_meshShader.use();
+
+	glActiveTexture(GL_TEXTURE0);
+	textureLocation = m_meshShader.getUniformLocation("textureSampler");
+	glUniform1i(textureLocation, 0);
+
+	static float moleculeScale = 35.0f;
+
+	static glm::mat4 projection = glm::ortho(0.0f, (float) m_screenWidth, 0.0f, (float) m_screenHeight, -1000.0f, 1000.0f);
+	GLint projectionLocation = m_meshShader.getUniformLocation("projection");
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(projection[0][0]));
+
+	glm::mat4 transform;
+	transform = glm::translate(transform, glm::vec3(815.0f, 300.0f, 0.0f));
+	transform = glm::scale(transform, glm::vec3(moleculeScale));
+	transform = glm::rotate(transform, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	transform = glm::rotate(transform, m_angle, glm::vec3(1.0f, 1.0f, 0.0f));
+	GLint transformLocation = m_meshShader.getUniformLocation("transform");
+	glUniformMatrix4fv(transformLocation, 1, GL_FALSE, &(transform[0][0]));
+
+	m_moleculeMesh.render();
+
+	m_meshShader.unuse();
     
     m_window.swapBuffer();
 }
