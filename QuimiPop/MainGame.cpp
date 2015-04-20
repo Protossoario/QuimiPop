@@ -13,7 +13,9 @@ MainGame::MainGame() : m_screenWidth(960), m_screenHeight(540), m_gameState(Game
     m_gameBoard.init();
 }
 
-MainGame::~MainGame() {}
+MainGame::~MainGame() {
+	delete m_spriteFont;
+}
 
 void MainGame::run() {
     initSystems();
@@ -44,6 +46,9 @@ void MainGame::initSystems() {
     initShaders();
     
     m_spriteBatch.init();
+	m_hudBatch.init();
+
+	m_spriteFont = new SpriteFont("Fonts/chemistry.ttf", 32);
     
     m_fpsLimiter.init(m_maxFPS);
     
@@ -214,6 +219,8 @@ void MainGame::drawGame() {
     
     m_spriteBatch.renderBatch();
     
+	drawHUD();
+
     m_particleEngine.draw(&m_spriteBatch);
     
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -249,6 +256,55 @@ void MainGame::drawGame() {
 	m_meshShader.unuse();
     
     m_window.swapBuffer();
+}
+
+void MainGame::drawHUD() {
+	m_hudBatch.begin();
+
+	Molecule mol = m_gameBoard.getHoverMolecule();
+	std::string title;
+	std::string description;
+
+	switch (mol) {
+	case SUGAR:
+		title = "Glucosa";
+		description = "Hace mas dulce al mundo!";
+		break;
+
+	case WATER:
+		title = "Agua";
+		description = "Hasta las plantas la toman!";
+		break;
+
+	case CARBON_DIOXIDE:
+		title = "Dioxido de Carbono";
+		description = "Como el humo de los autos!";
+		break;
+
+	case METHANE:
+		title = "Metano";
+		description = "Muy flamable. Manejese con cuidado!";
+		break;
+
+	case NITROUS_OXIDE:
+		title = "Dioxido de Nitrogeno";
+		description = "Tambien conocido como gas de la risa!";
+		break;
+
+	case SULFURIC_ACID:
+		title = "Acido Sulfurico";
+		description = "Fuerte y corrosivo!";
+		break;
+
+	case NONE:
+		return;
+	}
+
+	m_spriteFont->draw(m_hudBatch, title.c_str(), glm::vec2(325.0f, 200.0f), glm::vec2(1.0), 0.0f, ColorRGBA8(255, 255, 255, 255), Justification::MIDDLE);
+	m_spriteFont->draw(m_hudBatch, description.c_str(), glm::vec2(325.0f, 175.0f), glm::vec2(0.5), 0.0f, ColorRGBA8(255, 255, 255, 255), Justification::MIDDLE);
+
+	m_hudBatch.end();
+	m_hudBatch.renderBatch();
 }
 
 void MainGame::addGlow(const glm::vec2 &position, int numParticles) {

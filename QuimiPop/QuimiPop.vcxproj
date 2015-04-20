@@ -36,6 +36,7 @@
     <ClCompile Include="picoPNG.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
+    <ClCompile Include="SpriteFont.cpp" />
     <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -59,6 +60,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
+    <ClInclude Include="SpriteFont.h" />
     <ClInclude Include="TextureCache.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Vertex.h" />
@@ -128,7 +130,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;opengl32.lib;glew32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2test.lib;opengl32.lib;glew32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>

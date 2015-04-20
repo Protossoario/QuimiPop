@@ -30,6 +30,7 @@
 #include "ParticleEngine2D.h"
 #include "ParticleBatch2D.h"
 #include "Mesh.h"
+#include "SpriteFont.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -46,6 +47,7 @@ private:
     void gameLoop();
     void processInput();
     void drawGame();
+	void drawHUD();
     void calculateFPS();
     void addGlow(const glm::vec2& position, int numParticles);
     
@@ -59,8 +61,11 @@ private:
     Camera2D m_camera;
     
     SpriteBatch m_spriteBatch;
+	SpriteBatch m_hudBatch;
     ParticleEngine2D m_particleEngine;
     ParticleBatch2D* m_particleBatch;
+
+	SpriteFont* m_spriteFont;
 
 	std::map<Molecule, Mesh> m_molecules;
     
