@@ -94,7 +94,7 @@ void MainGame::gameLoop() {
         m_gameBoard.update();
         m_particleEngine.update();
 
-		m_angle += 0.1f;
+		m_angle += 0.025f;
 		if (m_angle >= 360.0f) {
 			m_angle = 0.0f;
 		}
