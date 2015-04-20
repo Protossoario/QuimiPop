@@ -18,6 +18,7 @@
 #include "Sprite.h"
 #include "SpriteBatch.h"
 #include "Grid.h"
+#include "AudioEngine.h"
 
 struct Tile {
     Tile(int Row, int Col) : row(Row), col(Col) {}
@@ -61,6 +62,8 @@ public:
     void setClickingDown(bool clickingDown);
     void updateMouseCoords(glm::vec2 mouseCoords);
 	Molecule getHoverMolecule();
+
+	void setMoleculeSound(SoundEffect moleculeSound);
     
     bool isPointInsideBoard(glm::vec2 point);
     
@@ -92,6 +95,8 @@ private:
     MoleculeAnimation m_molAnimation;
 
 	Molecule m_hoverMolecule = NONE;
+
+	SoundEffect m_moleculeSound;
     
     glm::vec2 m_boardPosition;
     

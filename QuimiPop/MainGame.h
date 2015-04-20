@@ -31,6 +31,7 @@
 #include "ParticleBatch2D.h"
 #include "Mesh.h"
 #include "SpriteFont.h"
+#include "AudioEngine.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -66,6 +67,8 @@ private:
     ParticleBatch2D* m_particleBatch;
 
 	SpriteFont* m_spriteFont;
+
+	AudioEngine m_audioEngine;
 
 	std::map<Molecule, Mesh> m_molecules;
     

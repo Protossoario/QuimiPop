@@ -19,6 +19,9 @@ MainGame::~MainGame() {
 
 void MainGame::run() {
     initSystems();
+
+	Music bgMusic = m_audioEngine.loadMusic("Sounds/calm_bgm.ogg");
+	bgMusic.play(-1);
     
     gameLoop();
 }
@@ -42,6 +45,11 @@ void MainGame::initSystems() {
 	*/
     printf("OpenGL version %s\n", glGetString(GL_VERSION));
     printf("GLSL version %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+
+	m_audioEngine.init();
+
+	SoundEffect moleculeSound = m_audioEngine.loadSoundEffect("Sounds/Item1B.wav");
+	m_gameBoard.setMoleculeSound(moleculeSound);
     
     initShaders();
     
