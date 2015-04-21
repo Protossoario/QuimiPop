@@ -46,27 +46,30 @@ void Grid::moveGrid(int colOrRen, int index, int offset) {
 
 bool Grid::checkMolecule(int colOrRen, int x, int y, const int *arrMolecule, int size) {
     switch (colOrRen) {
+		// caso en que se mueve una columna
         case 0:
             for (int i = 0; i < size; i++) {
                 if ((y + i) >= GRID_SIZE || arrMolecule[i] != m_gameGrid[x][y + i]) {
                     return false;
                 }
             }
-            break;
-            
+        break;
+        // caso en que se mueve el renglon    
         case 1:
             for (int i = 0; i < size; i++) {
                 if ((x + i) >= GRID_SIZE || arrMolecule[i] != m_gameGrid[x + i][y]) {
                     return false;
                 }
             }
-            break;
+        break;
     }
+
     return true;
 }
 
 void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, Molecule type) {
     switch(colOrRen) {
+		// caso si se movio la columna
         case 0:
             for (int j = y + 1; j < y + size; j++) {
                 for (int i = x; i > 1; i--) {
@@ -74,8 +77,9 @@ void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, Molecule type
                 }
                 m_gameGrid[0][j] = rand() % 5;
             }
-            break;
-            
+        break;
+        
+		// caso si se movio el renglon
         case 1:
             for (int i = 0; i < x; i++) {
                 m_gameGrid[x + size - 2 - i][y] = m_gameGrid[x - 1 - i][y];
@@ -83,26 +87,29 @@ void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, Molecule type
             for (int i = 0; i < size - 1; i++) {
                 m_gameGrid[i][y] = rand() % 5;
             }
-            break;
+        break;
     }
 }
 
 void Grid::deleteMolecule(int colOrRen, int x, int y, int size, Molecule type) {
     switch(colOrRen) {
+		// caso en que se movio la columna
         case 0:
             m_gridObserver->formedMoleculeRow(x, y, size);
             m_gameGrid[x][y] = type;
             for (int i = 1; i < size; i++) {
                 m_gameGrid[x][y+i] = EMPTY;
             }
-            break;
+        break;
+
+		//casi en que se movio el renglon
         case 1:
             m_gridObserver->formedMoleculeCol(x, y, size);
             m_gameGrid[x+size-1][y] = type;
             for (int i = x + size - 2; i > x - 1; i--) {
                 m_gameGrid[i][y] = EMPTY;
             }
-            break;
+        break;
     }
     
     rearrangeMolecule(colOrRen, x, y, size, type);
@@ -158,10 +165,10 @@ void Grid::checkGrid(int colOrRen, int pos) {
         break;
     //caso si se movio el renglon
     case 1:
-        for (int i = 0; i < GRID_SIZE; i++) {
+        for (int j = 0; j < GRID_SIZE; j++) {
             int inf_limit = (pos - MAX_MOLECULE_SIZE <= 0)? 0 : pos - MAX_MOLECULE_SIZE;
             int top_limit = (pos + MAX_MOLECULE_SIZE > MAX_MOLECULE_SIZE)? MAX_MOLECULE_SIZE : pos + MAX_MOLECULE_SIZE;
-            for (int j = inf_limit; j < top_limit; j++) {
+            for (int i = inf_limit; i < top_limit; i++) {
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid1, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
                 }
