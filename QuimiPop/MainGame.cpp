@@ -20,7 +20,7 @@ MainGame::~MainGame() {
 void MainGame::run() {
     initSystems();
 
-	Music bgMusic = m_audioEngine.loadMusic("Sounds/calm_bgm.ogg");
+	Music bgMusic = m_audioEngine.loadMusic("Sounds/menuloopsid.ogg");
 	bgMusic.play(-1);
     
     gameLoop();
@@ -202,6 +202,7 @@ void MainGame::drawGame() {
     glClearDepth(1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+	glDisable(GL_DEPTH_TEST);
 	// Drawing 2D sprites
     m_spriteShader.use();
     
@@ -213,14 +214,14 @@ void MainGame::drawGame() {
     glm::mat4 cameraMatrix = m_camera.getCameraMatrix();
     glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
-    m_spriteBatch.begin();
+	m_spriteBatch.begin();
     
     glm::vec4 backgroundRect(-m_screenWidth / 2, -m_screenHeight / 2, m_screenWidth, m_screenHeight);
     glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
     static GLTexture backgroundTexture = ResourceManager::getTexture("Textures/Background.png");
     ColorRGBA8 color(255, 255, 255, 255);
-    m_spriteBatch.draw(backgroundRect, uvRect, backgroundTexture.textureId, 0.0f, color);
-    
+	m_spriteBatch.draw(backgroundRect, uvRect, backgroundTexture.textureId, 0.0f, color);
+
     m_gameBoard.draw(m_spriteBatch);
     
     m_spriteBatch.end();
@@ -235,12 +236,10 @@ void MainGame::drawGame() {
     
     m_spriteShader.unuse();
 
+	glEnable(GL_DEPTH_TEST);
+
 	// Drawing 3D molecule mesh
 	m_meshShader.use();
-
-	glActiveTexture(GL_TEXTURE0);
-	textureLocation = m_meshShader.getUniformLocation("textureSampler");
-	glUniform1i(textureLocation, 0);
 
 	static float moleculeScale = 35.0f;
 
@@ -249,16 +248,16 @@ void MainGame::drawGame() {
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(projection[0][0]));
 
 	glm::mat4 transform;
-	transform = glm::translate(transform, glm::vec3(815.0f, 300.0f, 0.0f));
+	transform = glm::translate(transform, glm::vec3(815.0f, 300.0f, 100.0f));
 	transform = glm::scale(transform, glm::vec3(moleculeScale));
 	transform = glm::rotate(transform, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 	transform = glm::rotate(transform, m_angle, glm::vec3(1.0f, 1.0f, 0.0f));
 	GLint transformLocation = m_meshShader.getUniformLocation("transform");
 	glUniformMatrix4fv(transformLocation, 1, GL_FALSE, &(transform[0][0]));
-
+	
 	std::map<Molecule, Mesh>::iterator iter = m_molecules.find(m_gameBoard.getHoverMolecule());
 	if (iter != m_molecules.end()) {
-		iter->second.render();
+		iter->second.render(m_meshShader);
 	}
 
 	m_meshShader.unuse();

@@ -1,11 +1,9 @@
 #version 330
 
-in vec2 fragmentUV;
-
-uniform sampler2D textureSampler;
+uniform vec3 materialColor;
 
 out vec4 color;
 
 void main() {
-    color = texture2D(textureSampler, fragmentUV);
+    color = vec4(materialColor, 1.0);
 }

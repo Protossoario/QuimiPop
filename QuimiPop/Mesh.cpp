@@ -40,7 +40,7 @@ Mesh::~Mesh() {}
 void Mesh::clear()
 {
 	m_entries.clear();
-	m_textures.clear();
+	m_materials.clear();
 }
 
 void Mesh::loadMesh(const std::string& filename)
@@ -65,7 +65,7 @@ void Mesh::loadMesh(const std::string& filename)
 void Mesh::initFromScene(const aiScene* pScene, const std::string& filename)
 {
 	m_entries.resize(pScene->mNumMeshes);
-	m_textures.resize(pScene->mNumMaterials);
+	m_materials.resize(pScene->mNumMaterials);
 
 	// Initialize the meshes in the scene one by one
 	for (unsigned int i = 0; i < m_entries.size(); i++) {
@@ -110,50 +110,23 @@ void Mesh::initMesh(unsigned int index, const aiMesh* paiMesh)
 
 void Mesh::initMaterials(const aiScene* pScene, const std::string& filename)
 {
-	// Extract the directory part from the file name
-	std::string::size_type slashIndex = filename.find_last_of("/");
-	std::string dir;
-
-	if (slashIndex == std::string::npos) {
-		dir = ".";
-	}
-	else if (slashIndex == 0) {
-		dir = "/";
-	}
-	else {
-		dir = filename.substr(0, slashIndex);
-	}
-
-	// Initialize the materials
-	printf("Number of materials in mesh: %d\n", pScene->mNumMaterials);
 	for (unsigned int i = 0; i < pScene->mNumMaterials; i++) {
 		const aiMaterial* pMaterial = pScene->mMaterials[i];
 
-		m_textures[i] = 0;
+		aiColor3D diffuseColor;
+		pMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, diffuseColor);
 
-		if (pMaterial->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
-			printf("Diffuse texture.\n");
-			aiString path;
-
-			if (pMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS) {
-				std::string fullPath = dir + "/" + path.data;
-				printf("Reading texture: %s\n", fullPath);
-				m_textures[i] = ResourceManager::getTexture(fullPath).textureId;
-			}
-		}
-
-		// Load a white texture in case the model does not include its own texture
-		if (m_textures[i] == 0) {
-			m_textures[i] = ResourceManager::getTexture("Textures/solid_white.png").textureId;
-		}
+		m_materials[i] = diffuseColor;
 	}
 }
 
-void Mesh::render()
+void Mesh::render(GLSLProgram& renderProgram)
 {
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
+
+	GLint matColorLocation = renderProgram.getUniformLocation("materialColor");
 
 	for (unsigned int i = 0; i < m_entries.size(); i++) {
 		glBindBuffer(GL_ARRAY_BUFFER, m_entries[i].vB);
@@ -164,13 +137,11 @@ void Mesh::render()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_entries[i].iB);
 
 		const unsigned int materialIndex = m_entries[i].materialIndex;
-
-		glBindTexture(GL_TEXTURE_2D, m_textures[materialIndex]);
+		aiColor3D materialColor = m_materials[materialIndex];
+		glUniform3f(matColorLocation, materialColor.r, materialColor.g, materialColor.b);
 		
 		glDrawElements(GL_TRIANGLES, m_entries[i].numIndices, GL_UNSIGNED_INT, 0);
 	}
-
-	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

@@ -9,8 +9,7 @@
 #include <assimp/scene.h>
 #include <GL/glew.h>
 #include "glm/glm.hpp"
-#include "ResourceManager.h"
-#include "GLTexture.h"
+#include "GLSLProgram.h"
 #include "Errors.h"
 
 struct Vertex3D
@@ -31,15 +30,13 @@ public:
 	~Mesh();
 
 	void loadMesh(const std::string& Filename);
-	void render();
+	void render(GLSLProgram& renderProgram);
 
 private:
 	void initFromScene(const aiScene* pScene, const std::string& filename);
 	void initMesh(unsigned int Index, const aiMesh* paiMesh);
 	void initMaterials(const aiScene* pScene, const std::string& filename);
 	void clear();
-
-#define INVALID_MATERIAL 0xFFFFFFFF
 
 	struct MeshEntry {
 		MeshEntry();
@@ -54,6 +51,6 @@ private:
 	};
 
 	std::vector<MeshEntry> m_entries;
-	std::vector<GLuint> m_textures;
+	std::vector<aiColor3D> m_materials;
 };
 
