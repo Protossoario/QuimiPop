@@ -84,6 +84,8 @@ private:
 	float m_angle;
 
 	bool m_showingTitle = true;
+
+	float m_sidebarOffsetY = 0.0f;
 };
 
 #endif /* defined(__GraphicsTutorial__MainGame__) */
