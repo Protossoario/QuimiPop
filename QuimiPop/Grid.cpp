@@ -115,8 +115,10 @@ void Grid::deleteMolecule(int colOrRen, int x, int y, int size, Molecule type) {
     rearrangeMolecule(colOrRen, x, y, size, type);
 }
 
-void Grid::checkGrid(int colOrRen, int pos) {
-    switch (colOrRen) {
+bool Grid::checkGrid(int colOrRen, int pos) {
+	bool deletedMolecule = false;
+    
+	switch (colOrRen) {
     //caso si se movio la columna
     case 0:
         for (int i = 0; i < GRID_SIZE; i++) {
@@ -129,39 +131,51 @@ void Grid::checkGrid(int colOrRen, int pos) {
             for (int j = inf_limit; j < top_limit; j++) {
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid1, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid2, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid3, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid4, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar1, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, SUGAR);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar2, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, SUGAR);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrMethane1, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, METHANE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrMethane2, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, METHANE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrCarbonDioxide, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, CARBON_DIOXIDE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrNitrousOxide1, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, NITROUS_OXIDE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrNitrousOxide2, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, NITROUS_OXIDE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrWater, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, WATER);
+					deletedMolecule = true;
                 }
             
             }
@@ -179,44 +193,58 @@ void Grid::checkGrid(int colOrRen, int pos) {
             for (int i = inf_limit; i < top_limit; i++) {
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid1, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid2, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid3, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid4, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar1, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, SUGAR);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar2, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, SUGAR);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrMethane1, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, METHANE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrMethane2, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, METHANE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrCarbonDioxide, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, CARBON_DIOXIDE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrNitrousOxide1, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, NITROUS_OXIDE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrNitrousOxide2, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, NITROUS_OXIDE);
+					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrWater, 3)) {
                     deleteMolecule(colOrRen, i, j, 3, WATER);
+					deletedMolecule = true;
                 }
             }
         }
         break;
     }
+
+	return deletedMolecule;
 }
 
 std::string Grid::getTileTexturePath(int row, int col) {

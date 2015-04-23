@@ -145,12 +145,12 @@ void GameBoard::setClickingDown(bool clickingDown) {
         if (m_highlightRow > -1) {
             m_boardGrid.moveGrid(1, m_highlightRow, (int)m_offset.x);
             refreshRowFromGrid(m_highlightRow);
-            m_boardGrid.checkGrid(1, m_highlightRow);
+			while (m_boardGrid.checkGrid(1, m_highlightRow)) {}
         }
         else if (m_highlightCol > -1) {
             m_boardGrid.moveGrid(0, m_highlightCol, (int)m_offset.y);
             refreshColFromGrid(m_highlightCol);
-            m_boardGrid.checkGrid(0, m_highlightCol);
+			while (m_boardGrid.checkGrid(0, m_highlightCol)) {}
         }
         m_highlighting = false;
         m_highlightRow = -1;

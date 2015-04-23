@@ -67,7 +67,7 @@ public:
     bool checkMolecule(int colOrRen, int x, int y, const int* arrMolecule, int size);
     void rearrangeMolecule(int colOrRen, int x, int y, int size, Molecule type);
     void deleteMolecule(int colOrRen, int x, int y, int size, Molecule type);
-    void checkGrid(int colOrRen, int pos);
+    bool checkGrid(int colOrRen, int pos);
     
     std::string getTileTexturePath(int row, int col);
 	Molecule getTileMolecule(int row, int col);
