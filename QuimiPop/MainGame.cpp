@@ -210,6 +210,9 @@ void MainGame::processInput() {
 		if (m_inputManager.isKeyDown(SDL_BUTTON_RIGHT)) {
 			m_gameBoard.resetHoverMolecule();
 		}
+		if (m_inputManager.isKeyDown(SDLK_ESCAPE)) {
+			m_showingTitle = true;
+		}
 	}
 }
 
