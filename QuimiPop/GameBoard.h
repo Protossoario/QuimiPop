@@ -65,6 +65,8 @@ public:
 	void resetHoverMolecule();
 	int getScore();
 	void resetScore();
+	int getRemainingTurns();
+	void resetRemainingTurns();
 
 	void setMoleculeSound(SoundEffect moleculeSound);
     
@@ -114,6 +116,7 @@ private:
     int m_highlightCol;
 
 	int m_score = 0;
+	int m_remainingTurns = 15;
 };
 
 #endif /* defined(__QuimiPop__GameBoard__) */

@@ -155,6 +155,8 @@ void GameBoard::setClickingDown(bool clickingDown) {
         m_highlighting = false;
         m_highlightRow = -1;
         m_highlightCol = -1;
+		
+		m_remainingTurns--;
     }
 }
 
@@ -185,6 +187,14 @@ int GameBoard::getScore() {
 
 void GameBoard::resetScore() {
 	m_score = 0;
+}
+
+int GameBoard::getRemainingTurns() {
+	return m_remainingTurns;
+}
+
+void GameBoard::resetRemainingTurns() {
+	m_remainingTurns = 15;
 }
 
 bool GameBoard::isPointInsideBoard(glm::vec2 point) {

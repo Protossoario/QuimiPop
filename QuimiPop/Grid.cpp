@@ -145,20 +145,16 @@ bool Grid::checkGrid(int colOrRen, int pos) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
 					deletedMolecule = true;
                 }
+				if (checkMolecule(colOrRen, i, j, arrMethane, 5)) {
+					deleteMolecule(colOrRen, i, j, 5, METHANE);
+					deletedMolecule = true;
+				}
                 if (checkMolecule(colOrRen, i, j, arrSugar1, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, SUGAR);
 					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar2, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, SUGAR);
-					deletedMolecule = true;
-                }
-                if (checkMolecule(colOrRen, i, j, arrMethane1, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, METHANE);
-					deletedMolecule = true;
-                }
-                if (checkMolecule(colOrRen, i, j, arrMethane2, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, METHANE);
 					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrCarbonDioxide, 3)) {
@@ -207,20 +203,16 @@ bool Grid::checkGrid(int colOrRen, int pos) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
 					deletedMolecule = true;
                 }
+				if (checkMolecule(colOrRen, i, j, arrMethane, 5)) {
+					deleteMolecule(colOrRen, i, j, 4, METHANE);
+					deletedMolecule = true;
+				}
                 if (checkMolecule(colOrRen, i, j, arrSugar1, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, SUGAR);
 					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrSugar2, 4)) {
                     deleteMolecule(colOrRen, i, j, 4, SUGAR);
-					deletedMolecule = true;
-                }
-                if (checkMolecule(colOrRen, i, j, arrMethane1, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, METHANE);
-					deletedMolecule = true;
-                }
-                if (checkMolecule(colOrRen, i, j, arrMethane2, 4)) {
-                    deleteMolecule(colOrRen, i, j, 4, METHANE);
 					deletedMolecule = true;
                 }
                 if (checkMolecule(colOrRen, i, j, arrCarbonDioxide, 3)) {

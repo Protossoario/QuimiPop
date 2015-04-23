@@ -84,6 +84,7 @@ private:
 	float m_angle;
 
 	bool m_showingTitle = true;
+	bool m_showingCredits = false;
 
 	float m_sidebarOffsetY = 0.0f;
 };

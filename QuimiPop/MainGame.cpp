@@ -110,6 +110,11 @@ void MainGame::gameLoop() {
         
 		m_camera.update();
 
+		if (m_gameBoard.getRemainingTurns() == 0) {
+			m_showingTitle = true;
+			m_showingCredits = true;
+		}
+
 		if (m_showingTitle) {
 			drawTitleScreen();
 		}
@@ -182,11 +187,11 @@ void MainGame::processInput() {
     if (m_inputManager.isKeyDown(SDLK_e)) {
         m_camera.setScale(m_camera.getScale() - SCALE_SPEED);
     }
-	if (m_showingTitle && m_inputManager.isKeyDown(SDLK_RETURN)) {
+	if (m_showingTitle && !m_showingCredits && m_inputManager.isKeyDown(SDLK_RETURN)) {
 		m_showingTitle = false;
 		printf("Starting game!\n");
 	}
-	else {
+	else if (!m_showingTitle) {
 		if (m_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
 			glm::vec2 mouseCoords = m_inputManager.getMouseCoords();
 			mouseCoords = m_camera.convertScreenToWorld(mouseCoords);
@@ -289,6 +294,7 @@ void MainGame::drawHUD() {
 	Molecule mol = m_gameBoard.getHoverMolecule();
 	std::vector<std::string> titles;
 	std::vector<std::string> descriptions;
+	std::string turns = "Te quedan " + std::to_string(m_gameBoard.getRemainingTurns()) + " turnos!";
 	std::string score = std::to_string(m_gameBoard.getScore());
 	ColorRGBA8 white(255, 255, 255, 255);
 
@@ -382,6 +388,7 @@ void MainGame::drawHUD() {
 	m_sidebarOffsetY = coordY - 25.0f;
 
 	m_spriteFont->draw(m_hudBatch, score.c_str(), glm::vec2(325.0f, -255.0f), glm::vec2(1.5), 0.0f, white, Justification::MIDDLE);
+	m_spriteFont->draw(m_hudBatch, turns.c_str(), glm::vec2(325.0f, -135.0f), glm::vec2(0.75f), 0.0f, white, Justification::MIDDLE);
 
 	m_hudBatch.end();
 	m_hudBatch.renderBatch();
@@ -407,7 +414,13 @@ void MainGame::drawTitleScreen() {
 
 	glm::vec4 backgroundRect(-m_screenWidth / 2, -m_screenHeight / 2, m_screenWidth, m_screenHeight);
 	glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
-	static GLTexture titleTexture = ResourceManager::getTexture("Textures/QuimiPop-MainTitle.png");
+	static GLTexture titleTexture;
+	if (m_showingCredits) {
+		titleTexture = ResourceManager::getTexture("Textures/QuimiCreditos.png");
+	}
+	else {
+		titleTexture = ResourceManager::getTexture("Textures/QuimiPop-MainTitle.png");
+	}
 	ColorRGBA8 color(255, 255, 255, 255);
 	m_spriteBatch.draw(backgroundRect, uvRect, titleTexture.textureId, 0.0f, color);
 
@@ -419,28 +432,30 @@ void MainGame::drawTitleScreen() {
 
 	m_spriteShader.unuse();
 
-	glEnable(GL_DEPTH_TEST);
+	if (!m_showingCredits) {
+		glEnable(GL_DEPTH_TEST);
 
-	// Drawing 3D molecule mesh
-	m_meshShader.use();
+		// Drawing 3D molecule mesh
+		m_meshShader.use();
 
-	static float moleculeScale = 70.0f;
+		static float moleculeScale = 70.0f;
 
-	static glm::mat4 projection = glm::ortho(0.0f, (float)m_screenWidth, 0.0f, (float)m_screenHeight, -1000.0f, 1000.0f);
-	GLint projectionLocation = m_meshShader.getUniformLocation("projection");
-	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(projection[0][0]));
+		static glm::mat4 projection = glm::ortho(0.0f, (float)m_screenWidth, 0.0f, (float)m_screenHeight, -1000.0f, 1000.0f);
+		GLint projectionLocation = m_meshShader.getUniformLocation("projection");
+		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(projection[0][0]));
 
-	glm::mat4 transform;
-	transform = glm::translate(transform, glm::vec3((float)m_screenWidth / 2.0f, (float)m_screenHeight / 2.5f, 100.0f));
-	transform = glm::scale(transform, glm::vec3(moleculeScale));
-	transform = glm::rotate(transform, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-	transform = glm::rotate(transform, m_angle, glm::vec3(1.0f, 1.0f, 0.0f));
-	GLint transformLocation = m_meshShader.getUniformLocation("transform");
-	glUniformMatrix4fv(transformLocation, 1, GL_FALSE, &(transform[0][0]));
+		glm::mat4 transform;
+		transform = glm::translate(transform, glm::vec3((float)m_screenWidth / 2.0f, (float)m_screenHeight / 2.5f, 100.0f));
+		transform = glm::scale(transform, glm::vec3(moleculeScale));
+		transform = glm::rotate(transform, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+		transform = glm::rotate(transform, m_angle, glm::vec3(1.0f, 1.0f, 0.0f));
+		GLint transformLocation = m_meshShader.getUniformLocation("transform");
+		glUniformMatrix4fv(transformLocation, 1, GL_FALSE, &(transform[0][0]));
 
-	m_molecules.find(SUGAR)->second.render(m_meshShader);
+		m_molecules.find(SUGAR)->second.render(m_meshShader);
 
-	m_meshShader.unuse();
+		m_meshShader.unuse();
+	}
 
 	m_window.swapBuffer();
 }
