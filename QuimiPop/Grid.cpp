@@ -72,7 +72,7 @@ void Grid::rearrangeMolecule(int colOrRen, int x, int y, int size, Molecule type
 		// caso si se movio la columna
         case 0:
             for (int j = y + 1; j < y + size; j++) {
-                for (int i = x; i > 1; i--) {
+                for (int i = x; i > 0; i--) {
                     m_gameGrid[i][j] = m_gameGrid[i - 1][j];
                 }
                 m_gameGrid[0][j] = rand() % 5;
@@ -120,8 +120,12 @@ void Grid::checkGrid(int colOrRen, int pos) {
     //caso si se movio la columna
     case 0:
         for (int i = 0; i < GRID_SIZE; i++) {
-            int inf_limit = (pos - MAX_MOLECULE_SIZE < 0)? 0 : pos - MAX_MOLECULE_SIZE;
-            int top_limit = (pos + MAX_MOLECULE_SIZE > GRID_SIZE)? GRID_SIZE : pos + MAX_MOLECULE_SIZE;
+            //int inf_limit = (pos - MAX_MOLECULE_SIZE < 0)? 0 : pos - MAX_MOLECULE_SIZE;
+            //int top_limit = (pos + MAX_MOLECULE_SIZE > GRID_SIZE)? GRID_SIZE : pos + MAX_MOLECULE_SIZE;
+
+			int inf_limit = 0;
+			int top_limit = GRID_SIZE;
+
             for (int j = inf_limit; j < top_limit; j++) {
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid1, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
@@ -166,8 +170,12 @@ void Grid::checkGrid(int colOrRen, int pos) {
     //caso si se movio el renglon
     case 1:
         for (int j = 0; j < GRID_SIZE; j++) {
-            int inf_limit = (pos - MAX_MOLECULE_SIZE <= 0)? 0 : pos - MAX_MOLECULE_SIZE;
-            int top_limit = (pos + MAX_MOLECULE_SIZE > MAX_MOLECULE_SIZE)? MAX_MOLECULE_SIZE : pos + MAX_MOLECULE_SIZE;
+            //int inf_limit = (pos - MAX_MOLECULE_SIZE <= 0)? 0 : pos - MAX_MOLECULE_SIZE;
+            //int top_limit = (pos + MAX_MOLECULE_SIZE > MAX_MOLECULE_SIZE)? MAX_MOLECULE_SIZE : pos + MAX_MOLECULE_SIZE;
+
+			int inf_limit = 0;
+			int top_limit = GRID_SIZE;
+
             for (int i = inf_limit; i < top_limit; i++) {
                 if (checkMolecule(colOrRen, i, j, arrSulfuricAcid1, 5)) {
                     deleteMolecule(colOrRen, i, j, 5, SULFURIC_ACID);
