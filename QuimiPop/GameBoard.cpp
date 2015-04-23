@@ -47,6 +47,8 @@ void GameBoard::formedMoleculeRow(int row, int col, int size) {
     m_molAnimation.start(MOLECULE_ANIM_FRAMES);
 
 	m_moleculeSound.play();
+
+	m_score += size * 50;
 }
 
 void GameBoard::formedMoleculeCol(int row, int col, int size) {
@@ -57,6 +59,8 @@ void GameBoard::formedMoleculeCol(int row, int col, int size) {
     m_molAnimation.start(MOLECULE_ANIM_FRAMES);
 
 	m_moleculeSound.play();
+
+	m_score += size * 50;
 }
 
 void GameBoard::notifyAnimationFinished() {
@@ -173,6 +177,14 @@ void GameBoard::resetHoverMolecule() {
 
 void GameBoard::setMoleculeSound(SoundEffect moleculeSound) {
 	m_moleculeSound = moleculeSound;
+}
+
+int GameBoard::getScore() {
+	return m_score;
+}
+
+void GameBoard::resetScore() {
+	m_score = 0;
 }
 
 bool GameBoard::isPointInsideBoard(glm::vec2 point) {

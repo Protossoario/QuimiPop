@@ -63,6 +63,8 @@ public:
     void updateMouseCoords(glm::vec2 mouseCoords);
 	Molecule getHoverMolecule();
 	void resetHoverMolecule();
+	int getScore();
+	void resetScore();
 
 	void setMoleculeSound(SoundEffect moleculeSound);
     
@@ -110,6 +112,8 @@ private:
     bool m_highlighting;
     int m_highlightRow;
     int m_highlightCol;
+
+	int m_score = 0;
 };
 
 #endif /* defined(__QuimiPop__GameBoard__) */

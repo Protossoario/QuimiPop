@@ -286,6 +286,8 @@ void MainGame::drawHUD() {
 	Molecule mol = m_gameBoard.getHoverMolecule();
 	std::string title;
 	std::string description;
+	std::string score = std::to_string(m_gameBoard.getScore());
+	ColorRGBA8 white(255, 255, 255, 255);
 
 	switch (mol) {
 	case SUGAR:
@@ -322,20 +324,21 @@ void MainGame::drawHUD() {
 		title = "Instrucciones";
 		description = "Usa el raton para mover las piezas";
 		glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
-		ColorRGBA8 white(255, 255, 255, 255);
 		GLint hydrogen = ResourceManager::getTexture("Textures/Hydrogen2.png").textureId;
 		GLint oxygen = ResourceManager::getTexture("Textures/Oxygen3.png").textureId;
 		GLint water = ResourceManager::getTexture("Textures/Agua.png").textureId;
-		m_hudBatch.draw(glm::vec4(215.0f, 50.0f, 75.0f, 75.0f), uv, oxygen, 0.0f, white);
-		m_hudBatch.draw(glm::vec4(290.0f, 50.0f, 75.0f, 75.0f), uv, hydrogen, 0.0f, white);
-		m_hudBatch.draw(glm::vec4(365.0f, 50.0f, 75.0f, 75.0f), uv, oxygen, 0.0f, white);
+		m_hudBatch.draw(glm::vec4(215.0f, 50.0f, 75.0f, 75.0f), uv, hydrogen, 0.0f, white);
+		m_hudBatch.draw(glm::vec4(290.0f, 50.0f, 75.0f, 75.0f), uv, oxygen, 0.0f, white);
+		m_hudBatch.draw(glm::vec4(365.0f, 50.0f, 75.0f, 75.0f), uv, hydrogen, 0.0f, white);
 		m_spriteFont->draw(m_hudBatch, "=", glm::vec2(325.0f, -35.0f), glm::vec2(2.5), 0.0f, white, Justification::MIDDLE);
 		m_hudBatch.draw(glm::vec4(290.0f, -100.0f, 75.0f, 75.0f), uv, water, 0.0f, white);
 		break;
 	}
 
-	m_spriteFont->draw(m_hudBatch, title.c_str(), glm::vec2(325.0f, 200.0f), glm::vec2(1.0), 0.0f, ColorRGBA8(255, 255, 255, 255), Justification::MIDDLE);
-	m_spriteFont->draw(m_hudBatch, description.c_str(), glm::vec2(325.0f, 175.0f), glm::vec2(0.5), 0.0f, ColorRGBA8(255, 255, 255, 255), Justification::MIDDLE);
+	m_spriteFont->draw(m_hudBatch, title.c_str(), glm::vec2(325.0f, 200.0f), glm::vec2(1.0), 0.0f, white, Justification::MIDDLE);
+	m_spriteFont->draw(m_hudBatch, description.c_str(), glm::vec2(325.0f, 175.0f), glm::vec2(0.5), 0.0f, white, Justification::MIDDLE);
+
+	m_spriteFont->draw(m_hudBatch, score.c_str(), glm::vec2(325.0f, -255.0f), glm::vec2(1.5), 0.0f, white, Justification::MIDDLE);
 
 	m_hudBatch.end();
 	m_hudBatch.renderBatch();
