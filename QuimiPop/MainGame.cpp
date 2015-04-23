@@ -443,8 +443,6 @@ void MainGame::drawTitleScreen() {
 	m_meshShader.unuse();
 
 	m_window.swapBuffer();
-
-	m_window.swapBuffer();
 }
 
 void MainGame::addGlow(const glm::vec2 &position, int numParticles) {
