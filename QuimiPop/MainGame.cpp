@@ -263,7 +263,7 @@ void MainGame::drawGame() {
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(projection[0][0]));
 
 	glm::mat4 transform;
-	transform = glm::translate(transform, glm::vec3(815.0f, 300.0f, 100.0f));
+	transform = glm::translate(transform, glm::vec3(815.0f, m_sidebarOffsetY + 225.0f, 100.0f));
 	transform = glm::scale(transform, glm::vec3(moleculeScale));
 	transform = glm::rotate(transform, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 	transform = glm::rotate(transform, m_angle, glm::vec3(1.0f, 1.0f, 0.0f));
@@ -284,45 +284,74 @@ void MainGame::drawHUD() {
 	m_hudBatch.begin();
 
 	Molecule mol = m_gameBoard.getHoverMolecule();
-	std::string title;
-	std::string description;
+	std::vector<std::string> titles;
+	std::vector<std::string> descriptions;
 	std::string score = std::to_string(m_gameBoard.getScore());
 	ColorRGBA8 white(255, 255, 255, 255);
 
 	switch (mol) {
 	case SUGAR:
-		title = "Glucosa";
-		description = "Hace mas dulce al mundo!";
+		titles.push_back("Glucosa");
+		descriptions.push_back("C6H12O6");
+		descriptions.push_back("Se encuentra en frutas");
+		descriptions.push_back("y alimentos procesados!");
 		break;
 
 	case WATER:
-		title = "Agua";
-		description = "Hasta las plantas la toman!";
+		titles.push_back("Agua");
+		descriptions.push_back("H2O");
+		descriptions.push_back("Compuesto esencial para");
+		descriptions.push_back("la vida, se encuentra");
+		descriptions.push_back("en todos los seres vivos!");
 		break;
 
 	case CARBON_DIOXIDE:
-		title = "Dioxido de Carbono";
-		description = "Como el humo de los autos!";
+		titles.push_back("Dioxido de");
+		titles.push_back("Carbono");
+		descriptions.push_back("CO2");
+		descriptions.push_back("Gas principal del calentamiento");
+		descriptions.push_back("global!");
+		descriptions.push_back("Lo emitimos al exhalar,");
+		descriptions.push_back("y lo producen los combustibles");
+		descriptions.push_back("de los autos!");
 		break;
 
 	case METHANE:
-		title = "Metano";
-		description = "Muy flamable. Manejese con cuidado!";
+		titles.push_back("Metano");
+		descriptions.push_back("CH4");
+		descriptions.push_back("Se produce naturalmente");
+		descriptions.push_back("a partir de los deshechos");
+		descriptions.push_back("de las bacterias!");
+		descriptions.push_back("Es un hidrocarburo que");
+		descriptions.push_back("constitu hasta el 97%");
+		descriptions.push_back("del gas natural!");
 		break;
 
 	case NITROUS_OXIDE:
-		title = "Dioxido de Nitrogeno";
-		description = "Tambien conocido como gas de la risa!";
+		titles.push_back("Dioxido de");
+		titles.push_back("Nitrogeno");
+		descriptions.push_back("NO2");
+		descriptions.push_back("Gas toxico que afecta el");
+		descriptions.push_back("sistema respiratorio!");
+		descriptions.push_back("Se forma en la combustion");
+		descriptions.push_back("a altas temperaturas");
+		descriptions.push_back("en vehiculos y");
+		descriptions.push_back("plantas electricas!");
 		break;
 
 	case SULFURIC_ACID:
-		title = "Acido Sulfurico";
-		description = "Fuerte y corrosivo!";
+		titles.push_back("Acido");
+		titles.push_back("Sulfurico");
+		descriptions.push_back("H2SO4");
+		descriptions.push_back("Compuesto quimico");
+		descriptions.push_back("altamente corrosivo!");
+		descriptions.push_back("Encontrado en los");
+		descriptions.push_back("fertilizantes!");
 		break;
 
 	case NONE:
-		title = "Instrucciones";
-		description = "Usa el raton para mover las piezas";
+		titles.push_back("Instrucciones");
+		descriptions.push_back("Usa el raton para mover las piezas");
 		glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
 		GLint hydrogen = ResourceManager::getTexture("Textures/Hydrogen2.png").textureId;
 		GLint oxygen = ResourceManager::getTexture("Textures/Oxygen3.png").textureId;
@@ -335,8 +364,19 @@ void MainGame::drawHUD() {
 		break;
 	}
 
-	m_spriteFont->draw(m_hudBatch, title.c_str(), glm::vec2(325.0f, 200.0f), glm::vec2(1.0), 0.0f, white, Justification::MIDDLE);
-	m_spriteFont->draw(m_hudBatch, description.c_str(), glm::vec2(325.0f, 175.0f), glm::vec2(0.5), 0.0f, white, Justification::MIDDLE);
+	float coordY = 210.0f;
+	for each (auto title in titles) {
+		m_spriteFont->draw(m_hudBatch, title.c_str(), glm::vec2(325.0f, coordY), glm::vec2(1.0), 0.0f, white, Justification::MIDDLE);
+		coordY -= 25.0f;
+	}
+
+	for each (auto description in descriptions)
+	{
+		m_spriteFont->draw(m_hudBatch, description.c_str(), glm::vec2(325.0f, coordY), glm::vec2(0.5), 0.0f, white, Justification::MIDDLE);
+		coordY -= 20.0f;
+	}
+
+	m_sidebarOffsetY = coordY - 25.0f;
 
 	m_spriteFont->draw(m_hudBatch, score.c_str(), glm::vec2(325.0f, -255.0f), glm::vec2(1.5), 0.0f, white, Justification::MIDDLE);
 
