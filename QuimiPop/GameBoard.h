@@ -62,6 +62,7 @@ public:
     void setClickingDown(bool clickingDown);
     void updateMouseCoords(glm::vec2 mouseCoords);
 	Molecule getHoverMolecule();
+	void resetHoverMolecule();
 
 	void setMoleculeSound(SoundEffect moleculeSound);
     

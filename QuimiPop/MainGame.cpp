@@ -20,7 +20,7 @@ MainGame::~MainGame() {
 void MainGame::run() {
     initSystems();
 
-	Music bgMusic = m_audioEngine.loadMusic("Sounds/menuloopsid.ogg");
+	Music bgMusic = m_audioEngine.loadMusic("Sounds/calm_bgm.ogg");
 	bgMusic.play(-1);
     
     gameLoop();
@@ -102,17 +102,23 @@ void MainGame::gameLoop() {
         m_fpsLimiter.begin();
         
         processInput();
-        
-        m_camera.update();
-        m_gameBoard.update();
-        m_particleEngine.update();
 
 		m_angle += 0.025f;
 		if (m_angle >= 360.0f) {
 			m_angle = 0.0f;
 		}
         
-        drawGame();
+		m_camera.update();
+
+		if (m_showingTitle) {
+			drawTitleScreen();
+		}
+		else {
+			m_gameBoard.update();
+			m_particleEngine.update();
+
+			drawGame();
+		}
         
         m_fps = m_fpsLimiter.end();
         
@@ -176,26 +182,35 @@ void MainGame::processInput() {
     if (m_inputManager.isKeyDown(SDLK_e)) {
         m_camera.setScale(m_camera.getScale() - SCALE_SPEED);
     }
-    if (m_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
-        glm::vec2 mouseCoords = m_inputManager.getMouseCoords();
-        mouseCoords = m_camera.convertScreenToWorld(mouseCoords);
-        
-        if (m_gameBoard.isPointInsideBoard(mouseCoords)) {
-            m_gameBoard.setClickingDown(true);
-            m_gameBoard.updateMouseCoords(mouseCoords);
-        }
-        
-        addGlow(mouseCoords, 10);
-    }
-    else {
-        glm::vec2 mouseCoords = m_inputManager.getMouseCoords();
-        mouseCoords = m_camera.convertScreenToWorld(mouseCoords);
-        
-        if (m_gameBoard.isPointInsideBoard(mouseCoords)) {
-            m_gameBoard.setClickingDown(false);
-			m_gameBoard.updateMouseCoords(mouseCoords);
-        }
-    }
+	if (m_showingTitle && m_inputManager.isKeyDown(SDLK_RETURN)) {
+		m_showingTitle = false;
+		printf("Starting game!\n");
+	}
+	else {
+		if (m_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
+			glm::vec2 mouseCoords = m_inputManager.getMouseCoords();
+			mouseCoords = m_camera.convertScreenToWorld(mouseCoords);
+
+			if (m_gameBoard.isPointInsideBoard(mouseCoords)) {
+				m_gameBoard.setClickingDown(true);
+				m_gameBoard.updateMouseCoords(mouseCoords);
+			}
+
+			addGlow(mouseCoords, 10);
+		}
+		else {
+			glm::vec2 mouseCoords = m_inputManager.getMouseCoords();
+			mouseCoords = m_camera.convertScreenToWorld(mouseCoords);
+
+			if (m_gameBoard.isPointInsideBoard(mouseCoords)) {
+				m_gameBoard.setClickingDown(false);
+				m_gameBoard.updateMouseCoords(mouseCoords);
+			}
+		}
+		if (m_inputManager.isKeyDown(SDL_BUTTON_RIGHT)) {
+			m_gameBoard.resetHoverMolecule();
+		}
+	}
 }
 
 void MainGame::drawGame() {
@@ -304,7 +319,19 @@ void MainGame::drawHUD() {
 		break;
 
 	case NONE:
-		return;
+		title = "Instrucciones";
+		description = "Usa el raton para mover las piezas";
+		glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
+		ColorRGBA8 white(255, 255, 255, 255);
+		GLint hydrogen = ResourceManager::getTexture("Textures/Hydrogen2.png").textureId;
+		GLint oxygen = ResourceManager::getTexture("Textures/Oxygen3.png").textureId;
+		GLint water = ResourceManager::getTexture("Textures/Agua.png").textureId;
+		m_hudBatch.draw(glm::vec4(215.0f, 50.0f, 75.0f, 75.0f), uv, oxygen, 0.0f, white);
+		m_hudBatch.draw(glm::vec4(290.0f, 50.0f, 75.0f, 75.0f), uv, hydrogen, 0.0f, white);
+		m_hudBatch.draw(glm::vec4(365.0f, 50.0f, 75.0f, 75.0f), uv, oxygen, 0.0f, white);
+		m_spriteFont->draw(m_hudBatch, "=", glm::vec2(325.0f, -35.0f), glm::vec2(2.5), 0.0f, white, Justification::MIDDLE);
+		m_hudBatch.draw(glm::vec4(290.0f, -100.0f, 75.0f, 75.0f), uv, water, 0.0f, white);
+		break;
 	}
 
 	m_spriteFont->draw(m_hudBatch, title.c_str(), glm::vec2(325.0f, 200.0f), glm::vec2(1.0), 0.0f, ColorRGBA8(255, 255, 255, 255), Justification::MIDDLE);
@@ -312,6 +339,66 @@ void MainGame::drawHUD() {
 
 	m_hudBatch.end();
 	m_hudBatch.renderBatch();
+}
+
+void MainGame::drawTitleScreen() {
+	glClearDepth(1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glDisable(GL_DEPTH_TEST);
+	// Drawing 2D sprites
+	m_spriteShader.use();
+
+	glActiveTexture(GL_TEXTURE0);
+	GLint textureLocation = m_spriteShader.getUniformLocation("mySampler");
+	glUniform1i(textureLocation, 0);
+
+	GLint pLocation = m_spriteShader.getUniformLocation("P");
+	glm::mat4 cameraMatrix = m_camera.getCameraMatrix();
+	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
+
+	m_spriteBatch.begin();
+
+	glm::vec4 backgroundRect(-m_screenWidth / 2, -m_screenHeight / 2, m_screenWidth, m_screenHeight);
+	glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
+	static GLTexture titleTexture = ResourceManager::getTexture("Textures/QuimiPop-MainTitle.png");
+	ColorRGBA8 color(255, 255, 255, 255);
+	m_spriteBatch.draw(backgroundRect, uvRect, titleTexture.textureId, 0.0f, color);
+
+	m_spriteBatch.end();
+
+	m_spriteBatch.renderBatch();
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	m_spriteShader.unuse();
+
+	glEnable(GL_DEPTH_TEST);
+
+	// Drawing 3D molecule mesh
+	m_meshShader.use();
+
+	static float moleculeScale = 70.0f;
+
+	static glm::mat4 projection = glm::ortho(0.0f, (float)m_screenWidth, 0.0f, (float)m_screenHeight, -1000.0f, 1000.0f);
+	GLint projectionLocation = m_meshShader.getUniformLocation("projection");
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(projection[0][0]));
+
+	glm::mat4 transform;
+	transform = glm::translate(transform, glm::vec3((float)m_screenWidth / 2.0f, (float)m_screenHeight / 2.5f, 100.0f));
+	transform = glm::scale(transform, glm::vec3(moleculeScale));
+	transform = glm::rotate(transform, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	transform = glm::rotate(transform, m_angle, glm::vec3(1.0f, 1.0f, 0.0f));
+	GLint transformLocation = m_meshShader.getUniformLocation("transform");
+	glUniformMatrix4fv(transformLocation, 1, GL_FALSE, &(transform[0][0]));
+
+	m_molecules.find(SUGAR)->second.render(m_meshShader);
+
+	m_meshShader.unuse();
+
+	m_window.swapBuffer();
+
+	m_window.swapBuffer();
 }
 
 void MainGame::addGlow(const glm::vec2 &position, int numParticles) {

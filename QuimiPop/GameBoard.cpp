@@ -167,6 +167,10 @@ Molecule GameBoard::getHoverMolecule() {
 	return m_hoverMolecule;
 }
 
+void GameBoard::resetHoverMolecule() {
+	m_hoverMolecule = NONE;
+}
+
 void GameBoard::setMoleculeSound(SoundEffect moleculeSound) {
 	m_moleculeSound = moleculeSound;
 }

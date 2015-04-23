@@ -49,6 +49,7 @@ private:
     void processInput();
     void drawGame();
 	void drawHUD();
+	void drawTitleScreen();
     void calculateFPS();
     void addGlow(const glm::vec2& position, int numParticles);
     
@@ -81,6 +82,8 @@ private:
     float m_maxFPS;
 
 	float m_angle;
+
+	bool m_showingTitle = true;
 };
 
 #endif /* defined(__GraphicsTutorial__MainGame__) */
