@@ -53,7 +53,6 @@ private:
 class GameBoard : GridObserver, AnimationObserver {
 public:
     GameBoard(glm::vec2 position);
-	GameBoard(glm::vec2 position, SoundEffect moleculeSound);
     
     void init();
     

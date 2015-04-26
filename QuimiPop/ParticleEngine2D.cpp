@@ -10,7 +10,11 @@
 
 ParticleEngine2D::ParticleEngine2D() {}
 
-ParticleEngine2D::~ParticleEngine2D() {}
+ParticleEngine2D::~ParticleEngine2D() {
+    for (auto& batch : m_batches) {
+        delete batch;
+    }
+}
 
 void ParticleEngine2D::addParticleBatch(ParticleBatch2D *particleBatch) {
     m_batches.push_back(particleBatch);

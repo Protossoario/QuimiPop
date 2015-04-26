@@ -9,12 +9,7 @@
 #include "ResourceManager.h"
 
 TextureCache ResourceManager::m_textureCache;
-ModelCache ResourceManager::m_modelCache;
 
 GLTexture ResourceManager::getTexture(std::string texturePath) {
     return m_textureCache.getTexture(texturePath);
-}
-
-Mesh ResourceManager::getModel(std::string modelPath) {
-	return m_modelCache.getModel(modelPath);
 }
