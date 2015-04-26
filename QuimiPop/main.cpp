@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Eduardo Alberto Sanchez Alvarado & Graciela Garcia Diaz. All rights reserved.
 //
 
-#include "MainGame.h"
+#include "MainApp.h"
 #include <iostream>
 #undef main
 
 int main(int argc, const char * argv[]) {
-    MainGame mainGame;
-    mainGame.run();
+	MainApp game;
+	game.run();
     
     return 0;
 }

@@ -69,6 +69,9 @@ void GameBoard::notifyAnimationFinished() {
 
 GameBoard::GameBoard(glm::vec2 position) : m_boardPosition(position), m_clickingDown(false), m_setMouseCoords(false), m_highlighting(false), m_highlightCol(-1), m_highlightRow(-1) {}
 
+GameBoard::GameBoard(glm::vec2 position, SoundEffect moleculeSound) : m_boardPosition(position), m_clickingDown(false), m_setMouseCoords(false), m_highlighting(false), m_highlightCol(-1), m_highlightRow(-1), m_moleculeSound(moleculeSound) {}
+
+
 void GameBoard::init() {
     srand(time(NULL));
     
