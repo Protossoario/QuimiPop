@@ -279,7 +279,7 @@ std::string Grid::getTileTexturePath(int row, int col) {
             break;
             
         case NITROUS_OXIDE:
-            filePath += "Nitrous oxide.png";
+            filePath += "NitrousOxide2.png";
             break;
             
         case SULFURIC_ACID:
