@@ -22,7 +22,7 @@ int Window::create(std::string windowName, int screenWidth, int screenHeight, un
     }
     
     if (currentFlags & BORDERLESS) {
-        flags |= SDL_WINDOW_BORDERLESS;
+		flags |= SDL_WINDOW_BORDERLESS;
     }
     
     m_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, flags);

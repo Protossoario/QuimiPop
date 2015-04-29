@@ -289,12 +289,11 @@ void MainGame::drawGame() {
 
 	static float moleculeScale = 35.0f;
 
-	static glm::mat4 projection = glm::ortho(0.0f, (float) m_screenWidth, 0.0f, (float) m_screenHeight, -1000.0f, 1000.0f);
 	GLint projectionLocation = m_meshShader.getUniformLocation("projection");
-	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(projection[0][0]));
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
 	glm::mat4 transform;
-	transform = glm::translate(transform, glm::vec3(815.0f, m_sidebarOffsetY + 225.0f, 100.0f));
+	transform = glm::translate(transform, glm::vec3(325.0f, m_sidebarOffsetY - 50.0f, 0.0f));
 	transform = glm::scale(transform, glm::vec3(moleculeScale));
 	transform = glm::rotate(transform, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 	transform = glm::rotate(transform, m_angle, glm::vec3(1.0f, 1.0f, 0.0f));
@@ -466,12 +465,11 @@ void MainGame::drawTitleScreen() {
 
 		static float moleculeScale = 70.0f;
 
-		static glm::mat4 projection = glm::ortho(0.0f, (float)m_screenWidth, 0.0f, (float)m_screenHeight, -1000.0f, 1000.0f);
 		GLint projectionLocation = m_meshShader.getUniformLocation("projection");
-		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(projection[0][0]));
+		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
 
 		glm::mat4 transform;
-		transform = glm::translate(transform, glm::vec3((float)m_screenWidth / 2.0f, (float)m_screenHeight / 2.5f, 100.0f));
+		transform = glm::translate(transform, glm::vec3(0.0f, -50.0f, 0.0f));
 		transform = glm::scale(transform, glm::vec3(moleculeScale));
 		transform = glm::rotate(transform, 45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 		transform = glm::rotate(transform, m_angle, glm::vec3(1.0f, 1.0f, 0.0f));
