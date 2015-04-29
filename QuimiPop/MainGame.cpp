@@ -203,6 +203,11 @@ void MainGame::processInput() {
 		m_showingInstructions = false;
 		m_showingTitle = false;
 	}
+	else if (m_showingCredits && m_inputManager.isKeyPressed(SDLK_RETURN)) {
+		printf("Resetting game!\n");
+		m_showingCredits = false;
+		m_gameBoard.resetGame();
+	}
 	else if (!m_showingTitle) {
 		if (m_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
 			glm::vec2 mouseCoords = m_inputManager.getMouseCoords();

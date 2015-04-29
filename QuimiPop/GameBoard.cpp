@@ -197,6 +197,15 @@ void GameBoard::resetRemainingTurns() {
 	m_remainingTurns = 15;
 }
 
+void GameBoard::resetGame() {
+	m_remainingTurns = 15;
+	m_score = 0;
+
+	m_boardGrid.init();
+
+	refreshSpritesFromGrid();
+}
+
 bool GameBoard::isPointInsideBoard(glm::vec2 point) {
     return point.x >= m_boardPosition.x && point.x <= m_boardPosition.x + TILE_WIDTH * 8 && point.y >= m_boardPosition.y && point.y <= m_boardPosition.y + TILE_HEIGHT * 8;
 }

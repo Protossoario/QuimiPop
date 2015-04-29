@@ -67,6 +67,7 @@ public:
 	void resetScore();
 	int getRemainingTurns();
 	void resetRemainingTurns();
+	void resetGame();
 
 	void setMoleculeSound(SoundEffect moleculeSound);
     

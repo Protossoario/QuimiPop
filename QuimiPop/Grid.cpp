@@ -204,7 +204,7 @@ bool Grid::checkGrid(int colOrRen, int pos) {
 					deletedMolecule = true;
                 }
 				if (checkMolecule(colOrRen, i, j, arrMethane, 5)) {
-					deleteMolecule(colOrRen, i, j, 4, METHANE);
+					deleteMolecule(colOrRen, i, j, 5, METHANE);
 					deletedMolecule = true;
 				}
                 if (checkMolecule(colOrRen, i, j, arrSugar1, 4)) {
