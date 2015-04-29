@@ -101,6 +101,7 @@ void MainGame::gameLoop() {
     while (m_gameState != GameState::EXIT) {
         m_fpsLimiter.begin();
         
+		m_inputManager.update();
         processInput();
 
 		m_angle += 0.025f;
@@ -187,9 +188,20 @@ void MainGame::processInput() {
     if (m_inputManager.isKeyDown(SDLK_e)) {
         m_camera.setScale(m_camera.getScale() - SCALE_SPEED);
     }
-	if (m_showingTitle && !m_showingCredits && m_inputManager.isKeyDown(SDLK_RETURN)) {
+	if (m_showingTitle && !m_showingCredits && m_inputManager.isKeyPressed(SDLK_RETURN)) {
+		printf("Pressed enter\n");
+		if (!m_showingInstructions) {
+			m_showingInstructions = true;
+		}
+		else {
+			m_showingInstructions = false;
+			m_showingTitle = false;
+			printf("Starting game!\n");
+		}
+	}
+	else if (m_showingTitle && m_showingInstructions && m_inputManager.isKeyPressed(SDLK_i)) {
+		m_showingInstructions = false;
 		m_showingTitle = false;
-		printf("Starting game!\n");
 	}
 	else if (!m_showingTitle) {
 		if (m_inputManager.isKeyDown(SDL_BUTTON_LEFT)) {
@@ -215,7 +227,13 @@ void MainGame::processInput() {
 		if (m_inputManager.isKeyDown(SDL_BUTTON_RIGHT)) {
 			m_gameBoard.resetHoverMolecule();
 		}
-		if (m_inputManager.isKeyDown(SDLK_ESCAPE)) {
+		if (m_inputManager.isKeyPressed(SDLK_i)) {
+			if (!m_showingInstructions) {
+				m_showingTitle = true;
+				m_showingInstructions = true;
+			}
+		}
+		else if (m_inputManager.isKeyPressed(SDLK_ESCAPE)) {
 			m_showingTitle = true;
 		}
 	}
@@ -418,6 +436,9 @@ void MainGame::drawTitleScreen() {
 	if (m_showingCredits) {
 		titleTexture = ResourceManager::getTexture("Textures/QuimiCreditos.png");
 	}
+	else if (m_showingInstructions) {
+		titleTexture = ResourceManager::getTexture("Textures/QuimiInstrucciones.png");
+	}
 	else {
 		titleTexture = ResourceManager::getTexture("Textures/QuimiPop-MainTitle.png");
 	}
@@ -432,7 +453,7 @@ void MainGame::drawTitleScreen() {
 
 	m_spriteShader.unuse();
 
-	if (!m_showingCredits) {
+	if (!m_showingCredits && !m_showingInstructions) {
 		glEnable(GL_DEPTH_TEST);
 
 		// Drawing 3D molecule mesh

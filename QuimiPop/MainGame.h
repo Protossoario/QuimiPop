@@ -85,6 +85,7 @@ private:
 
 	bool m_showingTitle = true;
 	bool m_showingCredits = false;
+	bool m_showingInstructions = false;
 
 	float m_sidebarOffsetY = 0.0f;
 };
